@@ -1,0 +1,39 @@
+<% if flash != nil
+flash.keys.each do |key| %>
+<p><%= flash[key] %>
+<% end
+end %>
+<%= form_tag( '/gm/multiconfirm' ) do %>
+<table>
+<tr><th>Peli</th><th>Genre</th><th>Kuvaus</th><th>Etunimi</th><th>Sukunimi</th><th>Muuta</th><tr>
+<% @gms.each{ |gm| 
+%>
+<% gm.programs_organizers.each{ |o|
+  if o.program.event.id == @event.id
+    o.program.programgroups.each{ |g|
+      if g.id == 12
+%>
+<tr>
+<td><%= o.program.name %></td>
+<td>
+<% o.program.programs_events_attributes.each do |a| %>
+<%= a.value %>
+<% end %>
+</td>
+<td><%= o.program.description %></td>
+<td><%=gm.firstname%></td>
+<td><%=gm.lastname%></td>
+<td><%=gm.notes%></td>
+<td><%= link_to 'Vahvista', :action => 'confirm', :id => o.program %></td>
+<td><%= link_to 'Muokkaa', :controller => 'programs', :action => 'edit', :id => o.program %></td>
+<td><%= link_to 'Poista', {:action => 'destroy', :id => o.program}, :confirm => 'Oletko varma?' %></td>
+</tr>
+<%
+    end
+  }
+  end
+} 
+} %>
+</table>
+
+<% end %>

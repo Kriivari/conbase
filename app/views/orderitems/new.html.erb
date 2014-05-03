@@ -1,0 +1,8 @@
+<h1>New orderitem</h1>
+
+<%= form_for @orderitem, :url => { :action => 'create' } do |f| %>
+  <%= render :partial => 'form' %>
+  <%= f.submit "Create" %>
+<% end %>
+
+<%= link_to 'Back', :action => 'list' %>

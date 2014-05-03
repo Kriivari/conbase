@@ -1,0 +1,26 @@
+<h1>Listing programitems</h1>
+
+<table>
+  <tr>
+  <% Programitem.content_columns.each do |column| %>
+    <th><%= column.human_name %></th>
+  <% end %>
+  </tr>
+  
+<% for programitem in @programitems %>
+  <tr>
+  <% Programitem.content_columns.each do |programitem| %>
+    <td><%=h programitem.send(column.name) %></td>
+  <% end %>
+    <td><%= link_to 'Show', :action => 'show', :id => programitem %></td>
+    <td><%= link_to 'Edit', :action => 'edit', :id => programitem %></td>
+    <td><%= link_to 'Destroy', { :action => 'destroy', :id => programitem }, :confirm => 'Are you sure?', :method => :post %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= will_paginate @programitems %>
+
+<br />
+
+<%= link_to 'New programitem', :action => 'new' %>

@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<table>
+  <tr><td>Tilaaja</td><td><%= @purchase.person.fullname %></td></tr>
+  <tr><td>Tarkenne</td><td><%= @purchase.details %></td></tr>
+  <tr><td>Muistiinpanot</td><td><%= @purchase.notes %></td></tr>
+  <tr><td>Maksettu</td><td><%= @purchase.paid %></td></tr>
+<% for producttype in @purchase.product_types %>
+  <tr><td>Tuote</td><td><%= producttype.fullname %></td></tr>
+<% end %>
+</table>
+
+<%= link_to 'Muokkaa', edit_purchase_path(@purchase) %> |
+<%= link_to 'Takaisin listaan', purchases_path %>

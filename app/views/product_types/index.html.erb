@@ -1,0 +1,30 @@
+<h1>Myyntituotetyypit</h1>
+
+<table>
+  <tr>
+    <th>Nimi</th>
+    <th>Hinta</th>
+    <th>2+ Hinta</th>
+    <th>Myytävissä</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @product_types.each do |product_type| %>
+  <tr>
+    <td><%= product_type.product.name + " " + product_type.name %></td>
+    <td><%= product_type.price %></td>
+    <td><%= product_type.secondprice %></td>
+    <td><%= product_type.active %></td>
+    <td><%= link_to 'Näytä', product_type %></td>
+    <td><%= link_to 'Muokkaa', edit_product_type_path(product_type) %></td>
+    <td><%= link_to 'Poista', product_type, :method => :delete, :data => { :confirm => 'Oletko varma?' } %></td>
+    <td><%= button_to "Poista", product_type_path(product_type), :method => :delete, :confirm => "Oletko varma?", :title => "Poista" %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Uusi myyntituotetyyppi', new_product_type_path %>

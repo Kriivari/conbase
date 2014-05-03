@@ -1,0 +1,21 @@
+Hei <%= @exhibitor.person.name %> / <%= @exhibitor.companyname %>,
+
+Kiitos yhteydenotostasi. Tämä on järjestelmän automaattinen vastausviesti.
+
+Olet lähettänyt pyynnön myyntipaikasta <%= @event.name %> <%= @event.year.to_s %> -tapahtumaan.
+
+Olet pyytänyt seuraavanlaista myyntipaikkaa:
+<%= @exhibitor.tables.to_s %> pöytää (koko <%= @exhibitor.tablesize %>)
+<% if @exhibitor.tickets %>
+<%= @exhibitor.tickets.to_s %> lisäranneketta
+<% end %>
+<% if @exhibitor.travelpasses %>
+<%= @exhibitor.travelpasses.to_s %> myyjäpassia
+<% end %>
+
+Varauksen alustava kokonaishinta: <%= @exhibitor.total.to_s %> euroa.
+
+Tämä viesti ei ole vahvistus varauksesta.
+Otamme yhteyttä mahdollisimman pian.
+<%= @event.name %> kaubamajatiimi
+kaubamaja@ropecon.fi

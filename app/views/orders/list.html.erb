@@ -1,0 +1,46 @@
+<h1>Tilauslista</h1>
+
+<p><%= link_to 'Uusi tilaus', :action => 'new' %>
+<%= link_to 'Ostoslista', :action => 'itemlist' %>
+<%= link_to 'Tilausrivit', :action => 'itemlist', :all => 'true' %></p>
+
+<table>
+  <tr>
+	<th>Tilaaja</th>
+	<th>Nimi</th>
+	<th>Minne</th>
+	<th>Koska</th>
+	<th>Tila</th>
+	<th>Muuta</th>
+  </tr>
+  
+<% for order in @orders %>
+  <tr>
+    <td><%= order.person %></td>
+    <td><%= order.name %></td>
+    <td><%= order.destination %></td>
+<% if order.needed %>
+    <td><%= order.needed.strftime("%a %H.%M") %></td>
+<% else %>
+    <td></td>
+<% end %>
+    <td><%= order.statusname %></td>
+    <td><%= order.notes %></td>
+    <td><%= link_to 'Näytä', :action => 'show', :id => order %></td>
+<% if order.event == @event %>
+    <td><%= link_to 'Muokkaa', :action => 'edit', :id => order %></td>
+<% else %>
+    <td><%= link_to 'Kopioi', :action => 'edit', :id => order %></td>
+<% end %>
+    <td><%= link_to 'Poista', { :action => 'destroy', :id => order }, :confirm => 'Oletko varma?', :method => :post %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<ul>
+<% for event in Event.all(:conditions => ['name=?', @event.name], :order => 'year desc') %>
+<li><%= link_to 'Tilaukset ' + event.year.to_s, :action => 'list', :event => event.id %></li>
+<% end %>
+</ul>

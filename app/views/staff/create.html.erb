@@ -1,0 +1,21 @@
+<div class="sisalto">
+        <h2><%= flash[:notice] %></h2>
+	<h2>Työvoimarekry</h2>
+<% if @person.errors.empty? %>
+      <p>Kiitos ilmoittautumisestasi. Alla olevat tiedot on nyt talletettu. Mikäli et saa sähköpostia kahden viikon kuluessa tai haluat muuttaa antamiasi tietoja, lähetä sähköpostia osoitteeseen tyovoima ät ropecon.fi</p>
+
+      <p>Etunimi: <%= @person.firstname %></p>
+      <p>Sukunimi: <%= @person.lastname %></p>
+      <p>Lempinimi (vapaaehtoinen, tulee rintanappiin): <%= @person.nickname %></p>
+      <p>Puhelin, josta tavoittaa conin aikana: <%= @person.primary_phone %></p>
+      <p>Sähköpostiosoite, joka toimii käyttäjätunnuksenasi: <%= @person.primary_email %></p>
+      <p>Syntymävuosi: <%= @person.birthyear %></p>
+      <p>Työpisteet, joissa olet ollut aiemmin: <%= @oldgroups %></p>
+      <p>Haluamasi työpisteet: <%= @newgroups %></p>
+      <p>JV-kortin numero: <%= @jv %></p>
+      <p><%= @extra %></p>
+<% else %>
+      <%= render "shared/error_messages", :target => @person %>
+      <p>Ilmoittautumistasi ei ole talletettu! Palaa takaisin ja korjaa virheelliset tiedot.</p>
+<% end %>
+</div>

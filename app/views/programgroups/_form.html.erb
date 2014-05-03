@@ -1,0 +1,13 @@
+<%= error_messages_for 'programgroup' %>
+
+<!--[form:programgroup]-->
+<p><label for="programgroup_name">Nimi</label><br/>
+<%= f.text_area :name %></p>
+
+<p><label for="programgroup_nameen">Englanninkielinen nimi</label><br/>
+<%= f.text_area :nameen %></p>
+
+<p><label for="programgroup_visible">Näkyvä</label><br/>
+<select id="programgroup_visible" name="programgroup[visible]"><option value="false">Ei</option><option value="true">Kyllä</option></select></p>
+<!--[eoform:programgroup]-->
+

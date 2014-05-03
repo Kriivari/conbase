@@ -1,0 +1,40 @@
+<p><%= link_to "Tuotteet", :controller => 'products', :action => 'index' %></p>
+<h1>Tilauslista</h1>
+
+<table>
+  <tr>
+    <th>Tilaaja</th>
+    <th>Tuote</th>
+    <th>Tarkenne</th>
+    <th>Ryhmät</th>
+    <th>Viite</th>
+    <th>Maksettu</th>
+    <th>Muistiinpanot</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <% @purchases.each do |purchase| %>
+  <tr>
+    <td><%= purchase.person.fullname if purchase.person %></td>
+    <td>
+      <% for type in purchase.product_types %>
+        <%= type.fullname %> (<%= type.price %>)
+      <% end %>
+    </td>
+    <td><%= purchase.details %></td>
+    <td><%= purchase.person.realgroups( @event ) if purchase.person %></td>
+    <td><%= purchase.reference %></td>
+    <td><%= purchase.paid %></td>
+    <td><%= purchase.notes %></td>
+    <td><%= link_to 'Näytä', purchase %></td>
+    <td><%= link_to 'Muokkaa', edit_purchase_path(purchase) %></td>
+    <td><%= button_to "Poista", purchase_path(purchase), :method => :delete, :confirm => "Oletko varma?", :title => "Poista" %></td>
+  </tr>
+  <% end %>
+</table>
+
+<br />
+
+<%= link_to 'Uusi tilaus', new_purchase_path %>

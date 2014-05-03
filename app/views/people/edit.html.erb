@@ -1,0 +1,76 @@
+<h1>Henkilön muokkaaminen</h1>
+
+<%= form_for( @person, :url => { :action => 'update', :id => @person } ) do |f| %>
+<table>
+<tr><td><label for="person_firstname">Etunimi</label></td>
+  <td><input type="text" id="person_firstname" name="person[firstname]" value="<%= @person.firstname %>" /></td></tr>
+<tr><td><label for="person_lastname">Sukunimi</label></td>
+  <td><input type="text" id="person_lastname" name="person[lastname]" value="<%= @person.lastname %>" /></td></tr>
+<tr><td><label for="person_nickname">Lempinimi</label></td>
+  <td><input type="text" id="person_nickname" name="person[nickname]" value="<%= @person.nickname %>" /></td></tr>
+<tr><td><label for="person_street">Osoite</label></td>
+  <td><input type="text" id="person_street" name="person[street]" value="<%= @person.street %>" /></td></tr>
+<tr><td><label for="person_zipcode">Postinumero</label></td>
+  <td><input type="text" id="person_zipcode" name="person[zipcode]" value="<%= @person.zipcode %>" /></td></tr>
+<tr><td><label for="person_city">Kaupunki</label></td>
+  <td><input type="text" id="person_city" name="person[city]" value="<%= @person.city %>" /></td></tr>
+<tr><td><label for="person_country">Maa</label></td>
+  <td><input type="text" id="person_country" name="person[country]" value="<%= @person.country %>" /></td></tr>
+<tr><td><label for="person_primary_phone">Puhelin</label></td>
+  <td><input type="text" id="person_primary_phone" name="person[primary_phone]" value="<%= @person.primary_phone %>" /></td></tr>
+<tr><td><label for="person_primary_email">Sähköposti</label></td>
+  <td><input type="text" id="person_primary_email" name="person[primary_email]" value="<%= @person.primary_email %>" /></td></tr>
+<tr><td><label for="person_birthyear">Syntymävuosi</label></td>
+  <td><input type="text" id="person_birthyear" name="person[birthyear]" value="<%= @person.birthyear %>" /></td></tr>
+<tr><td><label for="password">Uusi salasana</label></td>
+  <td><input type="text" id="password" name="password" /></td></tr>
+<tr><td><label for="person_cv">CV</label></td>
+  <td><input type="text" id="person_cv" name="person[cv]" value="<%= @person.cv %>" /></td></tr>
+<tr><td><label for="person_notes">Muuta</label></td>
+  <td><input type="text" id="person_notes" name="person[notes]" value="<%= @person.notes %>" /></td></tr>
+
+<tr><td>Ryhmät:</td>
+<td>
+<% for group in @person.people_persongroups %>
+<% if group.persongroup.event == @event %>
+<%= group.persongroup.name %> 
+(<%= group.statusname %>)
+[<a href="/people/rmgroup/?groupid=<%= group.id %>&persid=<%= @person.id %>">Poista</a>]
+<% end %>
+<% end %>
+</td></tr>
+<tr><td>Lisää ryhmään</td>
+<td><%= select(:grp, :value, @groups) %></td>
+</tr>
+</table>
+
+<table>
+<tr><th>Attribuutti</th><th>Arvo</th><th>Lisätiedot</th></tr>
+<% for att in @person.people_events_attributes %>
+<% if att.event == @event %>
+<tr><td><%= att.attribute.name %> </td>
+<td><%= att.value %> </td>
+<td><%= att.notes %> </td>
+<td>[<%= link_to 'Poista', :action => 'rmattribute', :id => att %>]</td>
+</tr>
+<% end %>
+<% end %>
+</table>
+<p>Lisää attribuutti:</p>
+<table>
+<% for att in @attributes 
+values = att.attribute_values.map { |v| [v.value, v.id] }
+values = [['Ei uutta arvoa', 0]] + values
+%>
+<tr><td><%= att.name %></td>
+<td><%= select(("att" + att.id.to_s).to_sym, :value, values) %></td>
+<td><input type="text" id="att<%= att.id.to_s %>_notes" name="att<%= att.id.to_s %>[notes]" /></td>
+</tr>
+<% end %>
+</table>
+
+<p><%= f.submit 'Talleta muutokset' %></p>
+<% end %>
+
+<%= link_to 'Näytä', :action => 'show', :id => @person %> |
+<%= link_to 'Listaan', :action => 'list' %>

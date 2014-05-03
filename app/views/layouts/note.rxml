@@ -1,0 +1,9 @@
+xml.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
+xml.contvlist do
+  @notifications.each do |notification|
+    xml.item(:id => notification.id, 
+             :important => notification.important,
+             :title => h(notification.title),
+             :display => h(notification.body))
+  end
+end

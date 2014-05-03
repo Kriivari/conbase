@@ -1,0 +1,68 @@
+<!--[form:event]-->
+<%= form_for( @event ) do |f| %>
+
+<p><label for="event_name">Nimi</label><br/>
+<%= f.text_area :name %></p>
+
+<p><label for="event_year">Vuosi</label><br/>
+<%= f.text_field :year %></p>
+
+<p><label for="event_starttime">Alkamisaika</label><br/>
+<%= f.datetime_select :starttime %></p>
+
+<p><label for="event_endtime">Päättymisaika</label><br/>
+<%= f.datetime_select :endtime %></p>
+
+<p><label for="event_ispublic">Julkinen</label><br/>
+<select id="event_ispublic" name="event[ispublic]">
+<option value="false">Ei</option>
+<% if @event && @event.ispublic %>
+<option value="true" selected="selected">Kyllä</option>
+<% else %>
+<option value="true">Kyllä</option>
+<% end %>
+</select></p>
+
+<p><label for="event_shirtorder">Paitatilaukset</label><br/>
+<select id="event_shirtorder" name="event[shirtorder]">
+<option value="false">Kiinni</option>
+<% if @event && @event.shirtorder %>
+<option value="true" selected="selected">Auki</option>
+<% else %>
+<option value="true">Auki</option>
+<% end %>
+</select></p>
+
+<p><label for="event_footer">Paitatilausteksti (%PRICE%, %REFERENCE%, %SHIRTDETAILS%)</label><br/>
+<%= f.text_area :footer %></p>
+
+    <p><label for="event_ticketorder">Ranneketilaukset</label><br/>
+      <select id="event_ticketorder" name="event[ticketorder]">
+        <option value="false">Kiinni</option>
+        <% if @event && @event.ticketorder %>
+            <option value="true" selected="selected">Auki</option>
+        <% else %>
+            <option value="true">Auki</option>
+        <% end %>
+      </select></p>
+
+    <p><label for="event_ticketfooter">Ranneketilausteksti (%PRICE%, %REFERENCE%, %SHIRTDETAILS%)</label><br/>
+      <%= f.text_area :ticketfooter %></p>
+
+    <p><label for="event_registration">Ilmoittautumisen vahvistusviesti</label><br/>
+    <%= f.text_area :registration %></p>
+
+    <p><label for="event_address">Laskujen osoitetiedot</label><br/>
+      <%= f.text_area :address %></p>
+
+    <p><label for="event_bankaccount">Tilinumero</label><br/>
+      <%= f.text_field :bankaccount %></p>
+
+    <p><label for="event_businesscode">Y-tunnus</label><br/>
+      <%= f.text_field :businesscode %></p>
+
+    <%= f.submit 'Edit' %>
+<% end %>
+
+<!--[eoform:event]-->
+

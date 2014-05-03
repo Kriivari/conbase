@@ -1,0 +1,29 @@
+<%= link_to 'Takaisin listaan', :action => 'list' %>
+<%= link_to 'Muokkaa', :action => 'edit', :id => @exhibitor %>
+
+<table>
+    <tr><th align='left'>Yritys:</th><td><%= @exhibitor.companyname %></td></tr>
+    <tr><th align='left'>Julkinen nimi:</th><td><%= @exhibitor.publicname %></td></tr>
+<% if @exhibitor.person %>
+    <tr><th align='left'>Yhteyshenkilö:</th><td><%= @exhibitor.person.fullname %></td></tr>
+    <tr><th align='left'>Puhelin:</th><td><%= @exhibitor.person.primary_phone %></td></tr>
+    <tr><th align='left'>Sähköposti:</th><td><%= @exhibitor.person.primary_email %></td></tr>
+<% end %>
+    <tr><th align='left'>Pöytiä:</th><td><%= @exhibitor.tables.to_s %></td></tr>
+    <tr><th align='left'>Pöytäkoko:</th><td><%= @exhibitor.tablesize %></td></tr>
+    <tr><th align='left'>Rannekkeita:</th><td><%= @exhibitor.tickets.to_s %></td></tr>
+    <tr><th align='left'>Passeja:</th><td><%= @exhibitor.travelpasses.to_s %></td></tr>
+    <tr><th align='left'>Laskun päiväys:</th><td><%= @exhibitor.invoicedate %></td></tr>
+    <tr><th align='left'>Eräpäivä:</th><td><%= @exhibitor.duedate %></td></tr>
+    <tr><th align='left'>Muuta:</th><td><%= @exhibitor.notes %></td></tr>
+</table>
+
+<table>
+  <tr><th>Tuote</th></tr>
+  <% for product in @exhibitor.product_types %>
+      <tr><td><%= product.name %> </td>
+      </tr>
+  <% end %>
+</table>
+
+<p><%= link_to 'Lasku', '/exhibitors/invoice/' + @exhibitor.id.to_s + '.pdf' %></p>

@@ -1,0 +1,13 @@
+<% if flash != nil
+for key in flash.keys %>
+<p><%= flash[key] %></p>
+<% end
+end %>
+
+<h1>Jasenet lisatty uudestaan. Lisatty <%= @added.size().to_s %> osoitetta.</h1>
+
+<table>
+<% for p in @added.sort{ |a,b| a.primary_email <=> b.primary_email} %>
+<tr><td><%= p.primary_email %></td></tr>
+<% end %>
+</table>

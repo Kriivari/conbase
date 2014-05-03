@@ -1,0 +1,26 @@
+<%= form_for( @person, :url => { :action => 'doshifts' } ) do |f| %>
+<%= f.submit( "Luo vuorot" ) %></td>
+<input type="hidden" id="group" name="group" value="<%= @group.id %>" />
+<table>
+<tr>
+<th>Nimi</th>
+<% for time in @times %>
+  <th class="element" valign="top"><%= time %></th>
+<% end %>
+</tr>
+<% for person in @people %>
+<tr>
+  <td align="left" valign="top"><%= person.fullname %></td>
+  <% for time in @times %>
+    <td class="element" valign="top" align="left">
+      <div style="background-color:<%= person.availability_color( time ) %>">
+      <% if person.available( time ) %>
+        <input name="times[<%= person.id %>][<%= time %>]" type="checkbox" value="1" id="times_<%= person.id %>_<%= time %>" <%= person.scheduled( time ) %>/>
+      <% end %>
+      </div>
+    </td>
+  <% end %>
+</tr>
+<% end %>
+</table>
+<% end %>

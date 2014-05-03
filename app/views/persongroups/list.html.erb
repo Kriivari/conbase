@@ -1,0 +1,44 @@
+<h1>Kaikki henkilöryhmät</h1>
+
+<table>
+  <tr>
+  <th>Tapahtuma</th>
+  <th>Nimi</th>
+  <th>Kuvaus</th>
+  <th>Päivät</th>
+  <th>Ruuat</th>
+  <th>Ilmolomakkeessa</th>
+  <th>Jatkuu</th>
+  <th>Vakuutukseen</th>
+  <th>Ei työvoimaa</th>
+  <th>Ylläpito</th>
+  <th>Postilista</th>
+  <th>Muistiinpanot</th>
+  </tr>
+  
+<% for persongroup in @persongroups %>
+  <tr>
+  <td><%= persongroup.event %></td>
+  <td><%= persongroup.name %></td>
+  <td><%= persongroup.description %></td>
+  <td><%= persongroup.days %></td>
+  <td><%= persongroup.food %></td>
+  <td><%= persongroup.visible %></td>
+  <td><%= persongroup.continues %></td>
+  <td><%= persongroup.insurance %></td>
+  <td><%= persongroup.nonstaff %></td>
+  <td><%= persongroup.admin %></td>
+  <td><%= persongroup.mailinglist %></td>
+  <td><%= persongroup.notes %></td>
+    <td><%= link_to 'Näytä', :action => 'show', :id => persongroup %></td>
+    <td><%= link_to 'Muokkaa', :action => 'edit', :id => persongroup %></td>
+    <td><%= link_to 'Poista', { :action => 'destroy', :id => persongroup }, :confirm => 'Oletko varma?', :method => :post %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= will_paginate @persongroups %>
+
+<br />
+
+<%= link_to 'Uusi henkilöryhmä', :action => 'new' %>

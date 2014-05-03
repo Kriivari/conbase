@@ -1,0 +1,78 @@
+<h1>Tilauksen muokkaus</h1>
+
+<%= form_for @order, :url => { :action => 'update', :id => @order } do |f| %>
+
+<table>
+<tr><td><label for="order_name">Otsikko</label></td>
+<td><%= f.text_field :name %></td></tr>
+
+<tr><td><label for="order_destination">Minne</label></td>
+<td><%= f.text_field :destination %></td></tr>
+
+<tr><td><label for="order_notes">Huomautuksia</label></td>
+<td><%= f.text_area :notes %></td></tr>
+
+<tr><td><label for="order_needed">Koska tarvitaan</label></td>
+<td><%= f.datetime_select :needed %></td></tr>
+
+<tr><td><label for="order_released">Koska vapautuu</label></td>
+<td><%= f.datetime_select :released %></td></tr>
+
+  <tr><td><label for="order_status">Tila</label></td>
+<td><%= collection_select( :order, :status, @statuses, :status, :name ) %></td></tr>
+</table>
+
+<table>
+<tr><th>Attribuutti</th><th>Arvo</th><th>Lisätiedot</th></tr>
+<% for att in @order.orders_attributes %>
+<% if att.order.event.ispublic %>
+<tr><td><%= att.attribute.name %> </td>
+<td><%= att.value %> </td>
+<td><%= att.notes %> </td>
+<td>[<%= link_to 'Poista', :action => 'rmattribute', :id => att %>]</td>
+</tr>
+<% end %>
+<% end %>
+</table>
+<p>Lisää attribuutti:</p>
+<table>
+<% for att in @attributes
+values = att.attribute_values.map { |v| [v.value, v.id] }
+values = [['Ei uutta arvoa', 0]] + values
+%>
+<tr><td><%= att.name %></td>
+<td><%= select(("att" + att.id.to_s).to_sym, :value, values) %></td>
+<td><input type="text" id="att<%= att.id.to_s %>_notes" name="att<%= att.id.to_s %>[notes]" /></td>
+</tr>
+<% end %>
+</table>
+
+<table>
+<tr><th>Mitä</th><th>Mistä</th><th>Hinta (lukuarvo!)</th><th>Maksimihinta (lukuarvo!)</th><th>Tila</th><th>Huomautukset</th></tr>
+<% i = 0 %>
+<% for item in @order.orderitems %>
+<% i = i + 1 %>
+
+<tr>
+<td><%= item.name %>
+<input type="hidden" value="<%= item.name %>" name="orderitem<%= i %>[name]" /></td>
+
+<td><input type="text" value="<%= item.location %>" name="orderitem<%= i %>[location]" /></td>
+
+<td><input type="text" value="<%= item.cost %>" name="orderitem<%= i %>[cost]" /></td>
+
+<td><input type="text" value="<%= item.maxcost %>" name="orderitem<%= i %>[maxcost]" /></td>
+
+<td><%= collection_select( ("orderitem" + i.to_s).to_sym, :status, @statuses, :status, :name, {:selected => item.status} ) %></td>
+
+<td><input type="text" value="<%= item.notes %>" name="orderitem<%= i %>[notes]" /></td>
+
+<% end %>
+</table>
+<br />
+<br />
+  <%= f.submit 'Talleta muutokset' %>
+<% end %>
+
+<%= link_to 'Näytä', :action => 'show', :id => @order %> |
+<%= link_to 'Takaisin listaan', :action => 'list' %>

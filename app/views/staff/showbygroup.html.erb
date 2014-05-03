@@ -1,0 +1,34 @@
+<h3><%= @group.event %></h3>
+<p>Pisteessä <%= @group.name %> yhteensä <%= @groups.size %> henkilöä</p>
+<table border="1">
+<tr><th>Etunimi</th><th>Sukunimi</th><th>Lempinimi</th><th>Puhelin</th></tr>
+<% @groups.each{ |group| 
+if group && group.person
+%>
+<tr><td valign="top"><%=group.person.firstname%></td>
+<td valign="top"><%=group.person.lastname%></td>
+<td valign="top"><%=group.person.nickname%></td>
+<td valign="top"><%=group.person.primary_phone%></td>
+<% if @group.name == 'Jono' %>
+<td valign="top">
+<% group.person.people_persongroups.each { |gr|
+if gr.status == -2 && gr.persongroup.event == @event %>
+<%= gr.persongroup.name %>
+<% end
+} %>
+</td>
+<% end %>
+<td valign="top"><%= link_to 'Näytä', :controller => 'people', :action => 'show', :id => group.person %>
+<td valign="top"><%= link_to 'Muokkaa', :controller => 'people', :action => 'edit', :id => group.person %>
+<%= link_to 'Palauta toiveeksi', {:action => 'return', :groupid => group.id, :id => @group.id }, :confirm => 'Oletko varma?' %>
+<%= link_to 'Poista kokonaan', {:action => 'remove_signup', :id => group.person }, :confirm => 'Oletko varma?' %></td>
+</tr>
+<% end
+} %>
+</table>
+<%= render "persongroups/email", :group => @group, :next_controller => 'staff', :next_action => 'showbygroup' %>
+<p>
+<% @groups.each{ |group| %>
+<%= group && group.person && group.person.primary_email %>,
+<% } %>
+</p>

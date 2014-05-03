@@ -1,0 +1,91 @@
+<div class="programlist">
+<h3><%= @event %></h3>
+<ul>
+<li>Complete program: <a href="/programs/public/all/time?lang=en&id=<%= @event.id %>">by time</a> or <a href="/programs/public/all/loc?lang=en&id=<%= @event.id %>">by location</a></li>
+<% if @event.starttime.wday == 4 %>
+<li>Thursday program: <a href="/programs/public/to/time?lang=en&id=<%= @event.id %>">by time</a> or <a href="/programs/public/to/loc?lang=en&id=<%= @event.id %>">by location</a></li>
+<% end %>
+<li>Friday program: <a href="/programs/public/pe/time?lang=en&id=<%= @event.id %>">by time</a> or <a href="/programs/public/pe/loc?lang=en&id=<%= @event.id %>">by location</a></li>
+<li>Saturday program: <a href="/programs/public/la/time?lang=en&id=<%= @event.id %>">by time</a> or <a href="/programs/public/la/loc?lang=en&id=<%= @event.id %>">by location</a></li>
+<li>Sunday program: <a href="/programs/public/su/time?lang=en&id=<%= @event.id %>">by time</a> or <a href="/programs/public/su/loc?lang=en&id=<%= @event.id %>">by location</a></li>
+</ul>
+<div class="programlistindex">
+<h3>Programs by category</h3>
+<ul>
+<% @groups.each { |group| %>
+  <li><a href="/programs/public/all/time/<%= group.id %>?id=<%= @event.id %>"><%= group.name %></a>
+<% } %>
+</ul>
+</div>
+<% if @group %>
+<div class="incategorysort">
+<ul>
+<li><a href="/programs/public/all/time/<%= @group %>?id=<%= @event.id %>">By time</a></li>
+<li><a href="/programs/public/all/loc/<%= @group %>?id=<%= @event.id %>">By location</a></li>
+<li><a href="/programs/public/all/org/<%= @group %>?id=<%= @event.id %>">By organizer/a></li>
+</ul>
+</div>
+<% end %>
+<div class="programlistcontent">
+<table>
+  <tr>
+    <th class="time">Time</th>
+    <th class="name">Name</th>
+    <th class="place">Location</th>
+    <th class="type">Type</th>
+  </tr>
+  
+<% for program in @programs %>
+  <tr>
+    <td class="time">
+<%= @wdays[program.start_time.wday] %>
+                     <%= program.start_time.strftime("%a %H.%M") %>
+			-
+                     <%= @wdays[program.end_time.wday] %>
+                     <%= program.end_time.strftime("%a %H.%M") %>
+    </td>
+<% if program.program.programgroups %>
+    <td class="cat<%= program.program.programgroups.first.id %>" title="<%= h program.program.descriptionbylang( "en" ) %>">
+<% else %>
+    <td class="name" title="<%= h program.program.description %>">
+<% end %>
+    <a href="#<%= program.id %>"><%= program.program.namebylang( "en" ) %>
+<%= if program.program.name != program.name
+      program.name
+    end %></a></td>
+    <td class="loc<%= program.location.id %>"><%= program.location %></td>
+    <td class="type"><%= program.program.showgroups %></td>
+  </tr>
+<% end %>
+</table>
+<% for program in @programs %>
+<p><a name="<%= program.id %>"></a>
+<b><%= program.program.namebylang( "en" ) %></b><br />
+<%= @wdays[program.start_time.wday] %> <%= program.start_time.strftime("%H.%M") %>&nbsp;&ndash;&nbsp;
+<%= @wdays[program.end_time.wday] %> <%= program.end_time.strftime("%H.%M") %>,
+<%= program.location %>
+<%= program.program.showgroups %>
+<br />
+Organizer:
+<%= program.program.all_organizers %>
+<br />
+<% if program.description != nil && program.description.length > 0 %>
+<%= program.description %>
+<br />
+<% end %>
+<% if program.program.description != nil %>
+<%= program.program.descriptionbylang( "en" ) %>
+<br />
+<% end %>
+<% if program.program.publicnotes != nil %>
+<%= program.program.notesbylang( "en" ) %>
+<br />
+<% end %>
+<% if program.program.url != nil && program.program.url.length > 0 %>
+Extra material at <a href="<%= program.program.url %>"><%= program.program.url %></a>
+<br />
+<% end %>
+</p>
+<% end %>
+</div>
+</div>

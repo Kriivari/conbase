@@ -1,0 +1,60 @@
+<div class="sisalto">
+        <h2><%= flash[:notice] %></h2>
+	<h2><%= @event %> työvoimapaitatilaus</h2>
+<% if @event.shirtorder %>
+<%= form_for( @person, :url => { :action => 'ordershirt' } ) do |f| %>
+<div>
+<input id="event" name="event" type="hidden" value="<%= @event.id %>"/>
+<table border="0" id="comment_form">
+
+	<tr>
+		<td align="left" valign="top">Etunimi: <span class="form_required">*</span></td>
+		<td class="element" valign="top" align="left">	<input id="person_firstname" name="person[firstname]" size="30" style="width: 350px" type="text" /></td>
+	</tr>
+	<tr>
+		<td align="left" valign="top">Sukunimi: <span class="form_required">*</span></td>
+		<td class="element" valign="top" align="left">	<input size="30" style="width: 350px" name="person[lastname]" id="person_lastname" type="text" /></td>
+	</tr>
+	<tr>
+		<td align="left" valign="top">Sähköpostiosoite (sama millä ilmoittauduit työvoimaan): <span class="form_required">*</span></td>
+		<td class="element" valign="top" align="left">	<input size="30" style="width: 350px" name="person[primary_email]" id="person_primary_email" type="text" /></td>
+	</tr>
+    <tr>
+        <td align="left" valign="top">Haluamasi paita (kaikkien paitojen hinnat ovat 19 euroa nimikoituna):</td>
+        <td class="element" valign="top" align="left"><%= collection_select(:product, :id, @shirttypes, :id, :fullname) %></td>
+    </tr>
+    <tr>
+            <td align="left" valign="top">Nimi paitaan (jätä tyhjäksi, jos et halua nimikointia - VAIN RYHMÄ jos haluat vain ryhmänimikoinnin) - paita ilman mitään nimikointia on 14,70 euroa:</td>
+            <td class="element" valign="top" align="left">  <input size="30" style="width: 350px" name="shirttext" id="shirttext" type="text" /></td>
+    </tr>
+	<tr>
+		<td align="left" valign="top"></td>
+		<td valign="top" align="left">	<%= f.submit( "Tilaa paita" ) %></td>
+	</tr>
+	<tr>
+		<td></td>
+	<td align="left" valign="top">* pakollinen kenttä</td>
+	</tr>
+	<tr>
+		<td></td>
+	<td align="left" valign="top">
+      <p>Jos haluat tilata useamman paidan, täytä lomake useamman kerran.<br/>
+      Paitatilauksen deadline on 5.6. Jos et ole tilannut ja maksanut paitaa viimeistään 5.6., emme sitoudu toimittamaan staffipaitaa.<br/>
+      Jos sinulla on kysyttävää, laita viestiä myyntituotteet@ropecon.fi.</p>
+
+      <p>Työvoimapaitoja saa 2013 mustana ja (ei-hihattomia) turkoosina, Paitojen kokopähkäilemisen helpottamiseksi saatavuudet&mittataulukot:<br/>
+      <a href="http://porukkapaita.fi/tuotekuvat11/mittataul_exact150.jpg">Unisex S-XXXL (XXXL vain mustana)</a><br/>
+      <a href="http://porukkapaita.fi/tuotekuvat12/mittataulukko_menonly.jpg">Miesten istuva S-XXL</a> (Huom! paitamalli vaihtunut vuodesta 2012)<br/>
+      <a href="http://www.bc-collection.eu/catalogue/admin/images_products/tm201-sizingGuide.jpg">Miesten hihaton S-XXL</a><br/>
+      <a href="http://porukkapaita.fi/tuotekuvat11/mitat_exact190women.jpg">Naisten istuva XS-XXL</a><br/>
+      <a href="http://www.bc-collection.eu/catalogue/admin/images_products/tw014-sizingGuide.jpg">Naisten hihaton XS-XL</a></p>
+
+      <p>Työvoimapaidan kuvaa voi katsellä <a href="https://www.dropbox.com/s/h7etwvioowte504/mies.jpg">tämän linkin</a> takaa (turkoosin paidan kuva on <a href="https://www.dropbox.com/s/ah53xhlty2shaoi/Ropecon2013_miespaita_atoll.jpg">täällä</a>)<p></td>
+	</tr>
+</table>
+</div>
+<% end %>
+<% else %>
+<p><b>Paitatilaukset eivät ole auki.</b></p>
+<% end %>
+</div>

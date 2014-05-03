@@ -1,0 +1,5 @@
+<%= form_for( :url => { :action => 'confirmed' } ) do |f| %>
+<p>Alla oleva sähköposti lähtee henkilölle. Voit muokata sitä halumanlaiseksesi.</p>
+<p><textarea id="email_text" name="email[text]" rows="25" cols="75"><%= @email %></textarea></p>
+<p><%= f.submit 'Vahvista' %></p>
+<% end %>

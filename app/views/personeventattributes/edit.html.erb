@@ -1,0 +1,9 @@
+<h1>Editing personeventattribute</h1>
+
+<%= form_for( @personeventattribute, :url => { :action => 'update', :id => @personeventattribute } ) do |f| %>
+  <%= render :partial => 'form' %>
+  <%= f.submit 'Edit' %>
+<% end %>
+
+<%= link_to 'Show', :action => 'show', :id => @personeventattribute %> |
+<%= link_to 'Back', :action => 'list' %>

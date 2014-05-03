@@ -1,0 +1,10 @@
+<h1>Haku</h1>
+
+<%= form_for( @program, :url => { :action => 'results' } ) do |f| %>
+<p><label for="term">Ohjelman tai järjestäjän nimen osa</label>
+  <input type="text" id="term" name="term" /></p>
+
+  <%= submit_tag 'Hae' %>
+<% end %>
+
+<%= link_to 'Takaisin listaan', :action => 'list' %>

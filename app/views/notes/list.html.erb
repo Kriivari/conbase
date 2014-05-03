@@ -1,0 +1,28 @@
+<h1>Ilmoitukset</h1>
+
+<p><%= link_to 'Uusi ilmoitus', :action => 'new' %></p>
+<% if @notes != nil %>
+<table>
+  <tr>
+  <% for column in Note.content_columns %>
+    <th><%= column.human_name %></th>
+  <% end %>
+  </tr>
+  
+<% for notification in @notes %>
+  <tr>
+  <% for column in Note.content_columns %>
+    <td><%=h notification.send(column.name) %></td>
+  <% end %>
+    <td><%= link_to 'Näytä', :action => 'show', :id => notification %></td>
+    <td><%= link_to 'Muokkaa', :action => 'edit', :id => notification %></td>
+    <td><%= link_to 'Poista', { :action => 'destroy', :id => notification }, :confirm => 'Oletko varma?', :method => :post %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= will_paginate @notes %>
+<% end %>
+
+<br />
+

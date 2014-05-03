@@ -1,0 +1,38 @@
+<h1>Paikat</h1>
+
+<table>
+  <tr>
+    <th>Tapahtuma</th>
+    <th>Nimi</th>
+    <th>Ohjelmat</th>
+    <th>Huomautukset</th>
+    <th>Alkaa</th>
+    <th>Päättyy</th>
+    <th>Päällekäiset</th>
+  </tr>
+  
+<% for location in @locations %>
+  <tr>
+    <td><%= location.event %></td>
+    <td><%= location.name %></td>
+    <td><%= location.programitems.size %></td>
+    <td><%= location.notes %></td>
+    <td><%= location.start_time.strftime("%a %H.%M") %></td>
+    <td><%= location.end_time.strftime("%a %H.%M") %></td>
+<% if location.multiple %>
+    <td>Sallittu</td>
+<% else %>
+    <td></td>
+<% end %>
+    <td><%= link_to 'Näytä', :action => 'show', :id => location %></td>
+    <td><%= link_to 'Muokkaa', :action => 'edit', :id => location %></td>
+    <td><%= link_to 'Poista', { :action => 'destroy', :id => location }, :confirm => 'Oletko varma?', :method => :post %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= will_paginate @locations %>
+
+<br />
+
+<%= link_to 'Uusi paikka', :action => 'new' %>

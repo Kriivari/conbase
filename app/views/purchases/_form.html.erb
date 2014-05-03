@@ -1,0 +1,22 @@
+<%= form_for(@purchase) do |f| %>
+  <% if @purchase.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@purchase.errors.count, "error") %> prohibited this purchase from being saved:</h2>
+
+      <ul>
+      <% @purchase.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+    <table>
+      <tr><td>Myyntituote:</td><td><%= collection_select(:product_item_purchase, :product_item_id, ProductType.all, :id, :fullname) %></td></tr>
+      <tr><td>Tarkenne:</td><td><%= f.text_field :details %></td></tr>
+      <tr><td>Tilaaja:</td><td><%= collection_select(:purchase, :person_id, Person.all.sort! { |a,b| a.fullname.downcase <=> b.fullname.downcase }, :id, :fullname) %></td></tr>
+      <tr><td>Maksettu:</td><td><%= f.text_field :paid %></td></tr>
+      <tr><td>Muistiinpanot:</td><td><%= f.text_field :notes %></td></tr>
+      <tr><td><%= f.submit "Talleta" %></td></tr>
+    </table>
+<% end %>

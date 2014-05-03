@@ -1,0 +1,9 @@
+<h1>Editing mailinglist</h1>
+
+<%= form_for( @mailinglist, :url => { :action => 'update', :id => @mailinglist } ) do |f| %>
+  <%= render :partial => 'form' %>
+  <%= f.submit 'Edit' %>
+<% end %>
+
+<%= link_to 'Show', :action => 'show', :id => @mailinglist %> |
+<%= link_to 'Back', :action => 'list' %>

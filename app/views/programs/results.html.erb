@@ -1,0 +1,21 @@
+<h1>Haun tulokset</h1>
+
+<table>
+  <tr>
+  <% Program.content_columns.each do |column| %>
+    <th><%= column.human_name %></th>
+  <% end %>
+  </tr>
+  
+<% for program in @programs %>
+  <tr>
+  <% Program.content_columns.each do |program| %>
+    <td><%=h program.send(program.name) %></td>
+  <% end %>
+    <td><%= link_to 'Show', :action => 'show', :id => program %></td>
+    <td><%= link_to 'Edit', :action => 'edit', :id => program %></td>
+    <td><%= link_to 'Destroy', { :action => 'destroy', :id => program }, :confirm => 'Are you sure?', :method => :post %></td>
+  </tr>
+<% end %>
+</table>
+<%= link_to 'Takaisin hakusivulle', :action => 'search' %>

@@ -1,0 +1,32 @@
+    <p><b>Tapahtuma:</b> <%= @persongroup.event %></p>
+    <p><b>Nimi:</b> <%= @persongroup.name %></p>
+    <p><b>Kuvaus:</b> <%= @persongroup.description %></p>
+    <p><b>Lippupäivät:</b> <%= @persongroup.days %></p>
+    <p><b>Ruokarahat:</b> <%= @persongroup.food %></p>
+    <p><b>Julkinen:</b> <%= @persongroup.visible %></p>
+    <p><b>Jatkuva:</b> <%= @persongroup.continues %></p>
+    <p><b>Vakuutukseen:</b> <%= @persongroup.insurance %></p>
+    <p><b>Conbase-pääsy:</b> <%= @persongroup.admin %></p>
+    <p><b>Wiki-pääsy:</b> <%= @persongroup.wikiaccess %></p>
+    <p><b>Postilista:</b> <%= @persongroup.mailinglist %></p>
+    <p><b>Muuta:</b> <%= @persongroup.notes %></p>
+
+<table>
+<% emails = [] %>
+<% persons = [] %>
+<% for person in @persongroup.people_persongroups.sort_by { |g| g.person.fullname } %>
+<% if person.status == -1 && person.person != nil && ! persons.include?( person.person ) %>
+<tr><td><%= link_to person.person.lastname, :controller => "people", :action => "show", :id => person.person %> <%= person.person.firstname %></td></tr>
+<% unless person.person.primary_email.end_with?("example.com") || person.person.primary_email.end_with?(".invalid") %>
+  <% emails << person.person.primary_email %>
+<% end %>
+<% persons << person.person %>
+<% end %>
+<% end %>
+
+</table>
+<%= render "email", :group => @persongroup, :next_controller => 'persongroups', :next_action => 'show' %>
+<p>Mailit: <%= emails.join(",") %></p>
+
+<%= link_to 'Edit', :action => 'edit', :id => @persongroup %> |
+<%= link_to 'Back', :action => 'list' %>

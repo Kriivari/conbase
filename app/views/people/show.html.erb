@@ -1,0 +1,63 @@
+<%= link_to 'Muokkaa', :action => 'edit', :id => @person %> |
+<%= link_to 'Takaisin listaan', :action => 'index' %>
+<table>
+<tr><th align="left">Etunimi:</th><td> <%= @person.firstname %></td></tr>
+<tr><th align="left">Sukunimi:</th><td> <%= @person.lastname %></td></tr>
+<tr><th align="left">Lempinimi:</th><td> <%= @person.nickname %></td></tr>
+<% if @person.photo_url && @person.photo_url.start_with?( "http:" )%>
+<tr><th align="left">Kuva:</th><td><img src='<%= @person.photo_url %>' width="200" /></td></tr>
+<% end %>
+<tr><th align="left">Osoite:</th><td> <%= @person.street %></td></tr>
+<tr><th align="left">Postinumero:</th><td> <%= @person.zipcode %></td></tr>
+<tr><th align="left">Kaupunki:</th><td> <%= @person.city %></td></tr>
+<tr><th align="left">Maa:</th><td> <%= @person.country %></td></tr>
+<tr><th align="left">Puhelin:</th><td> <%= @person.primary_phone %></td></tr>
+<tr><th align="left">Sähköposti:</th><td> <%= @person.primary_email %></td></tr>
+<tr><th align="left">Syntymävuosi:</th><td> <%= @person.birthyear %></td></tr>
+<tr><th align="left">Salasana:</th><td> <%= @person.password != nil %></td></tr>
+<tr><th align="left">CV:</th><td> <%= @person.cv %></td></tr>
+<tr><th align="left">Muuta:</th><td> <%= @person.notes %></td></tr>
+<tr><th align="left">Ranneke:</th><td> <%= @person.max_days(@event) %></td></tr>
+<tr><th align="left">Ruokaraha:</th><td> <%= @person.max_food(@event) %></td></tr>
+<tr></tr>
+<tr><th align="left">Ryhmät:</th></tr>
+<% for group in @groups %>
+<tr><td>
+<% if group.statusname.name == 'Vahvistettu' && group.persongroup.event.ispublic %>
+<i>
+<% end %>
+<%= group.persongroup.event %> <%= link_to group.persongroup.name, :controller => 'staff', :action => 'showbygroup', :id => group.persongroup %> 
+<% if group.statusname.name == 'Vahvistettu' && group.persongroup.event.ispublic %>
+</i>
+<% end %>
+</td>
+<td>
+<% if group.statusname.name == 'Vahvistettu' && group.persongroup.event.ispublic %>
+<i>
+<% end %>
+<%= group.statusname %>
+<% if group.statusname.name == 'Vahvistettu' && group.persongroup.event.ispublic %>
+</i>
+<% end %>
+</td></tr>
+<% end %>
+<tr></tr>
+<tr><th align="left">Ohjelmat:</th></tr>
+<% for group in @programs %>
+<tr><td>
+<%= group.program.event %> <%= link_to group.program.name, :controller => 'programs', :action => 'show', :id => group.program %> 
+</td>
+<td>
+<%= group.statusname %>
+</td></tr>
+<% end %>
+<tr></tr>
+<tr><th align="left">Attribuutit:</th></tr>
+<% for att in @attributes %>
+<tr><td>
+<%= att.event %>
+<%= att.attribute.name %>:
+</td><td><%= att.value %> <%= att.notes %>
+</td></tr>
+<% end %>
+</table>

@@ -1,0 +1,12 @@
+<% cache('staff_foods') do %>
+<h3><%= @event %></h3>
+<table border="1" width="100%">
+<tr><th width="20%">Sukunimi</th><th width="20%">Etunimi</th><th width="10%">Ruokarahoja</th><th>Kuittaus</th width="50%"></tr>
+<% @staffs.each{ |staff| %>
+<tr><td valign="top"><%=staff.lastname%></td>
+<td valign="top"><%=staff.firstname%></td>
+<td valign="top"><%=staff.max_food(@event)%></td>
+<td>&nbsp;</td></tr>
+<% } %>
+</table>
+<% end %>

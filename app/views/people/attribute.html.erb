@@ -1,0 +1,40 @@
+<h1><%= @attribute.name %></h1>
+
+<table>
+  <tr>
+    <th>Sukunimi</th><th>Etunimi</th><th>Lempinimi</th><th><%= @attribute.name %></th><th>Muuta</th><th>Työpisteet</th><th>Viite</th>
+  </tr>
+  
+<% for att in @attributes 
+if att.person
+  show = ""
+  att.person.people_persongroups.each { |group|
+    if group.persongroup.event.id == @event.id && group.status == -1
+      show = show + group.persongroup.name + " "
+    end
+  }
+#  if show.length == 0
+    prog = true
+    att.person.programs_organizers.each { |org|
+      if org.program.event.id == @event.id && prog
+        show = show + "Ohjelma"
+        prog = false
+      end
+    }
+#  end
+  if show.length > 0
+%>
+  <tr>
+    <td><%= att.person.lastname %></td>
+    <td><%= att.person.firstname %></td>
+    <td><%= att.person.nickname %></td>
+    <td><%= att.value %></td>
+    <td><%= att.notes %></td>
+    <td><%= show %></td>
+    <td><%= ApplicationHelper.reference( @event.year, att.id.to_s ) %></td>
+  </tr>
+<% 
+  end
+end
+end %>
+</table>

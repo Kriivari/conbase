@@ -1,0 +1,8 @@
+<% AttributeValue.content_columns.each do |column| %>
+<p>
+  <b><%= column.human_name %>:</b> <%=h @attribute_value.send(column.name) %>
+</p>
+<% end %>
+
+<%= link_to 'Edit', :action => 'edit', :id => @attribute_value %> |
+<%= link_to 'Back', :action => 'list' %>

@@ -1,0 +1,12 @@
+<%= error_messages_for 'attribute_value' %>
+
+<p><label for="attribute_attribute">Attribute</label><br/>
+<%= f.select(:attribute, :attribute, @attributes) %></p>
+
+<p><label for="attribute_value_value">Value</label><br/>
+<%= f.text_field :value  %></p>
+
+<p><label for="attribute_value_defaultvalue">Defaultvalue</label><br/>
+<select id="attribute_value_defaultvalue" name="attribute_value[defaultvalue]"><option value="false">False</option><option value="true">True</option></select></p>
+<!--[eoform:attribute_value]-->
+

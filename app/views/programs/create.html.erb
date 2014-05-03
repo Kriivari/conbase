@@ -1,0 +1,20 @@
+<%= error_message_on(:person,:firstname) %>
+<%= error_message_on(:person,:lastname) %>
+<%= error_message_on(:person,:primary_email) %>
+<%= error_message_on(:person,:primary_phone) %>
+<%= error_message_on(:person,:birthyear) %>
+<%= error_message_on(:person,:password) %>
+<p>Ilmoittautumisesi on lisätty kantaan.</p>
+<p>Ohjelma: <%= @program.name %></p>
+<p>Kuvaus: <%= @program.description %></p>
+
+<p>Etunimi: <%= @person.firstname %></p>
+<p>Sukunimi: <%= @person.lastname %></p>
+<p>Lempinimi (vapaaehtoinen, tulee rintanappiin): <%= @person.nickname %></p>
+<p>Puhelin, josta tavoittaa conin aikana: <%= @person.primary_phone %></p>
+<p>Sähköpostiosoite, joka toimii käyttäjätunnuksenasi: <%= @person.primary_email %></p>
+<p>Salasana, jolla pääset muuttamaan tietoja: <%= @person.password %></p>
+<p>Syntymävuosi: <%= @person.birthyear %></p>
+<p>Työpisteet, joissa olet ollut aiemmin: <%= @oldgroups %></p>
+<p>Haluamasi työpisteet: <%= @newgroups %></p>
+<p><%= @extra %></p>

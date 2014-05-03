@@ -1,0 +1,6 @@
+<table>
+<tr><th>Alku</th><th>Loppu</th><th>Ohjelma</th><th>Tapahtuma</th><th>Ohjelman kuvaus</th><th>Tapahtuman kuvaus</th><th>Paikka</th><th>Järjestäjät</th></tr>
+<% @programs.each do |program| %>
+<tr><td><%= @wdays[program.start_time.wday] %> <%= program.start_time.strftime("%H.%M") %></td><td><%= @wdays[program.end_time.wday] %> <%= program.end_time.strftime("%H.%M") %></td><td><%= program.program.name %></td><td><%= program.name %></td><td><%= program.program.description %></td><td><%= program.description %></td><td><%= program.location %></td><td><%= program.program.all_organizers %></td></tr>
+<% end %>
+</table>

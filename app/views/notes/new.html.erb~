@@ -1,0 +1,8 @@
+<h1>Uusi ilmoitus</h1>
+
+<%= form_for @note, :url => { :action => 'create' } do |f| %>
+  <%= render :partial => 'form' %>
+  <%= f.submit "Luo" %>
+<% end %>
+
+<%= link_to 'Listaan', :action => 'list' %>

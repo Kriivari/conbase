@@ -1,0 +1,36 @@
+<h1>Uusi tilaus</h1>
+
+<%= form_for @order, :url => { :action => 'create' } do |f| %>
+
+<p>Ohjeita: Otsikon on hyvä olla esim. vastuualue (info, korttipelit, takahuone, jne). Erittelyssä muoto "Tussi 12 kpl" tai "Tussi x12" on suositeltava. Voit tilata myös suoraan inventaarin mukaisen laatikon kertsiltä ilman sen tarkempaa erittelyä.</p>
+
+<p><%= f.submit "Luo" %></p>
+
+<p><label for="order_name">Otsikko</label><br/>
+<%= f.text_field :name %></p>
+
+<p><label for="order_destination">Minne</label><br/>
+<%= f.text_field :destination %></p>
+
+<p><label for="order_notes">Huomautuksia</label><br/>
+<%= f.text_area :notes %></p>
+
+<p><label for="order_needed">Koska tarvitaan</label><br/>
+<%= f.datetime_select :needed %></p>
+
+<p><label for="order_released">Koska vapautuu</label><br/>
+<%= f.datetime_select :released  %></p>
+
+<table>
+<tr><th>Mitä</th><th>Mistä</th><th>Oletushinta (lukuarvo!)</th><th>Maksimihinta (lukuarvo!)</th></tr>
+<% for i in 1..25 %>
+<tr><td><%= text_field 'orderitem' + i.to_s, 'name'  %></td>
+<td><%= text_field 'orderitem' + i.to_s, 'location'  %></td>
+<td><%= text_field 'orderitem' + i.to_s, 'cost'  %></td>
+<td><%= text_field 'orderitem' + i.to_s, 'maxcost'  %></td></tr>
+<% end %>
+</table>
+
+<% end %>
+
+<%= link_to 'Takaisin listaan', :action => 'list' %>

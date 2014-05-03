@@ -1,0 +1,47 @@
+<%= render "shared/error_messages", :target => @attribute %>
+
+<!--[form:attribute]-->
+<%= form_for( @attribute ) do |f| %>
+<p><label for="attribute_name">Name</label><br/>
+<%= f.text_field :name  %></p>
+<p><label for="attribute_visible">Julkinen</label><br/>
+<select id="attribute_visible" name="attribute[visible]">
+    <option value="false">Ei</option>
+    <% if @attribute && @attribute.visible %>
+        <option value="true" selected="selected">Kyllä</option>
+    <% else %>
+        <option value="true">Kyllä</option>
+    <% end %>
+  </select></p>
+
+<p><label for="attribute_person">Henkilö</label><br/>
+    <select id="attribute_person" name="attribute[person]">
+      <option value="false">Ei</option>
+      <% if @attribute && @attribute.person %>
+          <option value="true" selected="selected">Kyllä</option>
+      <% else %>
+          <option value="true">Kyllä</option>
+      <% end %>
+    </select></p>
+<p><label for="attribute_program">Ohjelma</label><br/>
+    <select id="attribute_program" name="attribute[program]">
+      <option value="false">Ei</option>
+      <% if @attribute && @attribute.program %>
+          <option value="true" selected="selected">Kyllä</option>
+      <% else %>
+          <option value="true">Kyllä</option>
+      <% end %>
+    </select></p>
+<p><label for="attribute_orders">Tilaus</label><br/>
+    <select id="attribute_orders" name="attribute[orders]">
+      <option value="false">Ei</option>
+      <% if @attribute && @attribute.orders %>
+          <option value="true" selected="selected">Kyllä</option>
+      <% else %>
+          <option value="true">Kyllä</option>
+      <% end %>
+    </select></p>
+<%= f.submit 'Talleta' %>
+<% end %>
+<!--[eoform:attribute]-->
+

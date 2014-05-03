@@ -1,0 +1,22 @@
+<div class="sisalto">
+  <h2><%= flash[:notice] %></h2>
+  <h2>Kaubamajavaraus</h2>
+  <% if @exhibitor.errors.empty? %>
+      <p>Kiitos varauksestasi. Alla olevat tiedot on nyt talletettu. Lisätietoja tarvittaessa osoitteesta kaubamaja@ropecon.fi</p>
+
+      <p>Etunimi: <%= @exhibitor.person.firstname %></p>
+      <p>Sukunimi: <%= @exhibitor.person.lastname %></p>
+      <p>Sähköpostioste: <%= @exhibitor.person.primary_email %></p>
+      <p>Puhelin: <%= @exhibitor.person.primary_phone %></p>
+      <p>Yrityksen nimi: <%= @exhibitor.companyname %></p>
+      <p>Laskutusosoite: <%= @exhibitor.billing_address %></p>
+      <p>Pöytiä: <%= @exhibitor.tables %> (<%= @exhibitor.tablesize %>)</p>
+      <p>Lisärannekkeita: <%= @exhibitor.tickets %></p>
+      <p>Kulkulupia: <%= @exhibitor.travelpasses %></p>
+      <p>Lisätietoja: <%= @exhibitor.notes %></p>
+      <p><b>Alustava varauksen kokonaishinta: <%= @exhibitor.total %> euroa</b></p>
+  <% else %>
+      <%= render "shared/error_messages", :target => @exhibitor %>
+      <p>Varaustasi ei ole talletettu! Palaa takaisin ja korjaa virheelliset tiedot.</p>
+  <% end %>
+</div>

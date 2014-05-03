@@ -1,0 +1,20 @@
+<p><b>Nimi:</b> <%= @event.name %><br></p>
+<p><b>Vuosi:</b> <%= @event.year %><br></p>
+<p><b>Alkaa:</b> <%= @event.starttime %><br></p>
+<p><b>Päättyy:</b> <%= @event.endtime %><br></p>
+<p><b>Julkinen:</b> <%= @event.ispublic %><br></p>
+<p><b>Vakuutettavia työntekijöitä:</b> <%= @event.organizer_count %></p>
+<p><b>Joista alle 18-v:</b> <%= @event.underage_organizer_count %></p>
+<p><b>Vapaalippuja:</b> <%= @event.ticket_count %></p>
+<p><b>Ruokarahoja:</b> <%= @event.food_count %></p>
+<p><b>Ohjelmanumeroita:</b> <%= @event.program_count %></p>
+<p><b>Ohjelmanjärjestäjiä:</b> <%= @event.program_organizer_count %></p>
+<p><b>Pelejä:</b> <%= @event.game_count %></p>
+<p><b>Pelinjärjestäjiä:</b> <%= @event.game_organizer_count %></p>
+<p><b>Puuttuvia statuksia:</b>
+<% @missing.each { |person| %>
+<%= link_to person.name, :controller => 'people', :action => 'edit', :id => person %>
+<% } %>
+</p>
+<%= link_to 'Muokkaa', :action => 'edit', :id => @event %> |
+<%= link_to 'Takaisin listaan', :action => 'index' %>

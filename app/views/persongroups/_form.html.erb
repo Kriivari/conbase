@@ -1,0 +1,102 @@
+<%= form_for( @persongroup ) do |f| %>
+    <% if @persongroup.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@persongroup.errors.count, "error") %> esti tämän ryhmän tallettamisen:</h2>
+
+          <ul>
+            <% @persongroup.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+<!--[form:persongroup]-->
+<p><label for="persongroup_name">Ryhmän nimi</label><br/>
+<%= f.text_field :name %></p>
+
+<p><label for="persongroup_description">Ryhmän kuvaus</label><br/>
+<%= f.text_field :description %></p>
+
+<p><label for="persongroup_days">Rannekepäivät</label><br/>
+<%= f.text_field :days %></p>
+
+<p><label for="persongroup_food">Ruokarahat</label><br/>
+<%= f.text_field :food %></p>
+
+<p><label for="persongroup_continues">Jäsenyys jatkuu vuodesta toiseen</label><br/>
+<select id="persongroup_continues" name="persongroup[continues]">
+<option value="false">Ei</option>
+<% if @persongroup && @persongroup.continues %>
+<option value="true" selected="selected">Kyllä</option>
+<% else %>
+<option value="true">Kyllä</option>
+<% end %>
+</select></p>
+
+<p><label for="persongroup_admin">Pääsy Conbaseen</label><br/>
+<select id="persongroup_admin" name="persongroup[admin]">
+<option value="false">Ei</option>
+<% if @persongroup && @persongroup.admin %>
+<option value="true" selected="selected">Kyllä</option>
+<% else %>
+<option value="true">Kyllä</option>
+<% end %>
+</select></p>
+
+<p><label for="persongroup_wikiaccess">Pääsy Wikeihin</label><br/>
+<select id="persongroup_wikiaccess" name="persongroup[wikiaccess]">
+<option value="false">Ei</option>
+<% if @persongroup && @persongroup.wikiaccess %>
+<option value="true" selected="selected">Kyllä</option>
+<% else %>
+<option value="true">Kyllä</option>
+<% end %>
+</select></p>
+
+<p><label for="persongroup_insurance">Vakuutukseen</label><br/><select id="persongroup_insurance" name="persongroup[insurance]">
+<option value="false">Ei</option>
+<% if @persongroup && @persongroup.insurance %>
+<option value="true" selected="selected">Kyllä</option>
+<% else %>
+<option value="true">Kyllä</option>
+<% end %>
+</select></p>
+
+    <p><label for="persongroup_nonstaff">Työvoimaa</label><br/><select id="persongroup_nonstaff" name="persongroup[nonstaff]">
+      <option value="false">Kyllä</option>
+      <% if @persongroup && @persongroup.nonstaff %>
+          <option value="true" selected="selected">Ei</option>
+      <% else %>
+          <option value="true">Ei</option>
+      <% end %>
+    </select></p>
+
+    <p><label for="persongroup_visible">Näkyy ilmoittautumislomakkeella</label><br/><select id="persongroup_visible" name="persongroup[visible]">
+<option value="false">Ei</option>
+<% if @persongroup && @persongroup.visible %>
+<option value="true" selected="selected">Kyllä</option>
+<% else %>
+<option value="true">Kyllä</option>
+<% end %>
+</select></p>
+
+<p><label for="persongroup_mailinglist">Postituslista</label><br/>
+<%= collection_select(:persongroup, :mailinglist_id, @mailinglists, :id, :name) %>
+</p>
+
+<p><label for="persongroup_notes">Muistiinpanot</label><br/>
+<%= f.text_area :notes %></p>
+
+<p><label for="persongroup_welcomesubject">Tervetulosähköpostin otsikko</label><br/>
+<%= f.text_field :welcomesubject %></p>
+
+<p><label for="persongroup_adminemail">Ylläpitäjän sähköpostiosoite</label><br/>
+<%= f.text_field :adminemail %></p>
+
+<p><label for="persongroup_footer">Lopputeksti tervetulosähköposteihin</label><br/>
+<%= f.text_field :footer %></p>
+<!--[eoform:persongroup]-->
+
+    <%= f.submit "Talleta" %>
+<% end %>

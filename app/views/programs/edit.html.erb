@@ -1,0 +1,68 @@
+<h1>Ohjelmanumeron muokkaus</h1>
+<% if flash != nil
+     for key in flash.keys %>
+        <p><%= flash[key] %></p>
+    <% end
+       end %>
+<h3>Ohjelmanumeron perustiedot</h3>
+<%= form_for( @program, :url => { :action => 'update', :id => @program } ) do |f| %>
+    <table>
+<tr><td>Nimi:</td><td><input type="text" id="program_name" name="program[name]" value="<%= @program.name %>" /></td></tr>
+<tr><td>Kuvaus:</td><td><textarea rows="4" cols="80" id="program_description" name="program[description]" size="30" style="width: 350px" type="text" ><%= @program.description %></textarea></td></tr>
+<tr><td>Englanninkielinen nimi:</td><td><input type="text" id="english_name" name="english[name]" value="<%= @englishname %>" /></td></tr>
+<tr><td>Englanninkielinen kuvaus:</td><td><textarea rows="4" cols="80" id="english_description" name="english[description]" size="30" style="width: 350px" type="text" ><%= @englishdescription %></textarea></td></tr>
+<tr><td>Julkinen tarkennus:</td><td><textarea rows="4" cols="80" id="program_publicnotes" name="program[publicnotes]" size="30" style="width: 350px" type="text" ><%= @program.publicnotes %></textarea></td></tr>
+<tr><td>Salaiset muistiinpanot:</td><td><textarea rows="4" cols="80" id="program_privatenotes" name="program[privatenotes]" size="30" style="width: 350px" type="text" ><%= @program.privatenotes %></textarea></td></tr>
+<tr><td>Materiaalin URL:</td><td><input type="text" id="program_url" name="program[url]" value="<%= @program.url %>"/></td></tr>
+<tr><td>Väkimäärä:</td><td><input type="text" id="program_attendance" name="program[attendance]" value="<%= @program.attendance %>" /></td></tr>
+<tr><td>Tyypit:</td>
+<td><% for group in @program.programgroups %>
+<%= group.name %> 
+[<a href="/programs/rmgroup/?groupid=<%= group.id %>&programid=<%= @program.id %>">Poista</a>]
+<% end %>
+</td></tr>
+<tr><td>Lisää ryhmään:</td><td><%= select(:grp, :value, @groups) %></td></tr>
+<tr><td>Tila:</td><td><%= collection_select( :program, :status, @statuses, :status, :name ) %></td></tr>
+<tr><td>Muutettu:</td><td><%= @program.updated_at %></td></tr>
+<tr><td><%= f.submit "Tallenna" %></td></tr>
+      </table>
+<h3>Ohjelman järjestäjät</h3>
+<% @program.programs_organizers.each { |organizer| 
+if organizer.person
+%>
+<p><%= organizer.person.firstname %> <%= organizer.person.lastname %>
+<% if organizer.statusname != nil %>
+(<%= organizer.statusname.name %>)
+<% end %>
+<%= link_to 'Poista', { :action => 'remove_organizer', :id => organizer, :program => @program }, :confirm => 'Oletko varma?', :post => true %></p>
+<% 
+end
+} %>
+<p><b>Lisää järjestäjä:</b> 
+<%= collection_select( :organizers, :status, @organizerstatuses, :status, :name ) %><br />
+<%= collection_select( :organizers, :id, @people, :id, :fullname ) %><br />
+  <table>
+<tr><td>Etunimi:</td><td><input type="text" id="person_firstname" name="person[firstname]" /></td></tr>
+<tr><td>Sukunimi:</td><td><input type="text" id="person_lastname" name="person[lastname]" /></td></tr>
+<tr><td>Lempinimi:</td><td><input type="text" id="person_nickname" name="person[nickname]" /></td></tr>
+<tr><td>Puhelin:</td><td><input type="text" id="person_primary_phone" name="person[primary_phone]" /></td></tr>
+<tr><td>Sähköposti:</td><td><input type="text" id="person_primary_email" name="person[primary_email]" /></td></tr>
+<tr><td><%= f.submit "Lisää" %></td></tr>
+    </table></p>
+<% end %>
+<h3>Ohjelman aikataulutiedot</h3>
+<p><%= link_to 'Lisää uusi aikataulutieto', :controller => 'programitems', :action => 'new', :id => @program %></p>
+<% @program.programitems.each { |item| %>
+<table>
+<tr><td>Nimi:</td><td><%= link_to item.name, edit_programitem_path(item) %></td></tr>
+<tr><td>Kuvaus:</td><td><%= item.description %></td></tr>
+<tr><td>Paikka:</td><td><%= item.location %></td></tr>
+<tr><td>Alkaa:</td><td><%= item.start_time %></td></tr>
+<tr><td>Loppuu:</td><td><%= item.end_time %></td></tr>
+<tr><td colspan="2"><%= link_to 'Muokkaa', edit_programitem_path(item) %> <%= button_to "Poista", programitem_path(item), { :method => :delete } %></td></tr>
+</table>
+<% } %>
+
+<%= link_to 'Näytä', :action => 'show', :id => @program %> |
+<%= link_to 'Takaisin listaan', :action => 'list' %>
+

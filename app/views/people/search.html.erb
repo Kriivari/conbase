@@ -1,0 +1,15 @@
+<h1>Haku</h1>
+
+<%= form_for( :person, :url => { :action => 'results' } ) do |f| %>
+<p><label for="name">Etunimen, sukunimen, lempinimen, puhelinnumeron tai sähköpostin alku</label>
+  <input type="text" id="name" name="name" /></p>
+
+<p><label for="currentyear">Vain tältä vuodelta</label><br/>
+<select id="currentyear" name="currentyear"><option value="false">Ei</option><option value="true">Kyllä</option></select></p>
+
+<p><label for="extrawork">Varatyövoima</label>
+  <input name="extra" value="yes" type="radio" id="extra_yes" /><label for="extra_yes">Kyllä</label>&nbsp;<input name="extra" value="ei" type="radio" id="extra_no" /><label for="extra_no">Ei</label></p>
+  <%= f.submit 'Hae' %>
+<% end %>
+
+<%= link_to 'Takaisin listaan', :action => 'index' %>

@@ -1,0 +1,44 @@
+<div class="sisalto">
+  <h2><%= flash[:notice] %></h2>
+  <h2><%= @event %> ranneketilaus</h2>
+  <% if @event.ticketorder %>
+      <%= form_for( @person, :url => { :action => 'order' } ) do |f| %>
+          <div>
+            <input id="event" name="event" type="hidden" value="<%= @event.id %>"/>
+            <table border="0" id="comment_form">
+
+              <tr>
+                <td align="left" valign="top">Etunimi: <span class="form_required">*</span></td>
+                <td class="element" valign="top" align="left">	<input id="person_firstname" name="person[firstname]" size="30" style="width: 350px" type="text" /></td>
+              </tr>
+              <tr>
+                <td align="left" valign="top">Sukunimi: <span class="form_required">*</span></td>
+                <td class="element" valign="top" align="left">	<input size="30" style="width: 350px" name="person[lastname]" id="person_lastname" type="text" /></td>
+              </tr>
+              <tr>
+                <td align="left" valign="top">Sähköpostiosoite: <span class="form_required">*</span></td>
+                <td class="element" valign="top" align="left">	<input size="30" style="width: 350px" name="person[primary_email]" id="person_primary_email" type="text" /></td>
+              </tr>
+              <tr>
+                <td align="left" valign="top">Tilattava lipputyyppi:</td>
+                <td class="element" valign="top" align="left"><%= collection_select(:product, :id, @tickettypes, :id, :fullname) %></td>
+              </tr>
+              <tr>
+                <td align="left" valign="top">Kappalemäärä:</td>
+                <td class="element" valign="top" align="left">  <input size="30" style="width: 350px" name="ticketcount" id="ticketcount" type="text" /></td>
+              </tr>
+              <tr>
+                <td align="left" valign="top"></td>
+                <td valign="top" align="left">	<%= f.submit( "Tilaa liput" ) %></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td align="left" valign="top">* pakollinen kenttä</td>
+              </tr>
+            </table>
+          </div>
+      <% end %>
+  <% else %>
+      <p><b>Ranneketilaukset eivät ole auki.</b></p>
+  <% end %>
+</div>

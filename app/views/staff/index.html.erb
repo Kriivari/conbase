@@ -1,0 +1,13 @@
+<p>Valitse haluamasi toiminto.</p>
+<ul>
+<li><%= link_to "Uudet", :action => 'list' %></li>
+<li><%= link_to "Uudet GM:t", :controller => 'gm', :action => 'list' %></li>
+<% @groups.each{ |group| %>
+<li><%= link_to group.name, :action => 'showbygroup', :id => group.id %> - <%= group.size %></li>
+<% } %>
+<li><%= link_to "Haku", :controller => 'people', :action => 'search' %></li>
+<li><%= link_to "Henkilöt kahdessa tai useammassa ryhmässä", :controller => 'people', :action => 'duplicategrouplist' %></li>
+<li><%= link_to "Kaksoiskappaleet", :controller => 'people', :action => 'duplicates' %></li>
+<li><%= link_to "Rannekkeet", :controller => 'staff', :action => 'tickets' %></li>
+<li><%= link_to "Ruokarahat", :controller => 'staff', :action => 'foods' %></li>
+</ul>

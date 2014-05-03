@@ -1,0 +1,8 @@
+<% Mailinglist.content_columns.each do |column| %>
+<p>
+  <b><%= column.human_name %>:</b> <%=h @mailinglist.send(column.name) %>
+</p>
+<% end %>
+
+<%= link_to 'Edit', :action => 'edit', :id => @mailinglist %> |
+<%= link_to 'Back', :action => 'list' %>

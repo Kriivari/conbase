@@ -1,0 +1,27 @@
+<h1>Attribuutit</h1>
+
+<table>
+  <tr>
+  <% for column in Attribute.content_columns %>
+    <th><%= column.human_name %></th>
+  <% end %>
+  </tr>
+  
+<% for attribute in @attributes %>
+  <tr>
+  <% for column in Attribute.content_columns %>
+    <td><%=h attribute.send(column.name) %></td>
+  <% end %>
+    <td><%= link_to 'Henkilöt', :controller => 'people', :action => 'attribute', :id => attribute %></td>
+    <td><%= link_to 'Näytä', :action => 'show', :id => attribute %></td>
+    <td><%= link_to 'Muokkaa', :action => 'edit', :id => attribute %></td>
+    <td><%= link_to 'Poista', :action => 'destroy', :id => attribute %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= will_paginate @attributes %>
+
+<br />
+
+<%= link_to 'Uusi attribuutti', :action => 'new' %>

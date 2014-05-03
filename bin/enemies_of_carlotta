@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# First argument is the function (subscribe/unsubscribe),
+# second is the mailing list address, third is email to add
+
+set -e
+
+if [ "$1" == "subscribe" -o "$1" == "unsubscribe" ]; then
+  enemies-of-carlotta --"$1" --name="$2" "$3"
+else
+  exit 2
+fi

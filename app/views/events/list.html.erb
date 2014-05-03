@@ -1,0 +1,26 @@
+<h1>Listing events</h1>
+
+<table>
+  <tr>
+  <% for column in Event.content_columns %>
+    <th><%= column.human_name %></th>
+  <% end %>
+  </tr>
+  
+<% for event in @events %>
+  <tr>
+  <% for column in Event.content_columns %>
+    <td><%=h event.send(column.name) %></td>
+  <% end %>
+    <td><%= link_to 'Show', :action => 'show', :id => event %></td>
+    <td><%= link_to 'Edit', :action => 'edit', :id => event %></td>
+    <td><%= link_to 'Destroy', { :action => 'destroy', :id => event }, :confirm => 'Are you sure?', :method => :post %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= will_paginate @events %>
+
+<br />
+
+<%= link_to 'New event', :action => 'new' %>

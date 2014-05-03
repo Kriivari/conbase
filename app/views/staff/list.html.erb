@@ -1,0 +1,103 @@
+<% if @filter != "%" %>
+<p>Ryhmässä <%= @filter %> on nyt <%= @count %> henkilöä</p>
+<% end %>
+<% if flash != nil
+for key in flash.keys %>
+<p><%= flash[key] %>
+<% end
+end %>
+<%= form_tag( '/staff/multiconfirm' ) do %>
+    <table>
+      <tr><td valign="top">
+        <% for group in find_visible_groups %>
+            <input type="radio" name="admin[primarygroup]" value="<%= group.id %>" <% if @admin != nil && @admin[:primarygroup] == group.id.to_s %>checked<% end %>/><%= group.name %><br />
+        <% end %>
+      </td><td valign="top">
+        <% if @checked == nil %>
+            <%= submit_tag 'Siirrä' %>
+        <% end %>
+      </td>
+        <% if @checked != nil %>
+            <td valign="top">
+              <p>Olet valinnut siirrettäväksi <%= @checked.keys.size %> henkilöä.</p>
+              <textarea id="email_text" name="email[text]" rows="10" cols="75"><%= @email %></textarea>
+            </td>
+            <td valign="top"><%= submit_tag 'Vahvista' %></td>
+        <% end %>
+      </tr>
+    </table>
+
+    <table border="1">
+<tr><th colspan="2"></th><th>Etunimi</th><th>Sukunimi</th><th>Lempinimi</th><th>Sähköposti</th><th>Puhelin</th><th>Kuva</th><th>Syntymävuosi</th><th>Halutut pisteet</th><th>Vanhat pisteet</th><th>Oma ilmoitus</th><th>CV</th><th>JV</th><th>Muuta</th></tr>
+      <% count = 0 %>
+      <% @staffs.each{ |staff| %>
+<tr>
+<td valign="top"><input type="checkbox" name="checked[<%= staff.id %>]" <% if @checked != nil && @checked[staff.id.to_s] != nil %>checked <% end %>/></td>
+<td valign="top"><%= count = count + 1 %></td>
+<td valign="top"><%=staff.firstname%></td>
+<td valign="top"><%=staff.lastname%></td>
+<td valign="top"><%=staff.nickname%></td>
+<td valign="top"><%=staff.primary_email%></td>
+<td valign="top"><%=staff.primary_phone%></td>
+<td valign="top"><a href="<%=staff.photo_url%>"><%=staff.photo_url%></a></td>
+<td valign="top"><%=staff.birthyear%></td>
+<td valign="top">
+<% staff.people_persongroups.each { |group|
+if (group.status == -9 || group.status == -11 || group.status == -12 || group.status == -2 ) && group.persongroup.event == @event %>
+<%= group.persongroup.name %> (<%= Statusname.find(group.status).name %>) <br/>
+<% end
+} %>
+</td>
+<td valign="top">
+<% staff.people_persongroups.each { |group|
+if group.status == -1 && group.persongroup.event != @event && group.persongroup.event.name == @event.name %>
+<%= group.persongroup.event.year %> <%= group.persongroup.name %> <br/>
+<% end
+} %>
+</td>
+<td valign="top">
+<% staff.people_persongroups.each { |group|
+if group.status == -3 && group.persongroup.event == @event %>
+<%= group.persongroup.name %> <br/>
+<% end
+} %>
+</td>
+<td valign="top"><%=staff.cv%></td>
+<td valign="top">
+<% staff.people_events_attributes.each { |att| %>
+<%= "X" if att.event.id == @event.id && att.attribute.name == 'JV-kortti' %>
+<% } %>
+</td>
+<td valign="top"><%=staff.notes%></td>
+<td valign="top"><%= link_to 'Muokkaa', :controller => 'people', :action => 'edit', :id => staff %><br/>
+<%= link_to 'Poista ilmoittautuminen', {:action => 'remove_signup', :id => staff}, :confirm => 'Oletko varma?' %><br/>
+<%= link_to 'Tuhoa henkilö', {:action => 'destroy', :id => staff}, :confirm => 'Oletko varma?' %>
+</td>
+</tr>
+<%
+if @duplicates[staff.id] != nil
+for duplicate in @duplicates[staff.id]
+%>
+<tr>
+<td valign="top"></td>
+<td valign="top"><i><%=duplicate.firstname%></i></td>
+<td valign="top"><i><%=duplicate.lastname%></i></td>
+<td valign="top"><i><%=duplicate.nickname%></i></td>
+<td valign="top"><i><%=duplicate.primary_email%></i></td>
+<td valign="top"><i><%=duplicate.primary_phone%></i></td>
+<td valign="top"><i><a href="<%=duplicate.photo_url%>"><%=duplicate.photo_url%></a></i></td>
+<td valign="top"><i><%=duplicate.birthyear%></i></td>
+<td valign="top"></td><td valign="top"></td><td valign="top"></td><td valign="top"></td><td valign="top"></td><td valign="top"></td><td valign="top"></td><td valign="top"><%= link_to 'Yhdistä',:controller => 'people', :action => 'merge', :id => staff, :duplicate => duplicate, :from => 'staff/list' %></td>
+</tr>
+<%
+end
+end
+} %>
+</table>
+
+<% end %>
+<p>
+<% @staffs.each{ |staff| %>
+<%= staff.primary_email %>,
+<% } %>
+</p>

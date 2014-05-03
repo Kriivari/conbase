@@ -1,0 +1,33 @@
+<%= form_for(@location) do |f| %>
+<% if @location.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@location.errors.count, "error") %> prohibited this location from being saved:</h2>
+
+      <ul>
+        <% @location.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+<% end %>
+
+<!--[form:location]-->
+<p><label for="location_name">Nimi</label><br/>
+<%= f.text_field :name %></p>
+
+<p><label for="location_notes">Muistiinpanot</label><br/>
+<%= f.text_field :notes %></p>
+
+<p><label for="location_start_time">Alkuaika</label><br/>
+<%= f.datetime_select :start_time %></p>
+
+<p><label for="location_end_time">Loppuaika</label><br/>
+<%= f.datetime_select :end_time %></p>
+
+<p><label for="location_multiple">Päällekäiset varaukset sallittu</label><br/>
+<select id="location_multiple" name="location[multiple]"><option value="false">Ei</option><option value="true">Kyllä</option></select></p>
+<!--[eoform:location]-->
+
+<%= f.submit "Talleta" %>
+
+<% end %>

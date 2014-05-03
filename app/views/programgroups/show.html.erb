@@ -1,0 +1,13 @@
+<% Programgroup.content_columns.each do |column| %>
+<p>
+  <b><%= column.human_name %>:</b> <%=h @programgroup.send(column.name) %>
+</p>
+<% end %>
+
+<%= link_to 'Edit', :action => 'edit', :id => @programgroup %> |
+<%= link_to 'Back', :action => 'list' %>
+
+<% Event.all(:order => 'name, year DESC').each do |event|
+   programs = Program.find_by_sql( ['select * from programs where event_id=? and id in (select program_id from programs_programgroups where programgroup_id=?)', event.id, @programgroup.id] ) %>
+<p><%= event.name %> <%= event.year %> <%= programs.size %></p>
+<% end %>

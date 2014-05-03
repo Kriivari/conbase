@@ -1,0 +1,16 @@
+<table>
+<% @programs.each{ |program| %>
+<tr><td><%=program.name%></td>
+<td><%=program.name%></td></tr>
+<% program.programitems.each{ |item|
+  if item.start_time >= @starttime && item.start_time <= @endtime
+%>
+<tr><td><%=item.name%></td>
+<td><%=item.start_time%></td>
+<td><%=item.end_time%></td>
+<td><%=item.location%></td>
+</tr>
+<% end
+}
+} %>
+</table>

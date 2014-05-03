@@ -1,0 +1,17 @@
+<p><b>Tilaaja:</b> <%= @order.person %></p>
+<p><b>Nimi:</b> <%= @order.name %></p>
+<p><b>Minne:</b> <%= @order.destination %></p>
+<p><b>Koska:</b> <%= @order.needed.strftime("%a %H.%M") %></p>
+<p><b>Tila:</b> <%= @order.statusname %></p>
+<p><b>Muistiinpanot:</b> <%= @order.notes %></p>
+<p><b>Kokonaissumma:</b> <%= @order.total %></p>
+<p><b>Kokonaismaksimi:</b> <%= @order.maximum %></p>
+
+<table>
+<tr><th>Tuote</th><th>Mistä</th><th>Hinta</th><th>Maksimihinta</th><th>Tila</th><th>Huom</th></tr>
+<% for item in @order.orderitems %>
+<tr><td><%= item.name %></td><td><%= item.location %></td><td><%= item.cost %></td><td><%= item.maxcost %></td><td><%= item.statusname %></td><td><%= item.notes %></tr>
+<% end %>
+</table>
+<%= link_to 'Muokkaa', :action => 'edit', :id => @order %> |
+<%= link_to 'Takaisin listaan', :action => 'list' %>

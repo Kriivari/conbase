@@ -1,0 +1,24 @@
+<ul>
+<li><%= form_for( @event, :url => { :action => 'list' } ) do |f| %>
+<%= select(:grp, :value, @groups) %>
+<%= f.submit "Hae" %>
+<% end %></li>
+<li><%= form_for( @event, :url => { :action => 'list' } ) do |f| %>
+<%= select(:loc, :value, @locations) %>
+<%= f.submit "Hae" %>
+<% end %></li>
+<li><%= form_for( @event, :url => { :action => 'list' } ) do |f| %>
+<%= select(:status, :value, @statuses) %>
+<%= f.submit "Hae" %>
+<% end %></li>
+<li><a href="/programs/search">Ohjelmahaku</a></li>
+<li><a href="/programs/list">Kaikki ohjelmanumerot</a></li>
+<li><a href="/programs/sanitycheck">Aikatauluttamattomat ohjelmat</a></li>
+<% Event.all(:conditions => ['name=?', @event.name], :order => 'name, year desc').each{ |event|
+unless event.programs.empty?
+%>
+      <li><a href="/programs/public/<%= event.id %>"><%= event %> ohjelmanumeroiden julkinen listaus</a> (<a href="/programs/list/<%= event.id %>">salainen listaus</a>)</li>
+<% 
+end
+} %>
+</ul>

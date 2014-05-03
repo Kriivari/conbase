@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Nimi:</b>
+  <%= @product.name %>
+</p>
+
+<p>
+  <b>Myytävissä:</b>
+  <%= @product.active %>
+</p>
+
+<p>
+  <b>Vaihtoehdot:</b><br />
+  <% for type in @product.product_types %>
+    <%= link_to type.name, product_type_path(type) %>
+    <%= type.price %>
+    <%= type.active %><br />
+  <% end %>
+</p>
+
+<%= link_to 'Muokkaa', edit_product_path(@product) %> |
+<%= link_to 'Takaisin listaan', products_path %>

@@ -1,0 +1,37 @@
+<%= form_for( @exhibitor, :url => { :action => "update", :id => @exhibitor } ) do |f| %>
+    <table>
+      <tr><td><label for="exhibitor_companyname">Yhteisö</label></td>
+        <td><input type="text" id="exhibitor_companyname" name="exhibitor[companyname]" value="<%= @exhibitor.companyname %>" /></td></tr>
+      <tr><td><label for="exhibitor_publicname">Laskutusosoite</label></td>
+        <td><input type="text" id="exhibitor_billing_address" name="exhibitor[billing_address]" value="<%= @exhibitor.billing_address %>" /></td></tr>
+      <tr><td><label for="exhibitor_description">Julkinen kuvaus</label></td>
+        <td><input type="text" id="exhibitor_description" name="exhibitor[description]" value="<%= @exhibitor.description %>" /></td></tr>
+      <tr><td><label for="exhibitor_rebate">Alennusprosentti</label></td>
+        <td><input type="text" id="exhibitor_rebate" name="exhibitor[rebate]" value="<%= @exhibitor.rebate %>" /></td></tr>
+      <tr><td><label for="exhibitor_invoicedate">Laskun päiväys</label></td>
+        <td><input type="text" id="exhibitor_invoicedate" name="exhibitor[invoicedate]" value="<%= @exhibitor.invoicedate %>" /></td></tr>
+      <tr><td><label for="exhibitor_duedate">Eräpäivä</label></td>
+        <td><input type="text" id="exhibitor_duedate" name="exhibitor[duedate]" value="<%= @exhibitor.duedate %>" /></td></tr>
+      <tr><td><label for="exhibitor_notes">Lisätietoja</label></td>
+        <td><input type="text" id="exhibitor_notes" name="exhibitor[notes]" value="<%= @exhibitor.notes %>" /></td></tr>
+    </table>
+
+    <p><%= link_to 'Lasku', '/exhibitors/invoice/' + @exhibitor.id.to_s + '.pdf' %></p>
+
+    <table>
+      <tr><th>Tuote</th></tr>
+      <% for product in @exhibitor.product_types %>
+              <tr><td><%= product.name %> </td>
+                <td>[<%= link_to 'Poista', :action => 'rmproduct', :product_id => product, :exhibitor_id => @exhibitor %>]</td>
+              </tr>
+      <% end %>
+      <tr><td>Lisää tuote:</td>
+        <td><%= select(:product, :type, @product_types) %></td>
+      </tr>
+    </table>
+
+    <p><%= f.submit 'Talleta muutokset' %></p>
+<% end %>
+
+<%= link_to 'Näytä', :action => 'show', :id => @exhibitor %> |
+<%= link_to 'Listaan', :action => 'list' %>

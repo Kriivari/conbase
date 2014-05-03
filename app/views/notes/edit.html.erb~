@@ -1,0 +1,9 @@
+<h1>Muokkaa ilmoitusta</h1>
+
+<%= form_for @note, :url => { :action => 'update', :id => @note } do |f| %>
+  <%= render :partial => 'form' %>
+  <%= f.submit 'Talleta' %>
+<% end %>
+
+<%= link_to 'Näytä', :action => 'show', :id => @note %> |
+<%= link_to 'Listaan', :action => 'list' %>

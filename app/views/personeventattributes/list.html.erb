@@ -1,0 +1,27 @@
+<h1>Listing personeventattributes</h1>
+
+<table>
+  <tr>
+  <% Personeventattribute.content_columns.each do |column| %>
+    <th><%= column.human_name %></th>
+  <% end %>
+  </tr>
+  
+<% @personeventattributes.each do |personeventattribute| %>
+  <tr>
+  <% Personeventattribute.content_columns.each do |column| %>
+    <td><%=h personeventattribute.send(column.name) %></td>
+  <% end %>
+    <td><%= link_to 'Show', :action => 'show', :id => personeventattribute %></td>
+    <td><%= link_to 'Edit', :action => 'edit', :id => personeventattribute %></td>
+    <td><%= link_to 'Destroy', { :action => 'destroy', :id => personeventattribute }, :confirm => 'Are you sure?', :method => :post %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= link_to 'Previous page', { :page => @personeventattribute_pages.current.previous } if @personeventattribute_pages.current.previous %>
+<%= link_to 'Next page', { :page => @personeventattribute_pages.current.next } if @personeventattribute_pages.current.next %> 
+
+<br />
+
+<%= link_to 'New personeventattribute', :action => 'new' %>

@@ -1,0 +1,35 @@
+<h1>Hankintalista</h1>
+<p>Tämä näkymä ei sisällä jo hankittuja tilauksia.</p>
+<%= form_for( @order, :url => { :action => 'saveitems' } ) do |f| %>
+<p><%= collection_select( :order, :status, @statuses, :status, :name ) %>  
+   <%= f.submit 'Muuta tilat' %></p>
+<table>
+  <tr>
+        <th></th>
+	<th>Tilaaja</th>
+	<th><%= link_to 'Tuote', :action => 'itemlist', :sort => 'name'%></th>
+	<th><%= link_to 'Mistä', :action => 'itemlist', :sort => 'location'%></th>
+	<th>Hinta</th>
+	<th>Maksimihinta</th>
+	<th><%= link_to 'Tila', :action => 'itemlist', :sort => 'status'%></th>
+	<th>Muuta</th>
+  </tr>
+  
+<% for item in @items %>
+  <tr>
+    <td valign="top"><input type="checkbox" name="checked[<%= item.id %>]" <% if @checked != nil && @checked[item.id.to_s] != nil %>checked <% end %>/></td>
+    <td><%= item.order.person %></td>
+    <td><%= item.name %></td>
+    <td><%= item.location %></td>
+    <td><%= item.cost %></td>
+    <td><%= item.maxcost %></td>
+    <td><%= item.statusname %></td>
+    <td><%= item.notes %></td>
+    <td><%= link_to 'Näytä', :action => 'show', :id => item.order %></td>
+    <td><%= link_to 'Muokkaa', :action => 'edit', :id => item.order %></td>
+  </tr>
+<% end %>
+</table>
+<% end %>
+<br />
+

@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Tuote:</b>
+  <%= @product_type.product.name %>
+</p>
+
+<p>
+  <b>Tyyppi:</b>
+  <%= @product_type.name %>
+</p>
+
+<p>
+  <b>Myytävissä:</b>
+  <%= @product_type.active %>
+</p>
+
+<p>
+  <b>Hinta:</b>
+  <%= @product_type.price %>
+</p>
+
+<p>
+  <b>Toisen ja seuraavien kappaleiden hinta:</b>
+  <%= @product_type.secondprice %>
+</p>
+
+
+<%= link_to 'Muokkaa', edit_product_type_path(@product_type) %> |
+<%= link_to 'Takaisin listaan', product_types_path %>

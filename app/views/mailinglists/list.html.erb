@@ -1,0 +1,26 @@
+<h1>Listing mailinglists</h1>
+
+<table>
+  <tr>
+  <% for column in Mailinglist.content_columns %>
+    <th><%= column.human_name %></th>
+  <% end %>
+  </tr>
+  
+<% for mailinglist in @mailinglists %>
+  <tr>
+  <% for column in Mailinglist.content_columns %>
+    <td><%=h mailinglist.send(column.name) %></td>
+  <% end %>
+    <td><%= link_to 'Show', :action => 'show', :id => mailinglist %></td>
+    <td><%= link_to 'Edit', :action => 'edit', :id => mailinglist %></td>
+    <td><%= link_to 'Destroy', { :action => 'destroy', :id => mailinglist }, :confirm => 'Are you sure?', :method => :post %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= will_paginate @mailinglists %>
+
+<br />
+
+<%= link_to 'New mailinglist', :action => 'new' %>

@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+  <title>Näytä ryhmä <%= @filter %></title>
+</head>
+<body>
+<% if @filter != "%" %>
+<p>Ryhmässä <%= @filter %> on nyt <%= @count %> henkilöä</p>
+<% end %>
+<% if flash != nil
+for key in flash.keys %>
+<p><%= flash[key] %>
+<% end
+end %>
+<%= form_for( :url => { :action => 'multiconfirm' } ) do |f| %>
+<table>
+<tr><th></th><th>Etunimi</th><th>Sukunimi</th><th>Lempinimi</th><th>Sähköposti</th><th>Puhelin</th><th>Kuva</th><th>Syntymävuosi</th><th>Halutut pisteet</th><th>Vanhat pisteet</th><th>Muuta</th></tr>
+<% @staffs.each{ |staff| %>
+<tr>
+<td><input type="checkbox" name="checked[<%= staff.id %>]" <% if @checked != nil && @checked[staff.id.to_s] != nil %>checked <% end %>/></td>
+<td><%=staff.firstname%></td>
+<td><%=staff.lastname%></td>
+<td><%=staff.nickname%></td>
+<td><%=staff.primary_email%></td>
+<td><%=staff.primary_phone%></td>
+<td><a href="<%=staff.photo_url%>"><%=staff.photo_url%></a></td>
+<td><%=staff.birthyear%></td>
+<td>
+<% staff.people_persongroups.each { |group|
+if group.status == -2 %>
+<%= group.persongroup.name %>
+<% end
+} %>
+</td>
+<td>
+<% staff.people_persongroups.each { |group|
+if group.status == -3 %>
+<%= group.persongroup.name %>
+<% end
+} %>
+</td>
+<td><%=staff.notes%></td>
+<td><%= link_to 'Muokkaa', :action => 'show', :id => staff %></td>
+<td><%= link_to 'Poista', {:action => 'destroy', :id => staff}, :confirm => 'Oletko varma?' %></td>
+</tr>
+<%
+if @duplicates[staff.id] != nil
+for duplicate in @duplicates[staff.id]
+%>
+<tr>
+<td></td>
+<td><i><%=duplicate.firstname%></i></td>
+<td><i><%=duplicate.lastname%></i></td>
+<td><i><%=duplicate.nickname%></i></td>
+<td><i><%=duplicate.primary_email%></i></td>
+<td><i><%=duplicate.primary_phone%></i></td>
+<td><i><a href="<%=duplicate.photo_url%>"><%=duplicate.photo_url%></a></i></td>
+<td><i><%=duplicate.birthyear%></i></td>
+<td></td><td></td><td></td><td><%= link_to 'Yhdistä', :action => 'merge', :id => staff, :duplicate => duplicate %></td>
+</tr>
+<%
+end
+end
+} %>
+</table>
+<table>
+<tr><td valign="top">
+<% for group in find_groups %>
+<input type="radio" name="admin[primarygroup]" value="<%= group.id %>" <% if @admin != nil && @admin[:primarygroup] == group.id.to_s %>checked<% end %>/><%= group.name %><br />
+<% end %>
+</td><td valign="top">
+<% if @checked == nil %>
+<%= f.submit 'Siirrä' %>
+<% end %>
+</td>
+<% if @checked != nil %>
+<td valign="top">
+<textarea id="email_text" name="email[text]" rows="10" cols="75"><%= @email %></textarea>
+</td>
+<td valign="top"><%= f.submit 'Vahvista' %></td>
+<% end %>
+</tr>
+</table>
+
+<% end %>
+</body>
+</html>

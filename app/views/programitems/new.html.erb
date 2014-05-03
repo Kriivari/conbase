@@ -1,0 +1,17 @@
+        <h2><%= flash[:notice] %></h2>
+
+<h1>Uusi tapahtuma ohjelmalle <%= @program.name %></h1>
+
+<%= form_for( @programitem, :url => { :action => 'create' } ) do |f| %>
+<%= hidden_field :program, :id %>
+<%= render "shared/error_messages", :target => @programitem %>
+  <p><b>Nimi:</b> <input type="text" id="programitem_name" name="programitem[name]" /></p>
+  <p><b>Kuvaus:</b> <input type="text" id="programitem_description" name="programitem[description]" /></p>
+  <p><b>Alkaa:</b> <%= select(:starts, :value, @dates) %> <%= select_hour(12, :prefix => 'starttime') %> <%= select_minute(0, :prefix => 'starttime', :minute_step => 15) %></p>
+  <p><b>Päättyy:</b> <%= select(:ends, :value, @dates) %> <%= select_hour(12, :prefix => 'endtime') %> <%= select_minute(0, :prefix => 'endtime', :minute_step => 15) %></p>
+  <p><b>Paikka:</b><%= select(:loc, :value, @locations) %></p>
+
+  <%= f.submit "Luo" %>
+<% end %>
+
+<%= link_to 'Takaisin', :controller => 'programs', :action => 'show', :id => @program.id %>

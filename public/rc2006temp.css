@@ -1,0 +1,52 @@
+body {
+	margin: 0px;
+	padding: 20px;
+	border: 3px #ffffff solid;
+	font-family: Arial, sans-serif;
+	font-size: 90%;
+	background-color: #ffffff;
+	min-height: 500px;
+	text-align: center;
+}
+
+a { color: #000000; }
+
+div.sisalto, div.etusisalto { width: 600px;  margin: 0px auto 0px auto; }
+
+h1 {
+	font-size: 140%;
+	margin: 0px;
+	border: 0px;
+	padding: 0px;
+}
+
+h2 {
+	font-size: 150%;
+	margin: 0px;
+	border: 0px;
+	padding: 0px;
+	font-weight: bold;
+}
+
+p, ul, li { text-align: left; }
+
+p.yhteystiedot { font-weight: bold; font-size: 90%; text-align: center; }
+p.yhteystiedot a { text-decoration: none; }
+.navi { font-size: 90%; margin: 40px 0px 0px 0px; }
+
+table.yhttied {
+	border-top: 1px black solid;
+}
+
+table.yhttied th { text-align: left; font-weight: bold; padding: 2px; border-bottom: 1px black solid; }
+table.yhttied td { text-align: left; padding: 2px; border-bottom: 1px black solid; }
+
+div.goh {
+	text-align: center;
+	margin: 20px 0px 0px 0px;
+}
+
+div.goh h3 { margin: 0px; padding: 0px; }
+div.goh p { text-align: center; margin: 0px 0px 20px 0px; }
+
+ul.uutta li { font-size: 90%; text-align: center; }

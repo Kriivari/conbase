@@ -1,0 +1,45 @@
+<h1>Kaksoiskappaleet</h1>
+<p>Kaksoiskappaleita <%= @people.size %> kpl.</p>
+<table>
+  <tr><th>Etunimi</th><th>Sukunimi</th><th>Lempinimi</th><th>Sähköposti</th><th>Puhelin</th><th>Kuva</th><th>Syntymävuosi</th><th>Pisteet</th><th><th>CV</th><th>Muuta</th></tr>
+  
+<% for person in @people %>
+  <tr>
+    <td><%=person.firstname%></td>
+    <td><%=person.lastname%></td>
+    <td><%=person.nickname%></td>
+    <td><%=person.primary_email%></td>
+    <td><%=person.primary_phone%></td>
+    <td><a href="<%=person.photo_url%>"><%=person.photo_url%></a></td>
+    <td><%=person.birthyear%></td>
+    <td>
+    <% person.people_persongroups.each { |group| %>
+      <%= group.persongroup.event.year %> <%= group.persongroup.name %>
+    <% } %>
+    </td>
+    <td><%=person.cv%></td>
+    <td><%=person.notes%></td>
+    <td><%= link_to 'Näytä', :action => 'show', :id => person %></td>
+    <td><%= link_to 'Muokkaa', :action => 'edit', :id => person %></td>
+    <td><%= link_to 'Poista', { :action => 'destroy', :id => person }, :confirm => 'Are you sure?', :method => :post %></td>
+  </tr>
+<%
+if @duplicates[person.id] != nil
+for duplicate in @duplicates[person.id]
+%>
+  <tr>
+    <td><i><%=duplicate.firstname%></i></td>
+    <td><i><%=duplicate.lastname%></i></td>
+    <td><i><%=duplicate.nickname%></i></td>
+    <td><i><%=duplicate.primary_email%></i></td>
+    <td><i><%=duplicate.primary_phone%></i></td>
+    <td><i><a href="<%=duplicate.photo_url%>"><%=duplicate.photo_url%></a></i></td>
+    <td><i><%=duplicate.birthyear%></i></td>
+    <td></td><td></td><td></td><td><%= link_to 'Yhdisä', :action => 'merge', :id => person, :duplicate => duplicate %></td>
+  </tr>
+<%
+end
+end
+end %>
+</table>
+

@@ -1,0 +1,8 @@
+<h1>New attribute_value</h1>
+
+<%= form_for( @attribute_value ) do |f| %>
+  <%= render :partial => 'form' %>
+  <%= f.submit "Create" %>
+<% end %>
+
+<%= link_to 'Back', :action => 'list' %>

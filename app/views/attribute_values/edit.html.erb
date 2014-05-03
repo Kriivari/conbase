@@ -1,0 +1,9 @@
+<h1>Editing attribute_value</h1>
+
+<%= form_for( @attribute_value, :url => { :action => 'update', :id => @attribute_value } ) do |f| %>
+  <%= render :partial => 'form' %>
+  <%= f.submit 'Edit' %>
+<% end %>
+
+<%= link_to 'Show', :action => 'show', :id => @attribute_value %> |
+<%= link_to 'Back', :action => 'list' %>

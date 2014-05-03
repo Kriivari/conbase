@@ -1,0 +1,112 @@
+<div class="sisalto">
+        <h2><%= flash[:notice] %></h2>
+	<h2><%= @event %> työvoimarekry</h2>
+
+<p>Ilmoittautumisen lähetettyäsi saat lähiaikoina sähköpostiisi vahvistuksen
+     sen perillemenosta.</p>
+<%= form_for( @person, :url => { :action => 'create' } ) do |f| %>
+<input id="spammer" type="hidden" name="spammer" value="spammer" />
+<div>
+<table border="0" id="comment_form">
+
+	<tr>
+		<td align="left" valign="top">Etunimi: <span class="form_required">*</span></td>
+		<td class="element" valign="top" align="left">	<input id="person_firstname" name="person[firstname]" size="30" style="width: 350px" type="text" /></td>
+	</tr>
+	<tr>
+		<td align="left" valign="top">Sukunimi: <span class="form_required">*</span></td>
+		<td class="element" valign="top" align="left">	<input size="30" style="width: 350px" name="person[lastname]" id="person_lastname" type="text" /></td>
+	</tr>
+	<tr>
+		<td align="left" valign="top">Lempinimi (tulee badgeen):</td>
+		<td class="element" valign="top" align="left">	<input size="30" style="width: 350px" name="person[nickname]" id="person_nickname" type="text" /></td>
+	</tr>
+	<tr>
+		<td align="left" valign="top">Matkapuhelin: <span class="form_required">*</span></td>
+		<td class="element" valign="top" align="left">	<input size="30" style="width: 350px" name="person[primary_phone]" id="person_primary_phone" type="text" length="20" /></td>
+	</tr>
+	<tr>
+		<td align="left" valign="top">Sähköpostiosoite (juuri sinun, tällä tunnistetaan ihmiset): <span class="form_required">*</span></td>
+		<td class="element" valign="top" align="left">	<input size="30" style="width: 350px" name="person[primary_email]" id="person_primary_email" type="text" /></td>
+	</tr>
+	<tr>
+		<td align="left" valign="top">Valokuvan URL (ei pakollinen, käytetään vain kasvojen ja nimien yhdistämiseen):</td>
+		<td class="element" valign="top" align="left">	<input size="30" style="width: 350px" name="person[photo_url]" id="person_photo_url" type="text" /></td>
+	</tr>
+	<tr>
+		<td align="left" valign="top">Syntymävuosi: <span class="form_required">*</span></td>
+		<td class="element" valign="top" align="left">	<input size="30" style="width: 350px" name="person[birthyear]" id="person_birthyear" type="text" /></td>
+	</tr>
+	<tr>
+		<td align="left" valign="top">Mihin tehtäviin toivoisit ensisijaisesti sijoittuvasi:</td>
+		<td class="element" valign="top" align="left">	</td>
+	</tr>
+        <tr><td align="left" valign="top"></td><td>
+            <table>
+                <tr><th>Ei missään nimessä</th>
+                    <th>Aivan sama</th>
+                    <th>Voin koettaa</th>
+                    <th>Ehdottomasti tänne</th></tr>
+  <% for group in find_groups %>
+    <tr><td align="center"><input name="groups[<%= group.id %>]" type="radio" value="-9" id="groups_<%= group.id %>_no"/></td><td align="center"><input name="groups[<%= group.id %>]" type="radio" value="-10" id="groups_<%= group.id %>_ok" checked/></td><td align="center"><input name="groups[<%= group.id %>]" type="radio" value="-11" id="groups_<%= group.id %>_maybe"/></td><td align="center"><input name="groups[<%= group.id %>]" type="radio" value="-12" id="groups_<%= group.id %>_yes"/></td><td><label for="groups_<%= group.id %>" title="<%= group.notes %>"><%= group.name %></label></td></tr>
+  <% end %>
+             </table>
+        </td></tr>
+	<tr>
+		<td align="left" valign="top">Aiemmat tehtävät:</td>
+		<td class="element" valign="top" align="left">	</td>
+	</tr>
+  <% for group in find_groups %>
+    <tr><td align="left" valign="top"></td><td class="element" valign="top" align="left"><input name="oldgroups[<%= group.id %>]" type="checkbox" value="1" id="oldgroups_<%= group.id %>"/><label for="oldgroups_<%= group.id %>"><%= group.name %></label></td></tr>
+  <% end %>
+	<tr>
+		<td align="left" valign="top">Kahdeksan tunnin työpanos Conin aikana oikeuttaa viikonloppurannekkeeseen. Haluan sen lisäksi päivystää varatyövoimana neljä tuntia ja saada kaksi ruokarahaa. Tässä ilmoitetaan vain halukkuus, vahvistus asiaan tulee myöhemmin.</td>
+		<td class="element" valign="top" align="left">	</td>
+	</tr>
+	<tr>
+		<td align="left" valign="top"></td>
+		<td class="element" valign="top" align="left">	<input name="extra" value="yes" type="radio" id="extra_yes" /><label for="extra_yes">Kyllä</label>&nbsp;<input name="extra" value="ei" type="radio" id="extra_no" /><label for="extra_no">Ei</label></td>
+	</tr>
+	<tr>
+		<td align="left" valign="top">Minulla on JV-kortti ja suostun, jopa vaadin saada tehdä yli 12 tuntia töitä.</td>
+		<td class="element" valign="top" align="left">	</td>
+	</tr>
+	<tr>
+		<td align="left" valign="top"></td>
+		<td class="element" valign="top" align="left">	<input name="toomuch" value="yes" type="radio" id="toomuch_yes" /><label for="toomuch_yes">Kyllä</label>&nbsp;<input name="toomuch" value="ei" type="radio" id="toomuch_no" /><label for="toomuch_no">Ei</label></td>
+	</tr>
+	<tr>
+		<td align="left" valign="top">Minulla on voimassaoleva järjestyksenvalvojakortti. Järjestyksenvalvojakortin numero</td>
+		<td class="element" valign="top" align="left">	<input size="30" style="width: 350px" name="jvnumber" id="jvnumber" type="text" /></td>
+	</tr>
+	<tr>
+		<td align="left" valign="top">Työvoimapaidan tilaamisesta saat erilliset ohjeet, kun sinut hyväksytään työvoimaan.</td>
+		<td class="element" valign="top" align="left">	</td>
+	</tr>
+	<tr>
+		<td align="left" valign="top">Muuta kokemusta vastaavista tapahtumista:</td>
+		<td class="element" valign="top" align="left">	<textarea size="30" style="width: 350px" rows="5" wrap="virtual" name="person[notes]" id="person_notes"></textarea></td>
+	</tr>
+	<tr>
+		<td align="left" valign="top">Mistä kuulit Ropeconin työvoimarekrystä:</td>
+		<td class="element" valign="top" align="left">	<textarea size="30" style="width: 350px" rows="2" wrap="virtual" name="kuulit" id="kuulit"></textarea></td>
+	</tr>
+	<tr>
+		<td align="left" valign="top">Mihin roolipelialan yhdistyksiin kuulut:</td>
+		<td class="element" valign="top" align="left">	<textarea size="30" style="width: 350px" rows="2" wrap="virtual" name="kuulut" id="kuulut"></textarea></td>
+	</tr>
+	<tr>
+		<td align="left" valign="top">Täyttämällä tämän lomakkeen annat luvan Ropecon ry:lle käyttää tietojasi <a href="http://www.ropecon.fi/permanent/rekisteriseloste.txt">rekisteriselosteen</a> mukaisiin tarkoituksiin.</td>
+	</tr>
+	<tr>
+		<td align="left" valign="top"></td>
+		<td valign="top" align="left">	<%= f.submit( "Ilmoittaudu" ) %></td>
+	</tr>
+	<tr>
+		<td></td>
+	<td align="left" valign="top">* pakollinen kenttä</td>
+	</tr>
+</table>
+</div>
+<% end %>
+</div>

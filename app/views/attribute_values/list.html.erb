@@ -1,0 +1,26 @@
+<h1>Listing attribute_values</h1>
+
+<table>
+  <tr>
+  <% for column in AttributeValue.content_columns %>
+    <th><%= column.human_name %></th>
+  <% end %>
+  </tr>
+  
+<% for attribute_value in @attribute_values %>
+  <tr>
+  <% for column in AttributeValue.content_columns %>
+    <td><%=h attribute_value.send(column.name) %></td>
+  <% end %>
+    <td><%= link_to 'Show', :action => 'show', :id => attribute_value %></td>
+    <td><%= link_to 'Edit', :action => 'edit', :id => attribute_value %></td>
+    <td><%= link_to 'Destroy', { :action => 'destroy', :id => attribute_value }, :confirm => 'Are you sure?', :method => :post %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= will_paginate @attribute_values %>
+
+<br />
+
+<%= link_to 'New attribute_value', :action => 'new' %>

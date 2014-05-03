@@ -1,0 +1,19 @@
+<%= error_messages_for 'order' %>
+
+<!--[form:order]-->
+<p><label for="order_name">Name</label><br/>
+<%= f.text_area :name %></p>
+
+<p><label for="order_location">Location</label><br/>
+<%= f.text_area :location %></p>
+
+<p><label for="order_notes">Notes</label><br/>
+<%= f.text_area :notes %></p>
+
+<p><label for="order_cost">Cost</label><br/>
+<%= f.text_field :cost %></p>
+
+<p><label for="order_status">Status</label><br/>
+<%= f.text_field :status %></p>
+<!--[eoform:order]-->
+

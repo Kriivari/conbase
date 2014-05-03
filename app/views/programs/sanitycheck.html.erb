@@ -1,0 +1,31 @@
+<h1>Aikatauluttamattomat ohjelmat <%= @event %></h1>
+
+<table border="1">
+  <tr>
+    <th>Nimi</th>
+    <th>Kuvaus</th>
+    <th>Ajat ja paikat</th>
+    <th>Tila</th>
+    <th>Muutettu</th>
+  </tr>
+  
+<% for program in @programs %>
+  <tr>
+    <td valign="top"><%= link_to program.name, :action => 'show', :id => program %></td>
+    <td valign="top"><%= program.description %></td>
+    <td>
+<% program.programitems.each { |item| %>
+<p><%= item.start_time.strftime("%a %H.%M") %> - <%= item.end_time.strftime("%a %H.%M") %> <%= item.name %> <%= link_to item.location, :controller => 'locations', :action => 'show', :id => item.location %><p/>
+<% } %>
+    </td>
+    <td valign="top"><%= program.statusname  %></td>
+    <td valign="top"><%= program.updated_at %></td>
+    <td valign="top"><%= link_to 'Näytä', :action => 'show', :id => program %>
+    <%= link_to 'Muokkaa', :action => 'edit', :id => program %>
+    <%= link_to 'Poista', { :action => 'destroy', :id => program }, :confirm => 'Oletko varma?', :method => :post %></td>
+  </tr>
+<% end %>
+</table>
+
+<% will_paginate @programs %>
+

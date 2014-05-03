@@ -1,0 +1,14 @@
+<div class="sisalto">
+  <h2><%= flash[:notice] %></h2>
+  <h2>Ranneketilaus</h2>
+  <% if @person.errors.empty? %>
+      <p>Kiitos ranneketilauksesta. Alla olevat tiedot on nyt talletettu ja sähköpostiisi on lähetetty maksuohjeet. Lisätietoja osoitteesta kaubamaja ät ropecon.fi</p>
+
+      <p>Etunimi: <%= @person.firstname %></p>
+      <p>Sukunimi: <%= @person.lastname %></p>
+      <p>Rannekkeet: <%= @ticketcount %> kpl <%= @tickettype.fullname %></p>
+  <% else %>
+      <p><b>Virhe ranneketilauksen tallentamisessa.</b></p>
+      <p>Ranneketilausta ei ole talletettu! Palaa takaisin ja korjaa virheelliset tiedot.</p>
+  <% end %>
+</div>

@@ -1,0 +1,91 @@
+<div class="programlist">
+<h3><%= @event %></h3>
+<ul>
+<li>Koko ohjelma: <a href="/programs/public/all/time?id=<%= @event.id %>">ajan</a> tai <a href="/programs/public/all/loc?id=<%= @event.id %>">paikan</a> mukaan</li>
+<% if @event.starttime.wday == 4 %>
+<li>Torstain ohjelma: <a href="/programs/public/to/time?id=<%= @event.id %>">ajan</a> tai <a href="/programs/public/to/loc?id=<%= @event.id %>">paikan</a> mukaan</li>
+<% end %>
+<li>Perjantain ohjelma: <a href="/programs/public/pe/time?id=<%= @event.id %>">ajan</a> tai <a href="/programs/public/pe/loc?id=<%= @event.id %>">paikan</a> mukaan</li>
+<li>Lauantain ohjelma: <a href="/programs/public/la/time?id=<%= @event.id %>">ajan</a> tai <a href="/programs/public/la/loc?id=<%= @event.id %>">paikan</a> mukaan</li>
+<li>Sunnuntain ohjelma: <a href="/programs/public/su/time?id=<%= @event.id %>">ajan</a> tai <a href="/programs/public/su/loc?id=<%= @event.id %>">paikan</a> mukaan</li>
+</ul>
+<div class="programlistindex">
+<h3>Selaa ohjelmaa kategorioittain</h3>
+<ul>
+<% @groups.each { |group| %>
+  <li><a href="/programs/public/all/time/<%= group.id %>?id=<%= @event.id %>"><%= group.name %></a>
+<% } %>
+</ul>
+</div>
+<% if @group %>
+<div class="incategorysort">
+<ul>
+<li><a href="/programs/public/all/time/<%= @group %>?id=<%= @event.id %>">Ajan mukaan</a></li>
+<li><a href="/programs/public/all/loc/<%= @group %>?id=<%= @event.id %>">Paikan mukaan</a></li>
+<li><a href="/programs/public/all/org/<%= @group %>?id=<%= @event.id %>">Pitäjän mukaan</a></li>
+</ul>
+</div>
+<% end %>
+<div class="programlistcontent">
+<table>
+  <tr>
+    <th class="time">Aika</th>
+    <th class="name">Nimi</th>
+    <th class="place">Paikka</th>
+    <th class="type">Tyyppi</th>
+  </tr>
+  
+<% for program in @programs %>
+  <tr>
+    <td class="time">
+<%= @wdays[program.start_time.wday] %>
+                     <%= program.start_time.strftime("%H.%M") %>
+			-
+                     <%= @wdays[program.end_time.wday] %>
+                     <%= program.end_time.strftime("%H.%M") %>
+    </td>
+<% if program.program.programgroups %>
+    <td class="cat<%= program.program.programgroups.first.id %>" title="<%= h program.program.description %>">
+<% else %>
+    <td class="name" title="<%= h program.program.description %>">
+<% end %>
+    <a href="#<%= program.id %>"><%= program.program.name %>
+<%= if program.program.name != program.name
+      program.name
+    end %></a></td>
+    <td class="loc<%= program.location.id %>"><%= program.location %></td>
+    <td class="type"><%= program.program.showgroups %></td>
+  </tr>
+<% end %>
+</table>
+<% for program in @programs %>
+<p><a name="<%= program.id %>"></a>
+<b><%= program.program.name %></b><br />
+<%= @wdays[program.start_time.wday] %> <%= program.start_time.strftime("%H.%M") %>&nbsp;&ndash;&nbsp;
+<%= @wdays[program.end_time.wday] %> <%= program.end_time.strftime("%H.%M") %>,
+<%= program.location %>
+<%= program.program.showgroups %>
+<br />
+Järjestäjä:
+<%= program.program.all_organizers %>
+<br />
+<% if program.description != nil && program.description.length > 0 %>
+<%= program.description %>
+<br />
+<% end %>
+<% if program.program.description != nil %>
+<%= program.program.description %>
+<br />
+<% end %>
+<% if program.program.publicnotes != nil %>
+<%= program.program.publicnotes %>
+<br />
+<% end %>
+<% if program.program.url != nil && program.program.url.length > 0 %>
+Lisämateriaalia osoitteesta <a href="<%= program.program.url %>"><%= program.program.url %></a>
+<br />
+<% end %>
+</p>
+<% end %>
+</div>
+</div>

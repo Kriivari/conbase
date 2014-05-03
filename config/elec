@@ -1,0 +1,50 @@
+                    List of relations
+ Schema |             Name             | Type  |  Owner   
+--------+------------------------------+-------+----------
+ public | attribute_values             | table | www-data
+ public | attributes                   | table | www-data
+ public | contacts                     | table | www-data
+ public | events                       | table | www-data
+ public | line_items                   | table | www-data
+ public | locations                    | table | www-data
+ public | mailinglists                 | table | www-data
+ public | orders                       | table | www-data
+ public | people                       | table | www-data
+ public | people_events_attributes     | table | www-data
+ public | people_persongroups          | table | www-data
+ public | persongroups                 | table | www-data
+ public | pga_diagrams                 | table | ropecon
+ public | pga_forms                    | table | ropecon
+ public | pga_graphs                   | table | ropecon
+ public | pga_images                   | table | ropecon
+ public | pga_layout                   | table | ropecon
+ public | pga_queries                  | table | ropecon
+ public | pga_reports                  | table | ropecon
+ public | pga_scripts                  | table | ropecon
+ public | program_languages            | table | www-data
+ public | programgroups                | table | www-data
+ public | programitem_languages        | table | www-data
+ public | programitems                 | table | www-data
+ public | programs                     | table | www-data
+ public | programs_events_attributes   | table | www-data
+ public | programs_organizers          | table | www-data
+ public | programs_programgroups       | table | www-data
+ public | ropecon_applied_position     | table | ropecon
+ public | ropecon_category             | table | ropecon
+ public | ropecon_contact              | table | ropecon
+ public | ropecon_group                | table | ropecon
+ public | ropecon_item                 | table | ropecon
+ public | ropecon_item_category        | table | ropecon
+ public | ropecon_item_organizer       | table | ropecon
+ public | ropecon_job_category         | table | ropecon
+ public | ropecon_job_registration     | table | ropecon
+ public | ropecon_place                | table | ropecon
+ public | ropecon_previous_position    | table | ropecon
+ public | ropecon_previous_special_job | table | ropecon
+ public | ropecon_role                 | table | ropecon
+ public | ropecon_role_group           | table | ropecon
+ public | ropecon_staff                | table | ropecon
+ public | ropecon_timeitem             | table | ropecon
+ public | statusnames                  | table | www-data
+(45 rows)
+

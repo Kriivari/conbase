@@ -1,0 +1,68 @@
+<div class="programlist">
+<h3><%= @event %></h3>
+<ul>
+<li><a href="/programs/public/all/time?id=<%= @event.id %>">Koko ohjelma ajan mukaan</a></li>
+<li><a href="/programs/public/all/loc?id=<%= @event.id %>">Koko ohjelma paikan mukaan</a></li>
+<li><a href="/programs/public/pe/loc?id=<%= @event.id %>">Perjantain ohjelma paikan mukaan</a></li>
+<li><a href="/programs/public/la/loc?id=<%= @event.id %>">Lauantain ohjelma paikan mukaan</a></li>
+<li><a href="/programs/public/su/loc?id=<%= @event.id %>">Sunnuntain ohjelma paikan mukaan</a></li>
+</ul>
+<ul>
+<table>
+  <tr>
+    <th class="time">Aika</th>
+    <th class="name">Nimi</th>
+    <th class="place">Paikka</th>
+    <th class="organizer">Järjestäjä</th>
+    <th class="type">Tyyppi</th>
+  </tr>
+  
+<% for program in @programs %>
+  <tr>
+    <td class="time"><%= @wdays[program.start_time.wday] %>
+                     <%= program.start_time.strftime("%H.%M") %>&nbsp;&ndash;&nbsp;
+                     <%= @wdays[program.end_time.wday] %>
+                     <%= program.end_time.strftime("%H.%M") %></td>
+    <td class="name"><a href="#<%= program.id %>"><%= program.program.name %>
+<%= if program.program.name != program.name
+      program.name
+    end %></a></td>
+    <td class="place"><%= program.location %></td>
+    <td class="organizer">
+<% main = program.program.main_organizer
+   if main %>
+<%= program.program.main_organizer.name %>
+<% end %>
+</td>
+    <td class="type"><% program.program.programgroups.each{ |group| %><%= group.name %> <% } %></td>
+  </tr>
+<% end %>
+</table>
+<% for program in @programs %>
+<p><a name="<%= program.id %>"></a><%= @wdays[program.start_time.wday] %> <%= program.start_time.strftime("%H.%M") %>&nbsp;&ndash;&nbsp;
+<%= @wdays[program.end_time.wday] %> <%= program.end_time.strftime("%H.%M") %>
+<%= program.program.name %>
+<%= program.location %>
+<% program.program.programgroups.each{ |group| %><%= group.name %> <% } %>
+<br />
+<% if program.description != nil %>
+<%= program.description %>
+<br />
+<% end %>
+<% if program.program.description != nil %>
+<%= program.program.description %>
+<br />
+<% end %>
+<% if program.program.publicnotes != nil %>
+<%= program.program.publicnotes %>
+<br />
+<% end %>
+<% if program.program.programs_organizers != nil %>
+Järjestäjä:
+<% program.program.programs_organizers.each { |organizer| %>
+<%= organizer.person && organizer.person.name %>
+<% }
+end %>
+</p>
+<% end %>
+</div>

@@ -1,0 +1,19 @@
+<% Location.content_columns.each do |column| %>
+<p>
+  <b><%= column.human_name %>:</b> <%=h @location.send(column.name) %>
+</p>
+<% end %>
+<%= link_to 'Muokkaa', :action => 'edit', :id => @location %> |
+<%= link_to 'Listaan', :action => 'list' %>
+<p><b>Ohjelmanumerot</b></p>
+<table>
+<% @location.sorteditems.each do |programitem| %>
+<tr>
+<td><%= link_to programitem.program.name, :controller => 'programs', :action => 'show', :id => programitem.program %></td>
+<td><%= programitem.name %></td>
+<td><%= programitem.start_time.strftime("%a %H.%M") %></td>
+<td><%= programitem.end_time.strftime("%a %H.%M") %></td>
+<td><%= programitem.program.statusname %></td>
+</tr>
+<% end %>
+</table>

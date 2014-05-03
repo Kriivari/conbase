@@ -1,0 +1,10 @@
+<p>Lähetä sähköpostia koko ryhmälle</p>
+<%= form_for :email, :url => { :controller => :persongroups, :action => :email, :id => group }, :next_controller => next_controller, :next_action => next_action do |f| %>
+    <input type="hidden" name="next_controller" value="<%=next_controller%>" />
+    <input type="hidden" name="next_action" value="<%=next_action%>" />
+    <table>
+      <tr><td>Otsikko:</td><td><%= f.text_field :subject %></td></tr>
+      <tr><td>Viesti:</td><td><%= f.text_area :body %></td></tr>
+      <tr><td><%= f.submit "Lähetä" %></td></tr>
+    </table>
+<% end %>

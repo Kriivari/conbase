@@ -1,0 +1,14 @@
+<div class="sisalto">
+        <h2><%= flash[:notice] %></h2>
+	<h2>Työvoimarekry</h2>
+<% if @person.errors.empty? %>
+      <p>Kiitos paitatilauksesta. Alla olevat tiedot on nyt talletettu ja sähköpostiisi on lähetetty maksuohjeet. Lisätietoja osoitteesta tyovoima ät ropecon.fi</p>
+
+      <p>Etunimi: <%= @person.firstname %></p>
+      <p>Sukunimi: <%= @person.lastname %></p>
+      <p>Paidan tiedot: <%= @tshirt %></p>
+<% else %>
+      <p><b>Virheellinen sähköpostiosoite tai sinua ei ole hyväksytty työvoimaan.</b></p>
+      <p>Paitatilausta ei ole talletettu! Palaa takaisin ja korjaa virheelliset tiedot.</p>
+<% end %>
+</div>

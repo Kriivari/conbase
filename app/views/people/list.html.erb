@@ -1,0 +1,46 @@
+<h1>Henkilölistaus</h1>
+
+<table border="1">
+  <tr>
+    <th>Etunimi</th>
+    <th>Sukunimi</th>
+    <th>Lempinimi</th>
+    <th>Sähköposti</th>
+    <th>Puhelin</th>
+    <th>Syntynyt</th>
+    <th>Muistiinpanot</th>
+    <th>CV</th>
+    <th>Salasana</th>
+    <th>Ryhmät</th>
+  </tr>
+  
+<% for person in @people %>
+  <tr>
+    <td valign="top"><%= link_to person.firstname, :action => 'show', :id => person %></td>
+    <td valign="top"><%= link_to person.lastname, :action => 'show', :id => person %></td>
+    <td valign="top"><%= person.nickname %>
+    <td valign="top"><%= person.primary_email %>
+    <td valign="top"><%= person.primary_phone %>
+    <td valign="top"><%= person.birthyear %>
+    <td valign="top"><%= person.notes %>
+    <td valign="top"><%= person.cv %>
+    <td valign="top"><%= person.password != nil %>
+    <td valign="top">
+<% for group in person.people_persongroups %>
+<% if group.persongroup.event == @event && group.status == -1 %>
+<%= group.persongroup.name %>
+<% end %>
+<% end %>
+    </td>
+    <td valign="top"><%= link_to 'Näytä', :action => 'show', :id => person %>
+    <%= link_to 'Muokkaa', :action => 'edit', :id => person %>
+    <%= link_to 'Poista', { :action => 'destroy', :id => person }, :confirm => 'Are you sure?', :method => :post %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= will_paginate @people %>
+
+<br />
+
+<%= link_to 'Uusi henkilö', :action => 'new' %>

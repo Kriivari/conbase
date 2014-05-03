@@ -1,0 +1,13 @@
+<% if @person.errors.empty? %>
+<p>Ilmoittautumisesi on lisätty kantaan.</p>
+
+<p>Etunimi: <%= @person.firstname %></p>
+<p>Sukunimi: <%= @person.lastname %></p>
+<p>Lempinimi (vapaaehtoinen, tulee rintanappiin): <%= @person.nickname %></p>
+<p>Puhelin, josta tavoittaa conin aikana: <%= @person.primary_phone %></p>
+<p>Sähköpostiosoite: <%= @person.primary_email %></p>
+
+<% else %>
+<%= render "shared/error_messages", :target => @person %>
+    <p>Ilmoittautumistasi ei ole talletettu! Palaa takaisin ja korjaa virheelliset tiedot.</p>
+<% end %>

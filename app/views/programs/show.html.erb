@@ -1,0 +1,39 @@
+<h3>Ohjelmanumeron perustiedot</h3>
+<p><b>Nimi:</b> <%= @program.name %></p>
+<p><b>Kuvaus:</b> <%= @program.description %></p>
+<p><b>Englanninkielinen nimi:</b> <%= @englishname %></p>
+<p><b>Englanninkielinen kuvaus:</b> <%= @englishdescription %></p>
+<p><b>Julkinen tarkennus:</b> <%= @program.publicnotes %></p>
+<p><b>Salaiset muistiinpanot:</b> <%= @program.privatenotes %></p>
+<p><b>Materiaalin URL:</b> <%= @program.url %></p>
+<p><b>Väkimäärä:</b> <%= @program.attendance %></p>
+<p><b>Ryhmät</b> 
+<% for group in @program.programgroups %>
+<%= group.name %>
+<% end %>
+</p>
+<p><b>Tila:</b><%= @program.statusname %></p>
+<p><b>Muutettu:</b> <%= @program.updated_at %></p>
+<h3>Ohjelman järjestäjät</h3>
+<% @program.programs_organizers.each { |organizer| 
+if organizer.person
+%>
+<p><%= link_to organizer.person.name, :controller => 'people', :action => 'show', :id => organizer.person %>
+<% if organizer.statusname != nil %>
+(<%= organizer.statusname.name %>)
+<% end %>
+</p>
+<% 
+end
+} %>
+<h3>Ohjelman aikataulutiedot</h3>
+<% @program.programitems.sort{|p1,p2| p1.start_time <=> p2.start_time}.each { |item| %>
+<p><b>Nimi:</b> <%= item.name %></p>
+<p><b>Kuvaus:</b> <%= item.description %></p>
+<p><b>Paikka:</b> <%= link_to item.location, :controller => 'locations', :action => 'show', :id => item.location %></p>
+<p><b>Alkaa:</b> <%= item.start_time %></p>
+<p><b>Loppuu:</b> <%= item.end_time %></p>
+<% } %>
+<%= link_to 'Muokkaa', :action => 'edit', :id => @program %> |
+<%= link_to 'Takaisin', :action => 'list' %>
+

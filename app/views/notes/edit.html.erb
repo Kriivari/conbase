@@ -1,0 +1,37 @@
+<h1>Muokkaa ilmoitusta</h1>
+
+    <% if @note.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@note.errors.count, "error") %> prohibited this note from being saved:</h2>
+
+          <ul>
+            <% @note.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+<%= form_for @note, :url => { :action => 'update', :id => @note } do |f| %>
+<!--[form:notification]-->
+<p><label for="note_title">Otsikko</label><br/>
+<%= f.text_field :title  %></p>
+
+<p><label for="note_body">Viesti</label><br/>
+<%= f.text_area :body  %></p>
+
+<p><label for="note_starttime">Alkuaika</label><br/>
+<%= f.datetime_select :starttime, :minute_step => 15  %></p>
+
+<p><label for="note_endtime">Loppuaika</label><br/>
+<%= f.datetime_select :endtime, :minute_step => 15  %></p>
+
+<p><label for="note_important">Tärkeä</label><br/>
+<select id="note_important" name="note[important]"><option value="false">Ei</option><option value="true">Kyllä</option></select></p>
+
+<!--[eoform:note]-->
+  <%= f.submit 'Talleta' %>
+<% end %>
+
+<%= link_to 'Näytä', :action => 'show', :id => @note %> |
+<%= link_to 'Listaan', :action => 'list' %>

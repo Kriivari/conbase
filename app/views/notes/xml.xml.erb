@@ -1,0 +1,9 @@
+<contvlist>
+<% @notifications.each do |notification| %>
+<item id='<%= notification.id %>'
+      important='<%= notification.important %>'
+      title='<%= notification.title.to_s %>'
+      display='<%= notification.body.to_s %>'
+/>
+<% end %>
+</contvlist>
