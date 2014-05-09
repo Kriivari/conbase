@@ -78,7 +78,7 @@ class ExhibitorsController < Application
 
   def destroy
     Exhibitor.find(params[:id]).destroy
-    redirect_to :action => 'list'
+    redirect_to :action => 'index'
   end
 
   def edit

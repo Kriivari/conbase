@@ -47,7 +47,7 @@
     <td><%= link_to 'Näytä', :action => 'show', :id => exhibitor %></td>
     <td><%= link_to 'Lasku', '/exhibitors/invoice/' + exhibitor.id.to_s + '.pdf' %></td>
     <td><%= link_to 'Muokkaa', :action => 'edit', :id => exhibitor %></td>
-    <td><%= link_to 'Poista', {:action => 'destroy', :id => exhibitor}, :confirm => 'Oletko varma?' %></td>
+    <td><%= link_to 'Poista', '/exhibitors/destroy/' + exhibitor.id.to_s %></td>
   </tr>
 <% end %>
 </table>
