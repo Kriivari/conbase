@@ -5,7 +5,6 @@
 <p>Ilmoittautumisen lähetettyäsi saat lähiaikoina sähköpostiisi vahvistuksen
      sen perillemenosta.</p>
 <%= form_for( @person, :url => { :action => 'create' } ) do |f| %>
-<input id="spammer" type="hidden" name="spammer" value="" />
 <div>
 <table border="0" id="comment_form">
 
@@ -98,6 +97,11 @@
 	<tr>
 		<td align="left" valign="top">Täyttämällä tämän lomakkeen annat luvan Ropecon ry:lle käyttää tietojasi <a href="http://www.ropecon.fi/permanent/rekisteriseloste.txt">rekisteriselosteen</a> mukaisiin tarkoituksiin.</td>
 	</tr>
+    <tr>
+      <td align="left" valign="top">Jätä tämä kenttä tyhjäksi!:</td>
+      <td class="element" valign="top" align="left"> <input size="30" style="width: 350px" name="spammer" id="spammer" type="text" /></td>
+    </tr>
+  <input id="spammer" type="hidden" name="spammer" value="" />
 	<tr>
 		<td align="left" valign="top"></td>
 		<td valign="top" align="left">	<%= f.submit( "Ilmoittaudu" ) %></td>
