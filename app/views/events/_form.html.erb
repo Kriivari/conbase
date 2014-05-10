@@ -36,6 +36,9 @@
 <p><label for="event_footer">Paitatilausteksti (%PRICE%, %REFERENCE%, %SHIRTDETAILS%)</label><br/>
 <%= f.text_area :footer %></p>
 
+    <p><label for="event_tshirt_footer">Paitatilauslomakkeen loppuosa (HTML sallittu)</label><br/>
+      <%= f.text_area :tshirt_footer %></p>
+
     <p><label for="event_ticketorder">Ranneketilaukset</label><br/>
       <select id="event_ticketorder" name="event[ticketorder]">
         <option value="false">Kiinni</option>
