@@ -51,7 +51,7 @@ class StaffController < Application
       baseprice = tshirt.price
       purchase.save
       if params[:shirttext] == nil || params[:shirttext].length == 0
-	      baseprice = baseprice - 4.30
+	      baseprice = baseprice - 3
       end
       if @event.footer && baseprice > 0
 	      basename = tshirt.fullname
