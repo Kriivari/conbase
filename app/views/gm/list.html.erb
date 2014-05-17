@@ -9,7 +9,7 @@ end %>
 <% @gms.each{ |gm| 
 %>
 <% gm.programs_organizers.each{ |o|
-  if o.program.event.id == @event.id
+  if o.program.event.id == @event.id && o.program.status == -2
     o.program.programgroups.each{ |g|
       if g.id == 12
 %>

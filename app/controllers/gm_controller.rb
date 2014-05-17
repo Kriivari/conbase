@@ -162,7 +162,7 @@ class GmController < Application
   end
 
   def list
-    @gms = Person.find_by_sql("select distinct people.* from people, persongroups, people_persongroups, events where people.id=people_persongroups.person_id and persongroups.id=people_persongroups.persongroup_id and persongroups.event_id=events.id and events.ispublic=true and persongroups.name='GM'")
+    @gms = Person.find_by_sql(["select distinct people.* from people, persongroups, people_persongroups, events where people.id=people_persongroups.person_id and persongroups.id=people_persongroups.persongroup_id and persongroups.event_id=events.id and events.ispublic=true and persongroups.name='GM' and events.id=?", @event.id])
     @duplicates = {}
     for gm in @gms
       duplicate = Person.find_by_sql(["select distinct people.* from people where firstname = ? and lastname = ? and id != ?", gm.firstname, gm.lastname, gm.id])
@@ -176,10 +176,13 @@ class GmController < Application
     program = Program.find(params[:id])
     program.status = -1
     program.save
-    for organizer in program.programs_organizers.person.people_persongroups
-      if organizer.event.id == @event.id && organizer.name == 'GM'
-        organizer.status = -1
-        organizer.save
+    logger.info "Organizers is " + program.programs_organizers.to_json
+    for organizer in program.programs_organizers
+      for grp in organizer.person.people_persongroups
+        if grp.persongroup.event.id == @event.id && grp.persongroup.name == 'GM'
+          grp.status = -1
+          grp.save
+	end
       end
     end
     redirect_to :action => 'list'
