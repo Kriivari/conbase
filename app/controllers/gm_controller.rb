@@ -47,7 +47,7 @@ class GmController < Application
       ts.add( @event, @person, tshirt, params[:shirttext] )
     end
 
-    num = 5
+    num = 7
     if params[:game1][:name].length == 0
       flash[:notice] = 'Pitää ilmoittaa ainakin yksi peli!'
       redirect_to :action => 'new'
@@ -60,6 +60,10 @@ class GmController < Application
       num = 3
     elsif params[:game5][:name].length == 0
       num = 4
+    elsif params[:game6][:name].length == 0
+      num = 5
+    elsif params[:game7][:name].length == 0
+      num = 6
     end
     @games = []
     for i in 1..num 
