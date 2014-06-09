@@ -213,6 +213,7 @@ class StaffController < Application
     end
 
     @count = @staffs.size
+    @queuegroup = Persongroup.where( "name='Jono' and event_id=?", @event.id ).first
   end
 
   def confirmed(body)
