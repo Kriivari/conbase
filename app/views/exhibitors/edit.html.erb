@@ -22,7 +22,7 @@
       <tr><th>Tuote</th></tr>
       <% for product in @exhibitor.product_types %>
               <tr><td><%= product.name %> </td>
-                <td>[<%= link_to 'Poista', :action => 'rmproduct', :product_id => product, :exhibitor_id => @exhibitor %>]</td>
+                <td><%= button_to "Poista", {:action => "rmproduct", :product_id => product.id, :exhibitor_id => @exhibitor.id}, :method => :delete, :data => {:confirm => "Oletko varma?"}  %></td>
               </tr>
       <% end %>
       <tr><td>Lisää tuote:</td>
