@@ -27,7 +27,9 @@ Conbase::Application.routes.draw do
 
   resources :programitems
 
-  resources :exhibitors
+  resources :exhibitors do
+    delete 'rmproduct', :on => :collection
+  end
 
   resources :programgroups
 
