@@ -29,6 +29,8 @@ Conbase::Application.routes.draw do
 
   resources :exhibitors
 
+  resources :programgroups
+
   match '/:controller(/:action(/:id))'
   root :to => 'login#login'
 end
