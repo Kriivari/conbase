@@ -144,7 +144,7 @@ class ProgramsController < Application
       else
         @filter = params[:grp][:value]
       end
-      @programs = Program.paginate :per_page => 100, :page => params[:page], :order => 'name', :conditions => ['event_id=? and id in (select program_id from programs_programgroups where programgroup_id=?)', @event.id, @filter]
+      @programs = Program.paginate :per_page => 500, :page => params[:page], :order => 'name', :conditions => ['event_id=? and id in (select program_id from programs_programgroups where programgroup_id=?)', @event.id, @filter]
     elsif params[:location] != nil || params[:loc] != nil
       @location = nil
       if params[:location]
@@ -152,12 +152,12 @@ class ProgramsController < Application
       else
         @location = params[:loc][:value]
       end
-      @programs = Program.paginate :per_page => 100, :page => params[:page], :order => 'name', :conditions => ['id in (select program_id from programitems where location_id=?) and event_id=?', @location, @event.id]
+      @programs = Program.paginate :per_page => 500, :page => params[:page], :order => 'name', :conditions => ['id in (select program_id from programitems where location_id=?) and event_id=?', @location, @event.id]
     elsif params[:status] != nil
       @status = params[:status][:value]
-      @programs = Program.paginate :per_page => 100, :page => params[:page], :order => 'name', :conditions => ['status=? and event_id=?', @status, @event.id]
+      @programs = Program.paginate :per_page => 500, :page => params[:page], :order => 'name', :conditions => ['status=? and event_id=?', @status, @event.id]
     else
-      @programs = Program.paginate :per_page => 100, :page => params[:page], :order => 'name', :conditions => ['event_id=? and id not in (select program_id from programs_programgroups where programgroup_id=?)', @event.id, @gm]
+      @programs = Program.paginate :per_page => 500, :page => params[:page], :order => 'name', :conditions => ['event_id=? and id not in (select program_id from programs_programgroups where programgroup_id=?)', @event.id, @gm]
     end
   end
 
@@ -246,6 +246,7 @@ class ProgramsController < Application
       end
     end
     
+    expire_fragment('programs_xml')
     if @program.save && english.save
       flash[:notice] = 'Program was successfully created.'
       redirect_to :action => 'list'
