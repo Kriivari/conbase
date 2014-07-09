@@ -27,7 +27,11 @@ Conbase::Application.routes.draw do
 
   resources :programitems
 
-  resources :exhibitors
+  resources :exhibitors do
+    get 'rmproduct', :on => :collection
+  end
+
+  resources :programgroups
 
   match '/:controller(/:action(/:id))'
   root :to => 'login#login'

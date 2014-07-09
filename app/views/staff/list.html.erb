@@ -12,6 +12,7 @@ end %>
         <% for group in find_visible_groups %>
             <input type="radio" name="admin[primarygroup]" value="<%= group.id %>" <% if @admin != nil && @admin[:primarygroup] == group.id.to_s %>checked<% end %>/><%= group.name %><br />
         <% end %>
+        <input type="radio" name="admin[primarygroup]" value="<%= @queuegroup.id %>" <% if @admin != nil && @admin[:primarygroup] == @queuegroup.id.to_s %>checked<% end %>/><%= @queuegroup.name %><br />
       </td><td valign="top">
         <% if @checked == nil %>
             <%= submit_tag 'Siirrä' %>

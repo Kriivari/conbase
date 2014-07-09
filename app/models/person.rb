@@ -65,7 +65,7 @@ class Person < ActiveRecord::Base
 
   def created
     for group in self.people_persongroups
-      if group.persongroup.event.id == @event.id
+      if group.persongroup.event.object_id == @event.object_id
 	      return group.created_at
       end
     end
