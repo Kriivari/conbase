@@ -26,7 +26,7 @@ class Person < ActiveRecord::Base
 
   def in_reserve_group?
     self.people_persongroups.each { |group|
-      if group.persongroup.event.id == @event.id && ( group.persongroup.name == "Narikka" || group.persongroup.name == "Majoitus" || group.persongroup.name == "Lipunmyynti" || group.persongroup.name == "Kaubamaja" )
+      if group.persongroup.event.id == @event.id && group.persongroup.name == "Varatyövoima"
         return true
       end
     }
