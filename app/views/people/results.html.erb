@@ -13,8 +13,7 @@
     <th>Salasana</th>
   </tr>
   
-<% for person in @people
-if @group == nil || person.in_reserve_group? %>
+<% for person in @people %>
   
   <tr>
     <td valign="top"><%= link_to person.firstname, :action => 'show', :id => person %></td>
@@ -30,7 +29,6 @@ if @group == nil || person.in_reserve_group? %>
     <td><%= link_to 'Muokkaa', :action => 'edit', :id => person %></td>
     <td><%= link_to 'Poista', { :action => 'destroy', :id => person }, :confirm => 'Are you sure?', :method => :post %></td>
   </tr>
-<% end
-end %>
+<% end %>
 </table>
 <%= link_to 'Takaisin hakusivulle', :action => 'search' %>
