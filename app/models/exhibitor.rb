@@ -8,7 +8,10 @@ class Exhibitor < ActiveRecord::Base
 
   def total
     sum = 0
-
+    r = 0
+    if rebate
+      r = rebate
+    end
     if tables > 0
       table = product_types.select{|t| t.product.name == "Myyntipöytä"}
 
@@ -32,7 +35,7 @@ class Exhibitor < ActiveRecord::Base
         sum = sum + product_type.price
       end
     end
-    return sum * (100 - rebate) / 100
+    return sum * (100 - r) / 100
   end
 
   def reference
