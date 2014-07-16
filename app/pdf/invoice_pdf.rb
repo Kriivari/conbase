@@ -31,7 +31,7 @@ class InvoicePdf < Prawn::Document
           rows << ["Lisäranneke", "#{invoice.tickets}", {:content => "#{"%.2f" % invoice.ticketprice.to_s} €", :align => :right}, "#{invoice.rebate}%", {:content => "#{"%.2f" % (invoice.tickets * invoice.ticketprice * (100-invoice.rebate) / 100).to_s} €", :align => :right}]
       end
       if invoice.travelpasses > 0
-          rows << ["Kulkulupa", "#{invoice.tables}", {:content => "0.00 €", :align => :right}, "#{invoice.rebate}%", {:content => "0,00 €", :align => :right}]
+          rows << ["Kulkulupa", "#{invoice.travelpasses}", {:content => "0.00 €", :align => :right}, "#{invoice.rebate}%", {:content => "0,00 €", :align => :right}]
       end
 
       for product_type in invoice.product_types
