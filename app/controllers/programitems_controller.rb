@@ -57,6 +57,7 @@ class ProgramitemsController < Application
     @programitem.end_time = endtime
     if @programitem.save
       program.save
+      expire_fragment('programs_xml')
       flash[:notice] = 'Ohjelmatieto lisätty.'
       if @programitem.conflict == -1
 	flash[:conflict] = "Päällekäinen varaus"
@@ -76,6 +77,7 @@ class ProgramitemsController < Application
     @programitem = Programitem.find(params[:id])
     @locations = Location.where(:event_id => @programitem.program.event.id).order("name")
     if Programitem.update(params[:id], params[:programitem])
+      expire_fragment('programs_xml')
       flash[:notice] = 'Programitem was successfully updated.'
       if @programitem.conflict == -1
 	flash[:conflict] = "Päällekäinen varaus"
