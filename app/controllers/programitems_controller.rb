@@ -94,6 +94,7 @@ class ProgramitemsController < Application
     programitem = Programitem.find(params[:id])
     program = programitem.program
     programitem.destroy
+    expire_fragment('programs_xml')
     redirect_to :controller => 'programs', :action => 'edit', :id => program.id
   end
 end

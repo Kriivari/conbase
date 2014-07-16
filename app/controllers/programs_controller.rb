@@ -343,6 +343,7 @@ class ProgramsController < Application
     group = Programgroup.find(params[:groupid])
     program = Program.find(params[:programid])
     program.programgroups.delete(group)
+    expire_fragment('programs_xml')
     redirect_to :action => 'show', :id => params[:programid]
   end
 
@@ -350,6 +351,7 @@ class ProgramsController < Application
     program = Program.find(params[:id])
     program.program_languages.each { |l| l.destroy }
     program.destroy
+    expire_fragment('programs_xml')
     redirect_to :action => 'list'
   end
 
@@ -358,6 +360,7 @@ class ProgramsController < Application
     @program = Program.find(params[:program])
     organizer.destroy
     @program.save
+    expire_fragment('programs_xml')
     redirect_to :action => 'list'
   end
 end
