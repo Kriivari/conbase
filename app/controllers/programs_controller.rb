@@ -362,8 +362,7 @@ class ProgramsController < Application
 
   def rmattribute
     att = ProgramsEventsAttribute.find(params[:attributeid])
-    program = Program.find(params[:programid])
-    program.programs_events_attributes.delete(att)
+    att.destroy
     expire_fragment('programs_xml')
     redirect_to :action => 'show', :id => params[:programid]
   end
