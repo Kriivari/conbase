@@ -14,6 +14,13 @@
 </p>
 <p><b>Tila:</b><%= @program.statusname %></p>
 <p><b>Muutettu:</b> <%= @program.updated_at %></p>
+
+<br/>
+<p><b>Attribuutit:</b><br/>
+<% for att in @program.programs_events_attributes %>
+<%= att.attribute.name %>: <%= att.value %><br/>
+<% end %>
+</p>
 <h3>Ohjelman järjestäjät</h3>
 <% @program.programs_organizers.each { |organizer| 
 if organizer.person
