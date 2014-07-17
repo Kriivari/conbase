@@ -52,7 +52,15 @@
     <a href="#<%= program.id %>"><%= program.program.name %>
 <%= if program.program.name != program.name
       program.name
-    end %></a></td>
+    end %></a>
+<% if program.program.programs_events_attributes %>
+ (
+<%   for att in program.program.programs_events_attributes %>
+    <%= att.attribute.name %>: <%= att.value %>
+<%   end %>
+  )
+<% end %>
+    </td>
     <td class="loc<%= program.location.id %>"><%= program.location %></td>
     <td class="type"><%= program.program.showgroups %></td>
   </tr>
