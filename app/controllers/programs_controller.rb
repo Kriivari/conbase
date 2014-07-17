@@ -260,6 +260,8 @@ class ProgramsController < Application
   def edit
     @groups = Programgroup.all.map { |p| [p.name, p.id] }
     @groups = [['Ei uutta ryhmää', 0]] + @groups
+    @attributes = Attribute.all.map { |p| [p.name, p.id] }
+    @attributes = [['Ei uutta attribuuttia', 0]] + @attributes
     @program = Program.find(params[:id])
     @statuses = Statusname.all(:conditions => "program=true", :order => "name")
     @organizerstatuses = Statusname.all(:conditions => "organizer=true", :order => "name")
@@ -323,11 +325,22 @@ class ProgramsController < Application
       
       if params[:grp][:value] != '0'
         group = Programgroup.find(params[:grp][:value])
-	unless @program.programgroups.include?( group )
-	  @program.programgroups << group
-	  group.save
-	  @program.save
-	end
+      	unless @program.programgroups.include?( group )
+	        @program.programgroups << group
+	        group.save
+	        @program.save
+	      end
+      end
+
+      if params[:att][:id] != '0'
+        att = Attribute.find(params[:att][:id])
+        a = ProgramsEventsAttribute.new
+        a.program = @program
+        a.attribute = att
+        a.event = @event
+        a[:value] = params[:att][:value]
+        a.save
+        @program.save
       end
 
       if @program.update_attributes(params[:program])
@@ -343,6 +356,14 @@ class ProgramsController < Application
     group = Programgroup.find(params[:groupid])
     program = Program.find(params[:programid])
     program.programgroups.delete(group)
+    expire_fragment('programs_xml')
+    redirect_to :action => 'show', :id => params[:programid]
+  end
+
+  def rmattribute
+    att = ProgramsEventsAttribute.find(params[:attributeid])
+    program = Program.find(params[:programid])
+    program.programs_events_attributes.delete(att)
     expire_fragment('programs_xml')
     redirect_to :action => 'show', :id => params[:programid]
   end

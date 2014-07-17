@@ -22,6 +22,13 @@
 <% end %>
 </td></tr>
 <tr><td>Lisää ryhmään:</td><td><%= select(:grp, :value, @groups) %></td></tr>
+      <tr><td>Attribuutit:</td>
+        <td><% for att in @program.programs_events_attributes %>
+              <%= att.attribute.name %>: <%= att.value %>
+              [<a href="/programs/rmattribute/?attributeid=<%= att.id %>&programid=<%= @program.id %>">Poista</a>]
+          <% end %>
+        </td></tr>
+      <tr><td>Lisää attribuutti:</td><td><%= select(:att, :id, @attributes) %> <input type="text" id="att_value" name="att[value]" size="10"/></td></tr>
 <tr><td>Tila:</td><td><%= collection_select( :program, :status, @statuses, :status, :name ) %></td></tr>
 <tr><td>Muutettu:</td><td><%= @program.updated_at %></td></tr>
 <tr><td><%= f.submit "Tallenna" %></td></tr>
