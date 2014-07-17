@@ -61,6 +61,9 @@ class Program < ActiveRecord::Base
 	ret = ret + group.name + " "
       end
     }
+    self.programs_events_attributes.each{ |att|
+      ret = ret + att.value
+    }
     return ret
   end
 
