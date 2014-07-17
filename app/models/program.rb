@@ -62,7 +62,7 @@ class Program < ActiveRecord::Base
       end
     }
     self.programs_events_attributes.each{ |att|
-      ret = ret + att.value
+      ret = ret + att.value + " "
     }
     return ret
   end
