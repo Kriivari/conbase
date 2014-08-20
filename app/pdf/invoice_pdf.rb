@@ -14,6 +14,9 @@ class InvoicePdf < Prawn::Document
       text "Laskutusosoite", :style => :bold
       text "#{invoice.billing_address}"
       move_down 20
+      text "Asiakkaan viite", :style => :bold
+      text "#{invoice.customer_reference}"
+      move_down 20
       table( [
           ["Laskun numero", "Viitenumero", "Päiväys", "Eräpäivä"],
           ["#{invoice.id}","#{invoice.reference}","#{invoice.invoicedate.strftime('%-d.%-m.%Y')}","#{invoice.duedate.strftime('%-d.%-m.%Y')}"]
