@@ -12,6 +12,7 @@ class InvoicePdf < Prawn::Document
       text "Kaubamaja-lasku", :position => :center, :size => 14, :style => :bold
       move_down 20
       text "Laskutusosoite", :style => :bold
+      text "#{invoice.companyname}"
       text "#{invoice.billing_address}"
       move_down 20
       text "Asiakkaan viite", :style => :bold
