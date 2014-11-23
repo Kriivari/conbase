@@ -1,22 +1,22 @@
 <h3>Ohjelmanumeron perustiedot</h3>
 <table>
-  <tr><th>Nimi:</th><td><%= @program.name %></td></tr>
-  <tr><th>Kuvaus:</th><td><%= @program.description %></td></tr>
-  <tr><th>Englanninkielinen nimi:</th><td><%= @englishname %></td></tr>
-  <tr><th>Englanninkielinen kuvaus:</th><td><%= @englishdescription %></td></tr>
-  <tr><th>Julkinen tarkennus:</th><td><%= @program.publicnotes %></td></tr>
-  <tr><th>Salaiset muistiinpanot:</th><td><%= simple_format( @program.privatenotes ) %></td></tr>
-  <tr><th>Materiaalin URL:</th><td><%= @program.url %></td></tr>
-  <tr><th>Väkimäärä:</th><td><%= @program.attendance %></td></tr>
-  <tr><th>Ryhmät</th><td>
+  <tr><th align="left" valign="top">Nimi:</th><td><%= @program.name %></td></tr>
+  <tr><th align="left" valign="top">Kuvaus:</th><td><%= @program.description %></td></tr>
+  <tr><th align="left" valign="top">Englanninkielinen nimi:</th><td><%= @englishname %></td></tr>
+  <tr><th align="left" valign="top">Englanninkielinen kuvaus:</th><td><%= @englishdescription %></td></tr>
+  <tr><th align="left" valign="top">Julkinen tarkennus:</th><td><%= @program.publicnotes %></td></tr>
+  <tr><th align="left" valign="top">Salaiset muistiinpanot:</th><td><%= simple_format( @program.privatenotes ) %></td></tr>
+  <tr><th align="left" valign="top">Materiaalin URL:</th><td><%= @program.url %></td></tr>
+  <tr><th align="left" valign="top">Väkimäärä:</th><td><%= @program.attendance %></td></tr>
+  <tr><th align="left" valign="top">Ryhmät</th><td>
 <% for group in @program.programgroups %>
 <%= group.name %>
 <% end %>
   </td></tr>
-  <tr><th>Tila:</th><td><%= @program.statusname %></td></tr>
-  <tr><th>Muutettu:</th><td><%= @program.updated_at %></td></tr>
+  <tr><th align="left" valign="top">Tila:</th><td><%= @program.statusname %></td></tr>
+  <tr><th align="left" valign="top">Muutettu:</th><td><%= @program.updated_at %></td></tr>
 <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
-<tr><th>Attribuutit:</th><td>
+<tr><th align="left" valign="top">Attribuutit:</th><td>
 <% for att in @program.programs_events_attributes %>
 <%= att.attribute.name %>: <%= att.value %><br/>
 <% end %>
