@@ -245,7 +245,11 @@ class ProgramsController < Application
         group.save
       end
     end
-    
+
+    if params[:larp]
+      save_larp( params[:larp], @program )
+    end
+
     expire_fragment('programs_xml')
     if @program.save && english.save
       flash[:notice] = 'Program was successfully created.'
@@ -255,6 +259,28 @@ class ProgramsController < Application
       @types = Programgroup.all.map { |p| [p.name, p.id] }
       render :action => 'new'
     end
+  end
+
+  def save_larp( params, program )
+    larpgroup = Programgroup.find_by_name("Larpit")
+    program.programgroups << larpgroup
+    larpgroup.save
+    if params[:beginner] == "yes"
+      beginnergroup = Programgroup.find_by_name("Aloittelijaystävällinen")
+      program.programgroups << beginnergroup
+      beginnergroup.save
+    end
+    if params[:english] == "yes"
+      englishgroup = Programgroup.find_by_name("Englanninkielinen")
+      program.programgroups << englishgroup
+      englishgroup.save
+    end
+    program.attendance = params[:players]
+    signupsheet = "LARP-tiski"
+    if params[:signupsheet] == "self"
+      signupsheet = "Järjestäjä itse"
+    end
+    program.privatenotes = "Mieshahmot: " + params[:male] + "\nNaishahmot: " + params[:female] + "\nNeutraalit: " + params[:neutral] + "\nVähimmäismäärä: " + params[:minimum] + "\nIlmolomakkeen tekee: " + signupsheet + "\nTilatoiveet: " + params[:location] + "\nPelin pituus: " + params[:length] + "\nAikataulutoiveet: " + params[:scheduling] + "\nTarvikkeet: " + params[:props] + program.privatenotes
   end
 
   def edit
