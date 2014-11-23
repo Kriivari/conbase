@@ -2,8 +2,10 @@
     <table>
       <tr><td><label for="exhibitor_companyname">Yhteisö</label></td>
         <td><input type="text" id="exhibitor_companyname" name="exhibitor[companyname]" value="<%= @exhibitor.companyname %>" /></td></tr>
-      <tr><td><label for="exhibitor_publicname">Laskutusosoite</label></td>
+      <tr><td><label for="exhibitor_billing_address">Laskutusosoite</label></td>
         <td><input type="text" id="exhibitor_billing_address" name="exhibitor[billing_address]" value="<%= @exhibitor.billing_address %>" /></td></tr>
+      <tr><td><label for="exhibitor_customer_reference">Laskun viite</label></td>
+        <td><input type="text" id="exhibitor_customer_reference" name="exhibitor[customer_reference]" value="<%= @exhibitor.customer_reference %>" /></td></tr>
       <tr><td><label for="exhibitor_description">Julkinen kuvaus</label></td>
         <td><input type="text" id="exhibitor_description" name="exhibitor[description]" value="<%= @exhibitor.description %>" /></td></tr>
       <tr><td><label for="exhibitor_rebate">Alennusprosentti</label></td>

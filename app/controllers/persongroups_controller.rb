@@ -47,7 +47,7 @@ class PersongroupsController < Application
 
   def destroy
     Persongroup.find(params[:id]).destroy
-    redirect_to :action => 'list'
+    redirect_to :action => 'index'
   end
 
   def email

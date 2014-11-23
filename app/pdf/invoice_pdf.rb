@@ -12,7 +12,11 @@ class InvoicePdf < Prawn::Document
       text "Kaubamaja-lasku", :position => :center, :size => 14, :style => :bold
       move_down 20
       text "Laskutusosoite", :style => :bold
+      text "#{invoice.companyname}"
       text "#{invoice.billing_address}"
+      move_down 20
+      text "Asiakkaan viite", :style => :bold
+      text "#{invoice.customer_reference}"
       move_down 20
       table( [
           ["Laskun numero", "Viitenumero", "Päiväys", "Eräpäivä"],
@@ -20,10 +24,11 @@ class InvoicePdf < Prawn::Document
         ] )
       move_down 20
 
-      rows = [
-          ["Tuote", "Kpl", "Yksikköhinta", "Alennus", "Yhteensä"],
-          ["Ensimmäinen myyntipöytä", "#{[ invoice.tables, 1 ].min()}", {:content => "#{"%.2f" % invoice.tableprice.to_s} €", :align => :right}, "#{invoice.rebate}%", {:content => "#{"%.2f" % ([ invoice.tables, 1 ].min() * invoice.tableprice * (100-invoice.rebate) / 100).to_s} €", :align => :right}]
-        ]
+      rows = [ ["Tuote", "Kpl", "Yksikköhinta", "Alennus", "Yhteensä" ] ]
+
+      if invoice.tables > 0
+	rows << ["Ensimmäinen myyntipöytä", "#{[ invoice.tables, 1 ].min()}", {:content => "#{"%.2f" % invoice.tableprice.to_s} €", :align => :right}, "#{invoice.rebate}%", {:content => "#{"%.2f" % ([ invoice.tables, 1 ].min() * invoice.tableprice * (100-invoice.rebate) / 100).to_s} €", :align => :right}]
+      end
       if invoice.tables > 1
           rows << ["Seuraavat myyntipöydät", "#{[ invoice.tables - 1, 0 ].max()}", {:content => "#{"%.2f" % invoice.secondprice.to_s} €", :align => :right}, "#{invoice.rebate}%", {:content => "#{"%.2f" % ([ invoice.tables - 1, 0 ].max() * invoice.secondprice * (100-invoice.rebate) / 100).to_s} €", :align => :right}]
       end
