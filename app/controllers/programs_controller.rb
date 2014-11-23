@@ -257,7 +257,9 @@ class ProgramsController < Application
     expire_fragment('programs_xml')
     if @program.save && english.save
       flash[:notice] = 'Program was successfully created.'
-      redirect_to :action => 'list'
+      if params[:organizers][:id]
+        redirect_to :action => 'list'
+      end
     else
       @type = nil
       @types = Programgroup.all.map { |p| [p.name, p.id] }
