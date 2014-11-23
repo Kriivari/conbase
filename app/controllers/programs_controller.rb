@@ -284,7 +284,7 @@ class ProgramsController < Application
     if params[:signupsheet] == "self"
       signupsheet = "Järjestäjä itse"
     end
-    program.privatenotes = "Mieshahmot: " + params[:male] + "\nNaishahmot: " + params[:female] + "\nNeutraalit: " + params[:neutral] + "\nVähimmäismäärä: " + params[:minimum] + "\nIlmolomakkeen tekee: " + signupsheet + "\nTilatoiveet: " + params[:location] + "\nPelin pituus: " + params[:length] + "\nAikataulutoiveet: " + params[:scheduling] + "\nTarvikkeet: " + params[:props] + program.privatenotes
+    program.privatenotes = "Mieshahmot: " + params[:male] + "\nNaishahmot: " + params[:female] + "\nNeutraalit: " + params[:neutral] + "\nVähimmäismäärä: " + params[:minimum] + "\nIlmolomakkeen tekee: " + signupsheet + "\nTilatoiveet: " + params[:location] + "\nPelin pituus: " + params[:length] + "\nAikataulutoiveet: " + params[:scheduling] + "\nTarvikkeet: " + params[:props] + "\nMuita tietoja: " + program.privatenotes
   end
 
   def edit
