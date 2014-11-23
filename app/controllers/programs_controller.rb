@@ -1,5 +1,5 @@
 class ProgramsController < Application
-  before_filter :authorize, :except => [:public, :csv, :xml, :tabular]
+  before_filter :authorize, :except => [:new, :newlarp, :create, :public, :csv, :xml, :tabular]
 #  caches_page :csv, :public, :tabular
 #  cache_sweeper :program_sweeper, :only => [:edit, :create]
 
@@ -191,6 +191,10 @@ class ProgramsController < Application
     end
   end
 
+  def newlarp
+    new
+  end
+
   def create
     if params[:person][:firstname] == nil || params[:person][:firstname].length == 0
       @person = Person.find(params[:organizers][:id])
@@ -245,7 +249,11 @@ class ProgramsController < Application
         group.save
       end
     end
-    
+
+    if params[:larp]
+      save_larp( params[:larp], @program )
+    end
+
     expire_fragment('programs_xml')
     if @program.save && english.save
       flash[:notice] = 'Program was successfully created.'
@@ -255,6 +263,28 @@ class ProgramsController < Application
       @types = Programgroup.all.map { |p| [p.name, p.id] }
       render :action => 'new'
     end
+  end
+
+  def save_larp( params, program )
+    larpgroup = Programgroup.find_by_name("Larpit")
+    program.programgroups << larpgroup
+    larpgroup.save
+    if params[:beginner] == "yes"
+      beginnergroup = Programgroup.find_by_name("Aloittelijaystävällinen")
+      program.programgroups << beginnergroup
+      beginnergroup.save
+    end
+    if params[:english] == "yes"
+      englishgroup = Programgroup.find_by_name("Englanninkielinen")
+      program.programgroups << englishgroup
+      englishgroup.save
+    end
+    program.attendance = params[:players]
+    signupsheet = "LARP-tiski"
+    if params[:signupsheet] == "self"
+      signupsheet = "Järjestäjä itse"
+    end
+    program.privatenotes = "Mieshahmot: " + params[:male] + "\nNaishahmot: " + params[:female] + "\nNeutraalit: " + params[:neutral] + "\nVähimmäismäärä: " + params[:minimum] + "\nIlmolomakkeen tekee: " + signupsheet + "\nTilatoiveet: " + params[:location] + "\nPelin pituus: " + params[:length] + "\nAikataulutoiveet: " + params[:scheduling] + "\nTarvikkeet: " + params[:props] + "\nMuita tietoja: " + program.privatenotes
   end
 
   def edit
