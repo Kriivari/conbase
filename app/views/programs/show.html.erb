@@ -1,27 +1,28 @@
 <h3>Ohjelmanumeron perustiedot</h3>
-<p><b>Nimi:</b> <%= @program.name %></p>
-<p><b>Kuvaus:</b> <%= @program.description %></p>
-<p><b>Englanninkielinen nimi:</b> <%= @englishname %></p>
-<p><b>Englanninkielinen kuvaus:</b> <%= @englishdescription %></p>
-<p><b>Julkinen tarkennus:</b> <%= @program.publicnotes %></p>
-<p><b>Salaiset muistiinpanot:</b> <%= if @program.privatenotes
-                                        @program.privatenotes.gsub(/\n/, '<br/>')
-                                    end %></p>
-<p><b>Materiaalin URL:</b> <%= @program.url %></p>
-<p><b>Väkimäärä:</b> <%= @program.attendance %></p>
-<p><b>Ryhmät</b> 
+<table>
+  <tr><th>Nimi:</th><td><%= @program.name %></td></tr>
+  <tr><th>Kuvaus:</th><td><%= @program.description %></td></tr>
+  <tr><th>Englanninkielinen nimi:</th><td><%= @englishname %></td></tr>
+  <tr><th>Englanninkielinen kuvaus:</th><td><%= @englishdescription %></td></tr>
+  <tr><th>Julkinen tarkennus:</th><td><%= @program.publicnotes %></td></tr>
+  <tr><th>Salaiset muistiinpanot:</th><td><%= simple_format( @program.privatenotes ) %></td></tr>
+  <tr><th>Materiaalin URL:</th><td><%= @program.url %></td></tr>
+  <tr><th>Väkimäärä:</th><td><%= @program.attendance %></td></tr>
+  <tr><th>Ryhmät</th><td>
 <% for group in @program.programgroups %>
 <%= group.name %>
 <% end %>
-</p>
-<p><b>Tila:</b><%= @program.statusname %></p>
-<p><b>Muutettu:</b> <%= @program.updated_at %></p>
-
-<p><b>Attribuutit:</b><br/>
+  </td></tr>
+  <tr><th>Tila:</th><td><%= @program.statusname %></td></tr>
+  <tr><th>Muutettu:</th><td><%= @program.updated_at %></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><th>Attribuutit:</th><td>
 <% for att in @program.programs_events_attributes %>
 <%= att.attribute.name %>: <%= att.value %><br/>
 <% end %>
-</p>
+</td></tr>
+</table>
+
 <h3>Ohjelman järjestäjät</h3>
 <% @program.programs_organizers.each { |organizer| 
 if organizer.person
