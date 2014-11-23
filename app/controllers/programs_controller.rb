@@ -260,7 +260,7 @@ class ProgramsController < Application
   def edit
     @groups = Programgroup.all.map { |p| [p.name, p.id] }
     @groups = [['Ei uutta ryhmää', 0]] + @groups
-    @attributes = Attribute.all.map { |p| [p.name, p.id] }
+    @attributes = Attribute.all(:conditions => "program=true", :order => "name").map { |p| [p.name, p.id] }
     @attributes = [['Ei uutta attribuuttia', 0]] + @attributes
     @program = Program.find(params[:id])
     @statuses = Statusname.all(:conditions => "program=true", :order => "name")
