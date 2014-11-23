@@ -4,7 +4,9 @@
 <p><b>Englanninkielinen nimi:</b> <%= @englishname %></p>
 <p><b>Englanninkielinen kuvaus:</b> <%= @englishdescription %></p>
 <p><b>Julkinen tarkennus:</b> <%= @program.publicnotes %></p>
-<p><b>Salaiset muistiinpanot:</b> <pre><%= @program.privatenotes %></pre></p>
+<p><b>Salaiset muistiinpanot:</b> <%= if @program.privatenotes
+                                        @program.privatenotes.gsub(/\n/, '<br/>')
+                                    end %></p>
 <p><b>Materiaalin URL:</b> <%= @program.url %></p>
 <p><b>Väkimäärä:</b> <%= @program.attendance %></p>
 <p><b>Ryhmät</b> 
