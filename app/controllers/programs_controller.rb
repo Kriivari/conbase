@@ -191,6 +191,10 @@ class ProgramsController < Application
     end
   end
 
+  def newlarp
+    new
+  end
+
   def create
     if params[:person][:firstname] == nil || params[:person][:firstname].length == 0
       @person = Person.find(params[:organizers][:id])
