@@ -19,7 +19,7 @@ class GmController < Application
     }
 
     begin
-      render(:layout => "layouts/" + @event.name.to_s + "_staff" )
+      render(:layout => "layouts/" + @event.name.to_s + "_gm" )
     rescue Exception
       render
     end
