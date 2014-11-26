@@ -49,7 +49,7 @@ class GmController < Application
 
     num = 7
     if params[:game1][:name].length == 0
-      flash[:notice] = 'Pitää ilmoittaa ainakin yksi peli!'
+      flash[:notice] = 'Lomakkeella pitää ilmoittaa ainakin yksi peli!'
       redirect_to :action => 'new'
       return
     elsif params[:game2][:name].length == 0
