@@ -19,13 +19,13 @@ class ProgramsController < Application
     organizers = Program.find_by_sql(["select distinct programs.* from programs where id in (select program_id from programs_organizers where person_id in (select id from people where lower(firstname) like ? or lower(lastname) like ? or lower(nickname) like ?)) order by name", term, term, term])
     organizers.each { |p|
       unless @programs.include?( p )
-	      @programs << p
+        @programs << p
       end
     }
     items = Programitem.find_by_sql(["select distinct programitems.* from programitems where (lower(name) like ? or lower(description) like ?) and program_id in (select id from programs where event_id=?) order by program_id", term, term, @event_id])
     items.each { |item|
       unless @programs.include?( item.program )
-	      @programs << item.program
+        @programs << item.program
       end
     }
 
@@ -112,22 +112,22 @@ class ProgramsController < Application
     @programs = nil
     if params[:lang] && params[:lang] == "en"
       @programs = Programitem.find_by_sql(["select programitems.*, locations.name as lname from programitems, locations where locations.id=programitems.location_id and ((programitems.start_time>? and programitems.start_time<?) or (programitems.end_time>? and programitems.end_time<?)) and programitems.program_id in (select id from programs where event_id=? and status=-1 and id in (select program_id from programs_programgroups where programgroup_id=10 or programgroup_id=14))", 
-                                                   starttime, endtime, starttime, endtime, @event.id])
+        starttime, endtime, starttime, endtime, @event.id])
       sort( @programs, params[:sort] )
     else
       if params[:group] != nil
-	      @group = params[:group]
+        @group = params[:group]
         @programs = Programitem.find_by_sql(["select distinct programitems.*, locations.name as lname from programitems, locations, programs, programs_organizers, people where locations.id=programitems.location_id and ((programitems.start_time>? and programitems.start_time<?) or (programitems.end_time>? and programitems.end_time<?)) and programitems.program_id=programs.id and programs.event_id=? and programs.status=-1 and programs.id in (select program_id from programs_programgroups where programgroup_id=?) and programs.id=programs_organizers.program_id and programs_organizers.person_id=people.id",
-                                                     starttime, endtime, starttime, endtime, @event.id, params[:group]])
+          starttime, endtime, starttime, endtime, @event.id, params[:group]])
         sort( @programs, params[:sort] )
       else
-	if params[:location] != nil
-	  @programs = Programitem.find_by_sql(["select programitems.*, locations.name as lname from programitems, locations where locations.id=programitems.location_id and ((programitems.start_time>? and programitems.start_time<?) or (programitems.end_time>? and programitems.end_time<?)) and programitems.location_id=? and programitems.program_id in (select id from programs where event_id=? and status=-1) order by " + sort, 
-					 starttime, endtime, starttime, endtime, params[:location], @event.id])
-	else
-	  @programs = Programitem.find_by_sql(["select programitems.*, locations.name as lname from programitems, locations where locations.id=programitems.location_id and ((programitems.start_time>? and programitems.start_time<?) or (programitems.end_time>? and programitems.end_time<?)) and programitems.program_id in (select id from programs where event_id=? and status=-1) order by " + sort, 
-					 starttime, endtime, starttime, endtime, @event.id])
-	end
+        if params[:location] != nil
+          @programs = Programitem.find_by_sql(["select programitems.*, locations.name as lname from programitems, locations where locations.id=programitems.location_id and ((programitems.start_time>? and programitems.start_time<?) or (programitems.end_time>? and programitems.end_time<?)) and programitems.location_id=? and programitems.program_id in (select id from programs where event_id=? and status=-1) order by " + sort, 
+            starttime, endtime, starttime, endtime, params[:location], @event.id])
+        else
+          @programs = Programitem.find_by_sql(["select programitems.*, locations.name as lname from programitems, locations where locations.id=programitems.location_id and ((programitems.start_time>? and programitems.start_time<?) or (programitems.end_time>? and programitems.end_time<?)) and programitems.program_id in (select id from programs where event_id=? and status=-1) order by " + sort, 
+            starttime, endtime, starttime, endtime, @event.id])
+        end
       end
     end
   end
@@ -202,20 +202,20 @@ class ProgramsController < Application
     if @person == nil
       @person = Person.find_by_primary_email(params[:person][:primary_email])
       if @person != nil
-      	@person.primary_phone = params[:person][:primary_phone]
-	      @person.birthyear = params[:person][:birthyear]
-	      @person.save
+        @person.primary_phone = params[:person][:primary_phone]
+        @person.birthyear = params[:person][:birthyear]
+        @person.save
       else
-	      if params[:person][:firstname] != nil && params[:person][:firstname] != ""
-	        @person = Person.create(params[:person])
-	        if params[:person][:primary_email] == nil || params[:person][:primary_email] == ""
-	          @person.primary_email = @person.firstname + @person.lastname + "@" + (rand*10000).to_i.to_s + "example.com"
-	        end
-	        if params[:person][:primary_phone] == nil || params[:person][:primary_phone] == ""
-	          @person.primary_phone = "ei tiedossa"
-	        end
-	        @person.save
-	      end
+        if params[:person][:firstname] != nil && params[:person][:firstname] != ""
+          @person = Person.create(params[:person])
+          if params[:person][:primary_email] == nil || params[:person][:primary_email] == ""
+            @person.primary_email = @person.firstname + @person.lastname + "@" + (rand*10000).to_i.to_s + "example.com"
+          end
+          if params[:person][:primary_phone] == nil || params[:person][:primary_phone] == ""
+            @person.primary_phone = "ei tiedossa"
+          end
+          @person.save
+        end
       end
     end
 
@@ -357,11 +357,11 @@ class ProgramsController < Application
       
       if params[:grp][:value] != '0'
         group = Programgroup.find(params[:grp][:value])
-      	unless @program.programgroups.include?( group )
-	        @program.programgroups << group
-	        group.save
-	        @program.save
-	      end
+        unless @program.programgroups.include?( group )
+          @program.programgroups << group
+          group.save
+          @program.save
+        end
       end
 
       if params[:att][:id] != '0'
@@ -416,4 +416,3 @@ class ProgramsController < Application
     redirect_to :action => 'list'
   end
 end
-
