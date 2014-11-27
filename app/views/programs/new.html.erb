@@ -1,7 +1,8 @@
 <div class="sisalto">
 	<h2><%= flash[:notice] %></h2>
-	<h1><%= @event.name %> <%= @event.year %></h1>
-	<h2>Ohjelmailmoitukset</h2>
+	<h1><%= @event %> ohjelmailmoittautuminen</h1>
+
+<p>Ohjelmatiimi ottaa sinuun yhteyttä lähiaikoina tarkentaakseen tarvittaessa tietoja sekä vahvistaakseen ohjelman ottamisen mukaan Ropeconiin.</p>
 
 <%= form_for( @program, :url => { :action => 'create' } ) do |f| %>
 <%= render "shared/error_messages", :target => @person %>
@@ -43,8 +44,10 @@
 		<td class="element" valign="top" align="left"><%= collection_select( :organizers, :id, @people, :id, :fullname ) %></td>
 	</tr>
 <% end %>
+
+	<tr><td colspan="2">Pääjärjestäjän yhteystiedot</td></tr>
 	<tr>
-		<td align="left" valign="top">Pääjärjestäjän etunimi: <span class="form_required">*</span></td>
+		<td align="left" valign="top">Etunimi: <span class="form_required">*</span></td>
 		<td class="element" valign="top" align="left">	<input id="person_firstname" name="person[firstname]" size="30" style="width: 350px" type="text" /></td>
 	</tr>
 	<tr>
@@ -52,7 +55,7 @@
 		<td class="element" valign="top" align="left">	<input size="30" style="width: 350px" name="person[lastname]" id="person_lastname" type="text" /></td>
 	</tr>
 	<tr>
-		<td align="left" valign="top">Lempinimi:</td>
+		<td align="left" valign="top">Lempinimi (tulee badgeen):</td>
 		<td class="element" valign="top" align="left">	<input size="30" style="width: 350px" name="person[nickname]" id="person_nickname" type="text" /></td>
 	</tr>
 	<tr>
@@ -60,12 +63,12 @@
 		<td class="element" valign="top" align="left">	<input size="30" style="width: 350px" name="person[primary_phone]" id="person_primary_phone" type="text" /></td>
 	</tr>
 	<tr>
-		<td align="left" valign="top">Sähköpostiosoite (henkilön oma, tällä tunnistetaan ihmiset):</td>
+		<td align="left" valign="top">Sähköpostiosoite<br/>(henkilön oma, tällä tunnistetaan ihmiset):</td>
 		<td class="element" valign="top" align="left">	<input size="30" style="width: 350px" name="person[primary_email]" id="person_primary_email" type="text" /></td>
 	</tr>
 	<tr>
 		<td align="left" valign="top"></td>
-		<td valign="top" align="left">	<%= f.submit "Lisää" %></td>
+		<td valign="top" align="left">	<%= f.submit "Ilmoittaudu" %></td>
 	</tr>
 	<tr>
 		<td></td>
