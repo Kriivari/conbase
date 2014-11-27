@@ -1,5 +1,5 @@
 <div class="sisalto">
-        <h2><%= flash[:notice] %></h2>
+	<h2><%= flash[:notice] %></h2>
 	<h1><%= @event.name %> <%= @event.year %></h1>
 	<h2>Ohjelmailmoitukset</h2>
 
@@ -19,10 +19,10 @@
 	<tr>
 		<td align="left" valign="top">Ohjelman tyyppit:</td>
 		<td class="element" valign="top" align="left">
-<% for t in @types %>
-<%= t[0] %> <input type="checkbox" name="groups[<%= t[1] %>]" />
-<% end %>
-                </td>
+			<% for t in @types %>
+				<%= t[0] %> <input type="checkbox" name="groups[<%= t[1] %>]" />
+			<% end %>
+		</td>
 	</tr>
 	<tr>
 		<td align="left" valign="top">Englanninkielinen nimi:</td>
@@ -38,12 +38,12 @@
 	</tr>
 
 <% if @people != nil %>
-        <tr>
+	<tr>
 		<td align="left" valign="top">Pääjärjestäjä: <span class="form_required">*</span></td>
 		<td class="element" valign="top" align="left"><%= collection_select( :organizers, :id, @people, :id, :fullname ) %></td>
 	</tr>
 <% end %>
-        <tr>
+	<tr>
 		<td align="left" valign="top">Pääjärjestäjän etunimi: <span class="form_required">*</span></td>
 		<td class="element" valign="top" align="left">	<input id="person_firstname" name="person[firstname]" size="30" style="width: 350px" type="text" /></td>
 	</tr>
@@ -63,7 +63,7 @@
 		<td align="left" valign="top">Sähköpostiosoite (henkilön oma, tällä tunnistetaan ihmiset):</td>
 		<td class="element" valign="top" align="left">	<input size="30" style="width: 350px" name="person[primary_email]" id="person_primary_email" type="text" /></td>
 	</tr>
-    <tr>
+	<tr>
 		<td align="left" valign="top"></td>
 		<td valign="top" align="left">	<%= f.submit "Lisää" %></td>
 	</tr>

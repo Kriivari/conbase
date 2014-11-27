@@ -100,48 +100,48 @@ class GmController < Application
 
       type = Attribute.first(:conditions => "name='Pelin tyyppi'")
       if params[gamesym][:beginner]
-	att = ProgramsEventsAttribute.new
-	att.program = game
-	att.event = @event
-	att.attribute = type
-	att.value = 'Aloittelijaystävällinen'
-	att.save
-	@event.save
-	type.save
-	game.save
+        att = ProgramsEventsAttribute.new
+        att.program = game
+        att.event = @event
+        att.attribute = type
+        att.value = 'Aloittelijaystävällinen'
+        att.save
+        @event.save
+        type.save
+        game.save
       end
       if params[gamesym][:worldknowledge]
-	att = ProgramsEventsAttribute.new
-	att.program = game
-	att.event = @event
-	att.attribute = type
-	att.value = 'Pelimaailman tuntemus'
-	att.save
-	@event.save
-	type.save
-	game.save
+        att = ProgramsEventsAttribute.new
+        att.program = game
+        att.event = @event
+        att.attribute = type
+        att.value = 'Pelimaailman tuntemus'
+        att.save
+        @event.save
+        type.save
+        game.save
       end
       if params[gamesym][:rulesknowledge]
-	att = ProgramsEventsAttribute.new
-	att.program = game
-	att.event = @event
-	att.attribute = type
-	att.value = 'Pelisääntöjen tuntemus'
-	att.save
-	@event.save
-	type.save
-	game.save
+        att = ProgramsEventsAttribute.new
+        att.program = game
+        att.event = @event
+        att.attribute = type
+        att.value = 'Pelisääntöjen tuntemus'
+        att.save
+        @event.save
+        type.save
+        game.save
       end
       if params[gamesym][:adult]
-	att = ProgramsEventsAttribute.new
-	att.program = game
-	att.event = @event
-	att.attribute = type
-	att.value = 'Ei sovellu lapsille'
-	att.save
-	@event.save
-	type.save
-	game.save
+        att = ProgramsEventsAttribute.new
+        att.program = game
+        att.event = @event
+        att.attribute = type
+        att.value = 'Ei sovellu lapsille'
+        att.save
+        @event.save
+        type.save
+        game.save
       end
 
       organizer = ProgramsOrganizer.new
@@ -186,7 +186,7 @@ class GmController < Application
         if grp.persongroup.event.id == @event.id && grp.persongroup.name == 'GM'
           grp.status = -1
           grp.save
-	end
+        end
       end
     end
     redirect_to :action => 'list'
