@@ -1,0 +1,16 @@
+<html>
+<head>
+  <title><%= @event.name %> ohjelmailmoittautuminen</title>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+  <%= stylesheet_link_tag 'scaffold' %>
+  <%= javascript_include_tag :defaults %>
+  <%= javascript_include_tag '/assets/jquery.js' %>
+  <%= javascript_include_tag '/assets/jquery_ujs.js' %>
+  <%= javascript_tag 'jQuery.noConflict();' %>
+  <!-- calendar_date_select_includes "silver" -->
+  <%= csrf_meta_tag %>
+</head>
+<body>
+<%= yield %>
+</body>
+</html>

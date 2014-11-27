@@ -188,6 +188,7 @@ class ProgramsController < Application
     @types = Programgroup.all.map { |p| [p.name, p.id] }
     if verify
       @people = Person.all(:order => "lastname, firstname")
+      layout "Ropecon_program_registration"
     end
   end
 
