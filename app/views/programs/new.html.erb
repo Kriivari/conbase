@@ -21,7 +21,7 @@
 		<td align="left" valign="top">Ohjelman tyyppit:</td>
 		<td class="element" valign="top" align="left">
 			<% for t in @types %>
-				<%= t[0] %> <input type="checkbox" name="groups[<%= t[1] %>]" />
+				<input type="checkbox" name="groups[<%= t[1] %>]" /><%= t[0] %><br/>
 			<% end %>
 		</td>
 	</tr>
