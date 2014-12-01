@@ -5,7 +5,7 @@
 <% end %>
 
 <%= link_to 'Edit', :action => 'edit', :id => @programgroup %> |
-<%= link_to 'Back', :action => 'list' %>
+<%= link_to 'Back', :action => 'index' %>
 
 <% Event.all(:order => 'name, year DESC').each do |event|
    programs = Program.find_by_sql( ['select * from programs where event_id=? and id in (select program_id from programs_programgroups where programgroup_id=?)', event.id, @programgroup.id] ) %>
