@@ -2,6 +2,13 @@
 	<h2><%= flash[:notice] %></h2>
 	<h1><%= @event %> ohjelmailmoittautuminen</h1>
 
+<p>Tällä lomakkeella voit ilmoittautua halukkaaksi pitämään ohjelmaa Ropeconissa.</p>
+
+<p>Kerro lyhyesti, kuka olet (tai keitä olette), millaista ohjelmaa haluaisit järjestää ja oletko aiemmin
+toiminut ohjelmanjärjestäjänä Ropeconissa tai muissa coneissa. Mitä tarkemmin kuvaat aiheesi, sitä paremmin pystymme alustavasti välttämään ohjelman päällekäisyydet. Lopullista, painokelpoista ohjelmakuvausta ei kuitenkaan vielä tässä vaiheessa tarvita, ja tiimille saa toki heitellä myös vasta kehitteillä olevia tai puolipähkähulluja ideoita.</p>
+
+<p>Tarkista että antamasi yhteystiedot, erityisesti sähköpostiosoite, ovat oikein!</p>
+
 <p>Ohjelmatiimi ottaa sinuun yhteyttä lähiaikoina tarkentaakseen tarvittaessa tietoja sekä vahvistaakseen ohjelman ottamisen mukaan Ropeconiin.</p>
 
 <%= form_for( @program, :url => { :action => 'create' } ) do |f| %>
