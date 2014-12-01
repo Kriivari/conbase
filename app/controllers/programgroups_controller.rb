@@ -22,7 +22,7 @@ class ProgramgroupsController < Application
     @programgroup = Programgroup.new(params[:programgroup])
     if @programgroup.save
       flash[:notice] = 'Programgroup was successfully created.'
-      redirect_to :action => 'list'
+      redirect_to :action => 'index'
     else
       render :action => 'new'
     end
@@ -44,6 +44,6 @@ class ProgramgroupsController < Application
 
   def destroy
     Programgroup.find(params[:id]).destroy
-    redirect_to :action => 'list'
+    redirect_to :action => 'index'
   end
 end

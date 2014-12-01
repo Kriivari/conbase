@@ -1,4 +1,15 @@
-<%= error_messages_for 'programgroup' %>
+<%= form_for( @programgroup ) do |f| %>
+<% if @programgroup.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@programgroup.errors.count, "error") %> prohibited this programgroup from being saved:</h2>
+
+      <ul>
+        <% @programgroup.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+<% end %>
 
 <!--[form:programgroup]-->
 <p><label for="programgroup_name">Nimi</label><br/>
@@ -8,6 +19,17 @@
 <%= f.text_area :nameen %></p>
 
 <p><label for="programgroup_visible">Näkyvä</label><br/>
-<select id="programgroup_visible" name="programgroup[visible]"><option value="false">Ei</option><option value="true">Kyllä</option></select></p>
+<select id="programgroup_visible" name="programgroup[visible]">
+	<option value="false">Ei</option>
+	<option value="true">Kyllä</option>
+</select></p>
+
+<p><label for="programgroup_primarygroup">Primarygroup</label><br/>
+<select id="programgroup_primarygroup" name="programgroup[primarygroup]">
+	<option value="false">Ei</option>
+	<option value="true">Kyllä</option>
+</select></p>
+
 <!--[eoform:programgroup]-->
 
+<% end %>

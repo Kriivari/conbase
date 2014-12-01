@@ -13,7 +13,7 @@
       <li><%= link_to "Tapahtumat", :controller => 'events', :action => 'index' %></li>
       <li><%= link_to "Paikat", :controller => 'locations', :action => 'index' %></li>
       <li><a href="/persongroups">Kaikki henkilöryhmät</a></li>
-      <li><%= link_to "Kaikki ohjelmaryhmät", :controller => 'programgroups', :action => 'list' %></li>
+      <li><a href="/programgroups">Kaikki ohjelmaryhmät</a></li>
       <li><a href="/notes">Con-TV</a></li>
 <% Event.all(:conditions => ["name=?", @event.name], :order => 'name, year desc').each{ |event|
 unless event.programs.empty?
