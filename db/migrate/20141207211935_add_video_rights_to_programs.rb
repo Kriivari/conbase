@@ -3,5 +3,6 @@ class AddVideoRightsToPrograms < ActiveRecord::Migration
     change_table :programs do |t|
       t.boolean :videorights
       t.boolean :sliderights
+    end
   end
 end
