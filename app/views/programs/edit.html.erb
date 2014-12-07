@@ -13,6 +13,25 @@
 <tr><td>Englanninkielinen kuvaus:</td><td><textarea rows="4" cols="80" id="english_description" name="english[description]" size="30" style="width: 350px" type="text" ><%= @englishdescription %></textarea></td></tr>
 <tr><td>Julkinen tarkennus:</td><td><textarea rows="4" cols="80" id="program_publicnotes" name="program[publicnotes]" size="30" style="width: 350px" type="text" ><%= @program.publicnotes %></textarea></td></tr>
 <tr><td>Salaiset muistiinpanot:</td><td><textarea rows="4" cols="80" id="program_privatenotes" name="program[privatenotes]" size="30" style="width: 350px" type="text" ><%= @program.privatenotes %></textarea></td></tr>
+<tr>
+	<td>Ohjelman saa videoida</td>
+	<td>
+		<select id="program_videorights" name="program[videorights]">
+			<option value="true">Kyllä</option>
+			<option value="false">Ei</option>
+		</select>
+	</td>
+</tr>
+<tr>
+	<td>Kalvot saa jakaa</td>
+	<td>
+		<select id="program_sliderights" name="program[sliderights]">
+			<option value="true">Kyllä</option>
+			<option value="false">Ei</option>
+		</select>
+	</td>
+</tr>
+
 <tr><td>Materiaalin URL:</td><td><input type="text" id="program_url" name="program[url]" value="<%= @program.url %>"/></td></tr>
 <tr><td>Väkimäärä:</td><td><input type="text" id="program_attendance" name="program[attendance]" value="<%= @program.attendance %>" /></td></tr>
 <tr><td>Tyypit:</td>
