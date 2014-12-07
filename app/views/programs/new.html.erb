@@ -45,6 +45,29 @@ toiminut ohjelmanjärjestäjänä Ropeconissa tai muissa coneissa. Mitä tarkemm
 		<td class="element" valign="top" align="left">	<textarea rows="4" cols="80" id="program_privatenotes" name="program[privatenotes]" size="30" style="width: 350px" type="text" ></textarea></td>
 	</tr>
 
+	<tr>
+		<td colspan="2">Osa Ropeconin ohjelmasta videoidaan ja jaetaan tapahtuman jälkeen Ropeconin YouTube-kanavalla sekä luentotyyppisten ohjelmien järjestäjiltä pyydetään mahdollisia luentodioja jaettavaksi Ropeconin sivujen kautta.
+		</td>
+	</tr>
+	<tr>
+		<td>Ohjelmani saa videoida</td>
+		<td>
+			<select id="program_videorights" name="program[videorights]">
+				<option value="false">Ei</option>
+				<option value="true">Kyllä</option>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td>Käyttämäni kalvot saa jakaa</td>
+		<td>
+			<select id="program_sliderights" name="program[sliderights]">
+				<option value="false">Ei</option>
+				<option value="true">Kyllä</option>
+			</select>
+		</td>
+	</tr>
+
 <% if @people != nil %>
 	<tr>
 		<td align="left" valign="top">Pääjärjestäjä: <span class="form_required">*</span></td>
