@@ -233,14 +233,11 @@ class ProgramsController < Application
 
     english = ProgramLanguage.new
     english.language = "en"
-    if params[:english][:name] != nil
+    if params[:english] != nil
       english.name = params[:english][:name]
-    else
-      english.name = ''
-    end
-    if params[:english][:description] != nil
       english.description = params[:english][:description]
     else
+      english.name = ''
       english.description = ''
     end
     @program.program_languages << english
