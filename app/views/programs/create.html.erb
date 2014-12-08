@@ -1,5 +1,4 @@
 <div class="sisalto">
-	<h2><%= flash[:notice] %></h2>
 	<h2>Ohjelmailmoittautuminen</h2>
 	<% if @program.errors.empty? %>
 		<p>Kiitos ilmoittautumisestasi. Alla olevat tiedot on nyt talletettu. Ohjelmatiimi ottaa sinuun yhteyttä lähitulevaisuudessa. Tarvittaessa voit lähettää myös meille sähköpostia osoitteeseen: ohjelma@ropecon.fi</p>
@@ -9,9 +8,9 @@
 
 		<p>Etunimi: <%= @person.firstname %></p>
 		<p>Sukunimi: <%= @person.lastname %></p>
-		<p>Lempinimi (vapaaehtoinen, tulee rintanappiin): <%= @person.nickname %></p>
-		<p>Puhelin, josta tavoittaa conin aikana: <%= @person.primary_phone %></p>
-		<p>Sähköpostiosoite, joka toimii käyttäjätunnuksenasi: <%= @person.primary_email %></p>
+		<p>Lempinimi: <%= @person.nickname %></p>
+		<p>Puhelin: <%= @person.primary_phone %></p>
+		<p>Sähköpostiosoite: <%= @person.primary_email %></p>
 <% else %>
       <%= render "shared/error_messages", :target => @program %>
       <p>Ilmoittautumistasi ei ole talletettu! Palaa takaisin ja korjaa virheelliset tiedot.</p>
