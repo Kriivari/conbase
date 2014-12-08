@@ -230,12 +230,21 @@ class ProgramsController < Application
     @program = Program.new(params[:program])
     @program.event = @event
     @program.statusname = wishstatus
+
     english = ProgramLanguage.new
     english.language = "en"
-    english.name = params[:english][:name]
-    english.description = params[:english][:description]
+    if params[:english][:name] != nil
+      english.name = params[:english][:name]
+    else
+      english.name = ''
+    end
+    if params[:english][:description] != nil
+      english.description = params[:english][:description]
+    else
+      english.description = ''
+    end
     @program.program_languages << english
-    
+
     if @person != nil
       organizer = ProgramsOrganizer.new
       organizer.person = @person
