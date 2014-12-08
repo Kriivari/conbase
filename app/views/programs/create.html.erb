@@ -11,8 +11,10 @@
 		<p>Lempinimi: <%= @person.nickname %></p>
 		<p>Puhelin: <%= @person.primary_phone %></p>
 		<p>Sähköpostiosoite: <%= @person.primary_email %></p>
+		<hr/>
+		<p><%= link_to "Ilmoita toinen ohjelmanumero", :controller => 'programs', :action => 'new' %>
 <% else %>
-      <%= render "shared/error_messages", :target => @program %>
-      <p>Ilmoittautumistasi ei ole talletettu! Palaa takaisin ja korjaa virheelliset tiedot.</p>
+	<%= render "shared/error_messages", :target => @program %>
+	<p>Ilmoittautumistasi ei ole talletettu! Palaa takaisin ja korjaa virheelliset tiedot.</p>
 <% end %>
 </div>
