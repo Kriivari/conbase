@@ -1,20 +1,20 @@
-<%= error_message_on(:person,:firstname) %>
-<%= error_message_on(:person,:lastname) %>
-<%= error_message_on(:person,:primary_email) %>
-<%= error_message_on(:person,:primary_phone) %>
-<%= error_message_on(:person,:birthyear) %>
-<%= error_message_on(:person,:password) %>
-<p>Ilmoittautumisesi on lisätty kantaan.</p>
-<p>Ohjelma: <%= @program.name %></p>
-<p>Kuvaus: <%= @program.description %></p>
+<div class="sisalto">
+	<h2>Ohjelmailmoittautuminen</h2>
+	<% if @program.errors.empty? %>
+		<p>Kiitos ilmoittautumisestasi. Alla olevat tiedot on nyt talletettu. Ohjelmatiimi ottaa sinuun yhteyttä lähitulevaisuudessa. Tarvittaessa voit lähettää myös meille sähköpostia osoitteeseen: ohjelma@ropecon.fi</p>
 
-<p>Etunimi: <%= @person.firstname %></p>
-<p>Sukunimi: <%= @person.lastname %></p>
-<p>Lempinimi (vapaaehtoinen, tulee rintanappiin): <%= @person.nickname %></p>
-<p>Puhelin, josta tavoittaa conin aikana: <%= @person.primary_phone %></p>
-<p>Sähköpostiosoite, joka toimii käyttäjätunnuksenasi: <%= @person.primary_email %></p>
-<p>Salasana, jolla pääset muuttamaan tietoja: <%= @person.password %></p>
-<p>Syntymävuosi: <%= @person.birthyear %></p>
-<p>Työpisteet, joissa olet ollut aiemmin: <%= @oldgroups %></p>
-<p>Haluamasi työpisteet: <%= @newgroups %></p>
-<p><%= @extra %></p>
+		<p>Ohjelman nimi: <%= @program.name%></p>
+		<p>Ohjelman kuvaus: <%= @program.description%></p>
+
+		<p>Etunimi: <%= @person.firstname %></p>
+		<p>Sukunimi: <%= @person.lastname %></p>
+		<p>Lempinimi: <%= @person.nickname %></p>
+		<p>Puhelin: <%= @person.primary_phone %></p>
+		<p>Sähköpostiosoite: <%= @person.primary_email %></p>
+		<hr/>
+		<p><%= link_to "Ilmoita toinen ohjelmanumero", :controller => 'programs', :action => 'new' %>
+<% else %>
+	<%= render "shared/error_messages", :target => @program %>
+	<p>Ilmoittautumistasi ei ole talletettu! Palaa takaisin ja korjaa virheelliset tiedot.</p>
+<% end %>
+</div>

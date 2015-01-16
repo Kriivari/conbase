@@ -15,21 +15,11 @@
 <tr><td>Salaiset muistiinpanot:</td><td><textarea rows="4" cols="80" id="program_privatenotes" name="program[privatenotes]" size="30" style="width: 350px" type="text" ><%= @program.privatenotes %></textarea></td></tr>
 <tr>
 	<td>Ohjelman saa videoida</td>
-	<td>
-		<select id="program_videorights" name="program[videorights]">
-			<option value="true">Kyllä</option>
-			<option value="false">Ei</option>
-		</select>
-	</td>
+	<td><%= f.check_box :videorights %></td>
 </tr>
 <tr>
 	<td>Kalvot saa jakaa</td>
-	<td>
-		<select id="program_sliderights" name="program[sliderights]">
-			<option value="true">Kyllä</option>
-			<option value="false">Ei</option>
-		</select>
-	</td>
+	<td><%= f.check_box :sliderights %>
 </tr>
 
 <tr><td>Materiaalin URL:</td><td><input type="text" id="program_url" name="program[url]" value="<%= @program.url %>"/></td></tr>

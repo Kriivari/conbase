@@ -230,12 +230,18 @@ class ProgramsController < Application
     @program = Program.new(params[:program])
     @program.event = @event
     @program.statusname = wishstatus
+
     english = ProgramLanguage.new
     english.language = "en"
-    english.name = params[:english][:name]
-    english.description = params[:english][:description]
+    if params[:english] != nil
+      english.name = params[:english][:name]
+      english.description = params[:english][:description]
+    else
+      english.name = ''
+      english.description = ''
+    end
     @program.program_languages << english
-    
+
     if @person != nil
       organizer = ProgramsOrganizer.new
       organizer.person = @person
@@ -259,13 +265,17 @@ class ProgramsController < Application
     expire_fragment('programs_xml')
     if @program.save && english.save
       flash[:notice] = 'Program was successfully created.'
-      if params[:organizers][:id]
+      if params[:organizers] != nil
         redirect_to :action => 'list'
       end
     else
       @type = nil
       @types = Programgroup.all.map { |p| [p.name, p.id] }
       render :action => 'new'
+    end
+
+    if !verify
+      render(:layout => "Ropecon_program_registration")
     end
   end
 
