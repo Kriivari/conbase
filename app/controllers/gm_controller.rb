@@ -110,6 +110,12 @@ class GmController < Application
         type.save
         game.save
       end
+      if params[gamesym][:english]
+        grp = Programgroup.find_by_name( "Englanninkielinen" )
+        grp << game
+        grp.save
+        game.save
+      end
       if params[gamesym][:worldknowledge]
         att = ProgramsEventsAttribute.new
         att.program = game
