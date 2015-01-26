@@ -7,6 +7,24 @@
 <p>Puhelin, josta tavoittaa conin aikana: <%= @person.primary_phone %></p>
 <p>Sähköpostiosoite: <%= @person.primary_email %></p>
 
+    <br/>
+    <p>Pelien tiedot:</p>
+    <% for game in @games %>
+        <p>Pelin nimi / Game title: <%= game.name %></p>
+        <p>Pelin kuvaus ja lisätiedot pelaajille / Game description and additional information to players: <%= game.description %></p>
+        <p>Pelaajien lukumäärä / Number of players: <%= game.attendance %></p>
+        <% grp = Programgroup.find_by_name( "Aloittelijaystävällinen" ) %>
+        <p>Peli sopii aloittelijoille / The game is suitable for beginners: <%= yesno( game, grp %></p>
+        <% grp = Programgroup.find_by_name( "Pelimaailman tuntemus suotavaa" ) %>
+        <p>Etukäteistiedot pelimaailmasta suositeltavia / Familiarity with the setting recommended: <%= yesno( game, grp ) %></p>
+        <% grp = Programgroup.find_by_name( "Pelisääntöjen tuntemus suotavaa" ) %>
+        <p>Pelisääntöjen tuntemus suositeltavaa / Knowledge of the rules recommended: <%= yesno( game, grp ) %></p>
+        <% grp = Programgroup.find_by_name( "Ei sovellu lapsille" ) %>
+        <p>Peli ei sovellu lapsille! Pelaajien on oltava täysi-ikäisiä! / Unsuitable for minors! All players must be over 18!: <%= yesno( game, grp ) %></p>
+        <% grp = Programgroup.find_by_name( "Englanninkielinen" ) %>
+        <p>Peli pelataan englanniksi / Will be played in English: <%= yesno( game, grp ) %></p>
+        <p>Muuta tietoa / Other information: <%= game.description %></p>
+    <% end %>
 <% else %>
 <%= render "shared/error_messages", :target => @person %>
     <p>Ilmoittautumistasi ei ole talletettu! Palaa takaisin ja korjaa virheelliset tiedot.</p>

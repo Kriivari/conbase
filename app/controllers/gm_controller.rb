@@ -155,7 +155,7 @@ class GmController < Application
       realbody = realbody + "Peli ei sovellu lapsille! Pelaajien on oltava täysi-ikäisiä! / Unsuitable for minors! All players must be over 18!: " + yesno( game, grp ) + "\n"
       grp = Programgroup.find_by_name( "Englanninkielinen" )
       realbody = realbody + "Peli pelataan englanniksi / Will be played in English: " + yesno( game, grp ) + "\n"
-      realbody = realbody + "Muuta tietoa / Other information: " + "\n"
+      realbody = realbody + "Muuta tietoa / Other information: " + game.description + "\n"
     end
     StaffMailer.confirm(realbody, "gm-info@ropecon.fi", @person.primary_email, nil, @event.name + " - GM-ilmoittautuminen / GM sign-up").deliver
   end
@@ -196,10 +196,4 @@ class GmController < Application
     redirect_to :action => 'list'
   end
 
-  def yesno( game, grp )
-    if game.programgroups.include?( grp )
-      return "Kyllä / Yes"
-    end
-    return "Ei / No"
-  end
 end

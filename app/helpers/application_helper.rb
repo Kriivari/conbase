@@ -54,4 +54,12 @@ module ApplicationHelper
     end
     return original + last.to_s 
   end
+
+  def yesno( game, grp )
+    if game.programgroups.include?( grp )
+      return "Kyllä / Yes"
+    end
+    return "Ei / No"
+  end
+
 end
