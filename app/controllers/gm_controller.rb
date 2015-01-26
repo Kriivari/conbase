@@ -166,7 +166,6 @@ class GmController < Application
       realbody = realbody + game.name + "\n"
       realbody = realbody + game.description + "\n"
       realbody = realbody + game.attendance + "\n"
-      realbody = realbody + game.publicnotes + "\n"
     end
     StaffMailer.confirm(realbody, "gm-info@ropecon.fi", @person.primary_email, nil, @event.name + " - ilmoittautuminen").deliver
   end
