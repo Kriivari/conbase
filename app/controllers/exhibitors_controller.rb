@@ -38,7 +38,7 @@ class ExhibitorsController < Application
 
   def new
     @exhibitor = Exhibitor.new
-    @sizes = Product.find_by_name( "Myyntipöytä" ).product_types
+    @sizes = Product.where( :name => "Myyntipöytä", :active => false ).product_types
   end
 
   def create
