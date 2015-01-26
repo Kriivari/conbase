@@ -117,36 +117,21 @@ class GmController < Application
         game.save
       end
       if params[gamesym][:worldknowledge]
-        att = ProgramsEventsAttribute.new
-        att.program = game
-        att.event = @event
-        att.attribute = type
-        att.value = 'Pelimaailman tuntemus'
-        att.save
-        @event.save
-        type.save
+        grp = Programgroup.find_by_name( "Pelimaailman tuntemus suotavaa" )
+        grp.programs << game
+        grp.save
         game.save
       end
       if params[gamesym][:rulesknowledge]
-        att = ProgramsEventsAttribute.new
-        att.program = game
-        att.event = @event
-        att.attribute = type
-        att.value = 'Pelisääntöjen tuntemus'
-        att.save
-        @event.save
-        type.save
+        grp = Programgroup.find_by_name( "Pelisääntöjen tuntemus suotavaa" )
+        grp.programs << game
+        grp.save
         game.save
       end
       if params[gamesym][:adult]
-        att = ProgramsEventsAttribute.new
-        att.program = game
-        att.event = @event
-        att.attribute = type
-        att.value = 'Ei sovellu lapsille'
-        att.save
-        @event.save
-        type.save
+        grp = Programgroup.find_by_name( "Ei sovellu lapsille" )
+        grp.programs << game
+        grp.save
         game.save
       end
 
