@@ -153,7 +153,7 @@ class GmController < Application
       realbody = realbody + "Pelisääntöjen tuntemus suositeltavaa / Knowledge of the rules recommended: " + yesno( game, grp ) + "\n"
       grp = Programgroup.find_by_name( "Ei sovellu lapsille" )
       realbody = realbody + "Peli ei sovellu lapsille! Pelaajien on oltava täysi-ikäisiä! / Unsuitable for minors! All players must be over 18!: " + yesno( game, grp ) + "\n"
-      grp = Programgroup.find_by_name( "Englanninkielinene" )
+      grp = Programgroup.find_by_name( "Englanninkielinen" )
       realbody = realbody + "Peli pelataan englanniksi / Will be played in English: " + yesno( game, grp ) + "\n"
       realbody = realbody + "Muuta tietoa / Other information: " + "\n"
     end
