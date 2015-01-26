@@ -62,4 +62,14 @@ module ApplicationHelper
     return "Ei / No"
   end
 
+  def attributes( program )
+    ret = ""
+    program.programs_events_attributes.each{|att|
+      if ret.length > 0
+        ret = ret + ","
+      end
+      ret = ret + att.value
+    }
+    return ret
+  end
 end
