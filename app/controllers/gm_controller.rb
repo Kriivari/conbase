@@ -66,7 +66,8 @@ class GmController < Application
       num = 6
     end
     @games = []
-    for i in 1..num 
+    g = Attribute.first(:conditions => "name='Genre'")
+    for i in 1..num
       gamesym = ("game" + i.to_s).to_sym
       game = Program.new
       game.name = params[gamesym][:name]
@@ -84,7 +85,6 @@ class GmController < Application
       group.save
 
       genre = params[gamesym][:value]
-      g = Attribute.first(:conditions => "name='Genre'")
       att = ProgramsEventsAttribute.first(:conditions => ["program_id=? and event_id=? and attribute_id=?", game.id, @event.id, g.id])
       if att == nil
         att = ProgramsEventsAttribute.new
@@ -143,6 +143,7 @@ class GmController < Application
     realbody = realbody + "\n\nIlmoittamasi pelit / Signed up games:\n"
     for game in @games
       realbody = realbody + "\nPelin nimi / Game title: " + game.name + "\n"
+      realbody = realbody + "Genre: " + game.programs_events_attributes[0].value + "\n"
       realbody = realbody + "Pelin kuvaus ja lisätiedot pelaajille / Game description and additional information to players: " + game.description + "\n"
       realbody = realbody + "Pelaajien lukumäärä / Number of players: " + game.attendance + "\n"
       grp = Programgroup.find_by_name( "Aloittelijaystävällinen" )

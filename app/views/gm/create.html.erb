@@ -11,6 +11,7 @@
     <p>Pelien tiedot:</p>
     <% for game in @games %>
         <p>Pelin nimi / Game title: <%= game.name %></p>
+        <p>Genre: <%= game.programs_events_attributes[0].value %></p>
         <p>Pelin kuvaus ja lisätiedot pelaajille / Game description and additional information to players: <%= game.description %></p>
         <p>Pelaajien lukumäärä / Number of players: <%= game.attendance %></p>
         <% grp = Programgroup.find_by_name( "Aloittelijaystävällinen" ) %>
