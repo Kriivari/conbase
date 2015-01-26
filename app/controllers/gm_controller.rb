@@ -112,7 +112,7 @@ class GmController < Application
       end
       if params[gamesym][:english]
         grp = Programgroup.find_by_name( "Englanninkielinen" )
-        grp << game
+        grp.programs << game
         grp.save
         game.save
       end
