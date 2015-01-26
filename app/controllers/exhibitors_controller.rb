@@ -38,7 +38,8 @@ class ExhibitorsController < Application
 
   def new
     @exhibitor = Exhibitor.new
-    @sizes = Product.find_by_name( "Myyntipöytä" ).product_types.active( true )
+    @sizes = Product.where( :active => true ).includes( :products ).where( :name => "Myyntipöytä" )
+#    @sizes = Product.find_by_name( "Myyntipöytä" ).product_types.active( true )
   end
 
   def create
