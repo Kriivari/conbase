@@ -140,13 +140,24 @@ class GmController < Application
     realbody = @event.registration
     realbody = realbody + "\n\n"
     realbody = realbody + @person.details( @event )
+    realbody = realbody + "\n\nIlmoittamasi pelit / Signed up games:\n"
     for game in @games
-      realbody = realbody + "\n"
-      realbody = realbody + game.name + "\n"
-      realbody = realbody + game.description + "\n"
-      realbody = realbody + game.attendance + "\n"
+      realbody = realbody + "\nPelin nimi / Game title: " + game.name + "\n"
+      realbody = realbody + "Pelin kuvaus ja lisätiedot pelaajille / Game description and additional information to players: " + game.description + "\n"
+      realbody = realbody + "Pelaajien lukumäärä / Number of players: " + game.attendance + "\n"
+      grp = Programgroup.find_by_name( "Aloittelijaystävällinen" )
+      realbody = realbody + "Peli sopii aloittelijoille / The game is suitable for beginners: " + yesno( game, grp ) + "\n"
+      grp = Programgroup.find_by_name( "Pelimaailman tuntemus suotavaa" )
+      realbody = realbody + "Etukäteistiedot pelimaailmasta suositeltavia / Familiarity with the setting recommended: " + yesno( game, grp ) + "\n"
+      grp = Programgroup.find_by_name( "Pelisääntöjen tuntemus suotavaa" )
+      realbody = realbody + "Pelisääntöjen tuntemus suositeltavaa / Knowledge of the rules recommended: " + yesno( game, grp ) + "\n"
+      grp = Programgroup.find_by_name( "Ei sovellu lapsille" )
+      realbody = realbody + "Peli ei sovellu lapsille! Pelaajien on oltava täysi-ikäisiä! / Unsuitable for minors! All players must be over 18!: " + yesno( game, grp ) + "\n"
+      grp = Programgroup.find_by_name( "Englanninkielinene" )
+      realbody = realbody + "Peli pelataan englanniksi / Will be played in English: " + yesno( game, grp ) + "\n"
+      realbody = realbody + "Muuta tietoa / Other information: " + "\n"
     end
-    StaffMailer.confirm(realbody, "gm-info@ropecon.fi", @person.primary_email, nil, @event.name + " - ilmoittautuminen").deliver
+    StaffMailer.confirm(realbody, "gm-info@ropecon.fi", @person.primary_email, nil, @event.name + " - GM-ilmoittautuminen / GM sign-up").deliver
   end
 
   def list
@@ -185,4 +196,10 @@ class GmController < Application
     redirect_to :action => 'list'
   end
 
+  def yesno( game, grp )
+    if game.programgroups.include?( grp )
+      return "Kyllä / Yes"
+    end
+    return "Ei / No"
+  end
 end
