@@ -98,16 +98,10 @@ class GmController < Application
       g.save
       game.save
 
-      type = Attribute.first(:conditions => "name='Pelin tyyppi'")
       if params[gamesym][:beginner]
-        att = ProgramsEventsAttribute.new
-        att.program = game
-        att.event = @event
-        att.attribute = type
-        att.value = 'Aloittelijaystävällinen'
-        att.save
-        @event.save
-        type.save
+        grp = Programgroup.find_by_name( "Aloittelijaystävällinen" )
+        grp.programs << game
+        grp.save
         game.save
       end
       if params[gamesym][:english]
