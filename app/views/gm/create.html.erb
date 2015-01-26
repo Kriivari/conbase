@@ -14,7 +14,7 @@
         <p>Pelin kuvaus ja lisätiedot pelaajille / Game description and additional information to players: <%= game.description %></p>
         <p>Pelaajien lukumäärä / Number of players: <%= game.attendance %></p>
         <% grp = Programgroup.find_by_name( "Aloittelijaystävällinen" ) %>
-        <p>Peli sopii aloittelijoille / The game is suitable for beginners: <%= yesno( game, grp %></p>
+        <p>Peli sopii aloittelijoille / The game is suitable for beginners: <%= yesno( game, grp ) %></p>
         <% grp = Programgroup.find_by_name( "Pelimaailman tuntemus suotavaa" ) %>
         <p>Etukäteistiedot pelimaailmasta suositeltavia / Familiarity with the setting recommended: <%= yesno( game, grp ) %></p>
         <% grp = Programgroup.find_by_name( "Pelisääntöjen tuntemus suotavaa" ) %>
