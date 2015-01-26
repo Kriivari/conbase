@@ -4,9 +4,8 @@
         var txtArea = /textarea/i.test((e.target || e.srcElement).tagName);
         return txtArea || (e.keyCode || e.which || e.charCode || 0) !== 13;
     }
-    document.querySelector('form').onkeypress = checkEnter;
 </script>
-<div class="sisalto">
+<div class="sisalto" onkeypress="checkEnter()">
         <h2><%= flash[:notice] %></h2>
 	<h2><%= @event %> GM-ilmoittautuminen / GM Sign-up</h2>
 
