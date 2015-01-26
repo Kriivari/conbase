@@ -5,7 +5,7 @@
         return txtArea || (e.keyCode || e.which || e.charCode || 0) !== 13;
     }
 </script>
-<div class="sisalto" onkeypress="checkEnter()">
+<div class="sisalto" onkeypress="return checkEnter(event)">
         <h2><%= flash[:notice] %></h2>
 	<h2><%= @event %> GM-ilmoittautuminen / GM Sign-up</h2>
 
