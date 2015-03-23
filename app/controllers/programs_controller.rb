@@ -387,6 +387,18 @@ class ProgramsController < Application
         @program.save
       end
 
+      if params[:program][:status] == -1
+        for organizer in @program.programs_organizers
+          for persongroup in organizer.person.people_persongroups
+            if persongroup.persongroup.name == "Ohjelma" && persongroup.persongroup.event.id == @event.id
+              persongroup.status = -1
+              persongroup.save
+              organizer.person.save
+            end
+          end
+        end
+      end
+
       if @program.update_attributes(params[:program])
         flash[:notice] = 'Program was successfully updated.'
         redirect_to :action => 'show', :id => @program
