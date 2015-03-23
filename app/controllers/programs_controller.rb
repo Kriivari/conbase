@@ -388,7 +388,7 @@ class ProgramsController < Application
       end
 
       logger.fatal( "Checking for verify" )
-      if params[:program][:status] == -1
+      if params[:program][:status] == "-1"
         logger.fatal( "Entering verify" )
         for organizer in @program.programs_organizers
           for persongroup in organizer.person.people_persongroups
