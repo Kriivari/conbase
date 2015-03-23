@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="2365607067">
+    <data-source source="LOCAL" name="Rails conbase: development" uuid="e19adc6f-a7ee-47ea-a45c-c3805bb8e4bd">
+      <driver-ref>postgresql</driver-ref>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://kivimaa.fi/ropecontest</jdbc-url>
+      <libraries>
+        <library>
+          <url>file://$USER_HOME$/Library/Preferences/RubyMine40/jdbc-drivers/postgresql-driver-license.txt</url>
+        </library>
+        <library>
+          <url>file://$USER_HOME$/Library/Preferences/RubyMine40/jdbc-drivers/postgresql-9.1-901.jdbc3.jar</url>
+        </library>
+      </libraries>
+    </data-source>
+    <data-source source="LOCAL" name="Rails conbase: test" uuid="e3d7df8f-975e-47ac-b24e-dfd2e322848c">
+      <driver-ref>mysql</driver-ref>
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://127.0.0.1/conbase_test</jdbc-url>
+      <libraries>
+        <library>
+          <url>file://$USER_HOME$/Library/Preferences/RubyMine40/jdbc-drivers/mysql-connector-license.txt</url>
+        </library>
+        <library>
+          <url>file://$USER_HOME$/Library/Preferences/RubyMine40/jdbc-drivers/mysql-connector-java-5.1.18-bin.jar</url>
+        </library>
+      </libraries>
+    </data-source>
+    <data-source source="LOCAL" name="Rails conbase: production" uuid="d72d58d5-ed47-4c77-a062-e11a1f63764d">
+      <driver-ref>postgresql</driver-ref>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://127.0.0.1/ropecon</jdbc-url>
+      <libraries>
+        <library>
+          <url>file://$USER_HOME$/Library/Preferences/RubyMine40/jdbc-drivers/postgresql-driver-license.txt</url>
+        </library>
+        <library>
+          <url>file://$USER_HOME$/Library/Preferences/RubyMine40/jdbc-drivers/postgresql-9.1-901.jdbc3.jar</url>
+        </library>
+      </libraries>
+    </data-source>
+  </component>
+</project>
