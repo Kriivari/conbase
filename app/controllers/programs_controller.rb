@@ -387,10 +387,14 @@ class ProgramsController < Application
         @program.save
       end
 
+      logger.fatal( "Checking for verify" )
       if params[:program][:status] == -1
+        logger.fatal( "Entering verify" )
         for organizer in @program.programs_organizers
           for persongroup in organizer.person.people_persongroups
+            logger.fatal( "Have a group" )
             if persongroup.persongroup.name == "Ohjelma" && persongroup.persongroup.event.id == @event.id
+              logger.fatal( "Change status" )
               persongroup.status = -1
               persongroup.save
               organizer.person.save
