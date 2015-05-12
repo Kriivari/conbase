@@ -98,6 +98,6 @@ class Exhibitor < ActiveRecord::Base
   end
 
   def self.special_type( product_type )
-    return [2,3].member?(product_type.product_id)
+    return product_type.product_id == 3 || (product_type.product_id == 2 && product_type.id == 3)
   end
 end
