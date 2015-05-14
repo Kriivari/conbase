@@ -44,7 +44,7 @@ class Application < ActionController::Base
   end
 
   def canedit
-    for group in @user.persongroups
+    for group in @user.people_persongroups
       if group.persongroup.event.id == @event.id && group.persongroup.admin
         return true
       end
