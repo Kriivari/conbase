@@ -25,6 +25,9 @@ class LocationsController < Application
   end
 
   def create
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     @location = Location.new(params[:location])
     @location.event = @event
 
@@ -41,6 +44,9 @@ class LocationsController < Application
   end
 
   def update
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     @location = Location.find(params[:id])
     if @location.update_attributes(params[:location])
       flash[:notice] = 'Location was successfully updated.'
@@ -51,6 +57,9 @@ class LocationsController < Application
   end
 
   def destroy
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     Location.find(params[:id]).destroy
     redirect_to :action => 'list'
   end

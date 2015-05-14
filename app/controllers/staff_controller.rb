@@ -217,6 +217,9 @@ class StaffController < Application
   end
 
   def confirmed(body)
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     expire_fragment('staff_tickets')
     expire_fragment('staff_foods')
     namelist = ""
@@ -296,6 +299,9 @@ class StaffController < Application
   end
 
   def destroy
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     expire_fragment('staff_tickets')
     expire_fragment('staff_foods')
     Person.find(params[:id]).destroy
@@ -303,6 +309,9 @@ class StaffController < Application
   end
 
   def remove_signup
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     expire_fragment('staff_tickets')
     expire_fragment('staff_foods')
     person = Person.find(params[:id])
@@ -318,6 +327,9 @@ class StaffController < Application
   end
 
   def return
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     expire_fragment('staff_tickets')
     expire_fragment('staff_foods')
     group = PeoplePersongroup.find(params[:groupid])

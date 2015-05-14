@@ -40,6 +40,15 @@ class Application < ActionController::Base
   end
 
   def verify
-    return Person.first(:conditions => ["id=? and password is not null and id in (select person_id from people_persongroups where persongroup_id in (select id from persongroups where admin=true and event_id=?) and status = -1)", session[:user_id], @event.id])
+    return Person.first(:conditions => ["id=? and password is not null and id in (select person_id from people_persongroups where persongroup_id in (select id from persongroups where (admin=true or wikiuser=true) and event_id=?) and status = -1)", session[:user_id], @event.id])
+  end
+
+  def canedit
+    for group in @user.persongroups
+      if group.persongroup.event.id == @event.id && group.persongroup.admin
+        return true
+      end
+    end
+    return false
   end
 end

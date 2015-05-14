@@ -20,6 +20,9 @@ class PersongroupsController < Application
   end
 
   def create
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     @persongroup = Persongroup.new(params[:persongroup])
     @persongroup.event = @event
     if @persongroup.save
@@ -36,6 +39,9 @@ class PersongroupsController < Application
   end
 
   def update
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     @persongroup = Persongroup.find(params[:id])
     if @persongroup.update_attributes(params[:persongroup])
       flash[:notice] = 'Persongroup was successfully updated.'
@@ -46,11 +52,17 @@ class PersongroupsController < Application
   end
 
   def destroy
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     Persongroup.find(params[:id]).destroy
     redirect_to :action => 'index'
   end
 
   def email
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     @persongroup = Persongroup.find(params[:id])
     subject = params[:email][:subject]
     body = params[:email][:body]

@@ -78,6 +78,9 @@ class ExhibitorsController < Application
   end
 
   def destroy
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     Exhibitor.find(params[:id]).destroy
     redirect_to :action => 'index'
   end
@@ -89,6 +92,9 @@ class ExhibitorsController < Application
   end
 
   def update
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     @exhibitor = Exhibitor.find(params[:id])
 
     if params[:product][:type] != '0'
@@ -105,6 +111,9 @@ class ExhibitorsController < Application
   end
 
   def rmproduct
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     exhibitor = Exhibitor.find( params[:exhibitor_id] )
     product = ProductType.find( params[:product_id] )
     exhibitor.product_types.delete( product )

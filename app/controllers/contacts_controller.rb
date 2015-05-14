@@ -23,6 +23,9 @@ class ContactsController < Application
   end
 
   def create
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     @contact = Contact.new(params[:contact])
     if @contact.save
       flash[:notice] = 'Contact was successfully created.'
@@ -37,6 +40,9 @@ class ContactsController < Application
   end
 
   def update
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     @contact = Contact.find(params[:id])
     if @contact.update_attributes(params[:contact])
       flash[:notice] = 'Contact was successfully updated.'
@@ -47,6 +53,9 @@ class ContactsController < Application
   end
 
   def destroy
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     Contact.find(params[:id]).destroy
     redirect_to :action => 'list'
   end

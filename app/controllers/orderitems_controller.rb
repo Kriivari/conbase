@@ -23,6 +23,9 @@ class OrderitemsController < Application
   end
 
   def create
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     @orderitem = Orderitem.new(params[:orderitem])
     if @orderitem.save
       flash[:notice] = 'Orderitem was successfully created.'
@@ -37,6 +40,9 @@ class OrderitemsController < Application
   end
 
   def update
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     @orderitem = Orderitem.find(params[:id])
     if @orderitem.update_attributes(params[:orderitem])
       flash[:notice] = 'Orderitem was successfully updated.'
@@ -47,6 +53,9 @@ class OrderitemsController < Application
   end
 
   def destroy
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     Orderitem.find(params[:id]).destroy
     redirect_to :action => 'list'
   end

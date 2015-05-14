@@ -55,6 +55,9 @@ class PeopleController < Application
   end
 
   def create
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     expire_fragment('staff_list')
     @person = Person.new(params[:person])
     if @person.save
@@ -73,6 +76,9 @@ class PeopleController < Application
   end
 
   def rmgroup
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     expire_fragment('staff_list')
     expire_fragment('staff_tickets')
     expire_fragment('staff_foods')
@@ -81,6 +87,9 @@ class PeopleController < Application
   end
 
   def rmattribute
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     expire_fragment('staff_list')
     expire_fragment('staff_tickets')
     expire_fragment('staff_foods')
@@ -91,6 +100,9 @@ class PeopleController < Application
   end
 
   def update
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     expire_fragment('staff_list')
     expire_fragment('staff_tickets')
     expire_fragment('staff_foods')
@@ -130,6 +142,9 @@ class PeopleController < Application
   end
 
   def destroy
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     expire_fragment('staff_list')
     admin = Persongroup.find_by_name( "Tuki", :conditions => ["event_id=?", @event.id] )
     unless admin.ingroup( Person.find(session[:user_id]) )
@@ -155,6 +170,9 @@ class PeopleController < Application
   end
 
   def merge
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     expire_fragment('staff_list')
     remain = Person.find(params[:id])
     old = Person.find(params[:duplicate])

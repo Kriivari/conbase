@@ -43,6 +43,9 @@ class ProductsController < Application
   # POST /products
   # POST /products.json
   def create
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     @product = Product.new(params[:product])
 
     respond_to do |format|
@@ -59,6 +62,9 @@ class ProductsController < Application
   # PUT /products/1
   # PUT /products/1.json
   def update
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     @product = Product.find(params[:id])
 
     respond_to do |format|
@@ -75,6 +81,9 @@ class ProductsController < Application
   # DELETE /products/1
   # DELETE /products/1.json
   def destroy
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     @product = Product.find(params[:id])
     @product.destroy
 

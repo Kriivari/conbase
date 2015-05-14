@@ -19,6 +19,9 @@ class ProgramgroupsController < Application
   end
 
   def create
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     @programgroup = Programgroup.new(params[:programgroup])
     if @programgroup.save
       flash[:notice] = 'Programgroup was successfully created.'
@@ -33,6 +36,9 @@ class ProgramgroupsController < Application
   end
 
   def update
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     @programgroup = Programgroup.find(params[:id])
     if @programgroup.update_attributes(params[:programgroup])
       flash[:notice] = 'Programgroup was successfully updated.'
@@ -43,6 +49,9 @@ class ProgramgroupsController < Application
   end
 
   def destroy
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     Programgroup.find(params[:id]).destroy
     redirect_to :action => 'index'
   end
