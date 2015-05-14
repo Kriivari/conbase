@@ -42,6 +42,9 @@ class PurchasesController < Application
   # POST /purchases
   # POST /purchases.json
   def create
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     @purchase = Purchase.new(params[:purchase])
     @person = Person.find(params[:purchase][:person_id])
     @producttype = ProductType.find(params[:product_item_purchase][:product_item_id])
@@ -64,6 +67,9 @@ class PurchasesController < Application
   # PUT /purchases/1
   # PUT /purchases/1.json
   def update
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     @purchase = Purchase.find(params[:id])
     @person = Person.find(params[:purchase][:person_id])
     @producttype = ProductType.find(params[:product_item_purchase][:product_item_id])
@@ -87,6 +93,9 @@ class PurchasesController < Application
   # DELETE /purchases/1
   # DELETE /purchases/1.json
   def destroy
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     @purchase = Purchase.find(params[:id])
     @purchase.destroy
 

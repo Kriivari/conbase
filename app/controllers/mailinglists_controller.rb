@@ -23,6 +23,9 @@ class MailinglistsController < Application
   end
 
   def create
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     @mailinglist = Mailinglist.new(params[:mailinglist])
     if @mailinglist.save
       flash[:notice] = 'Mailinglist was successfully created.'
@@ -37,6 +40,9 @@ class MailinglistsController < Application
   end
 
   def update
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     @mailinglist = Mailinglist.find(params[:id])
     if @mailinglist.update_attributes(params[:mailinglist])
       flash[:notice] = 'Mailinglist was successfully updated.'
@@ -47,6 +53,9 @@ class MailinglistsController < Application
   end
 
   def destroy
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     Mailinglist.find(params[:id]).destroy
     redirect_to :action => 'list'
   end

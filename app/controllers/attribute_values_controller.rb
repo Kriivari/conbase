@@ -24,6 +24,9 @@ class AttributeValuesController < Application
   end
 
   def create
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     @attribute_value = AttributeValue.new
     @attribute_value.value = params[:attribute_value][:value]
     @attribute_value.defaultvalue = params[:attribute_value][:defaultvalue]
@@ -43,6 +46,9 @@ class AttributeValuesController < Application
   end
 
   def update
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     @attribute_value = AttributeValue.find(params[:id])
     @attribute_value.value = params[:attribute_value][:value]
     @attribute_value.defaultvalue = params[:attribute_value][:defaultvalue]
@@ -57,6 +63,9 @@ class AttributeValuesController < Application
   end
 
   def destroy
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     AttributeValue.find(params[:id]).destroy
     redirect_to :action => 'list'
   end

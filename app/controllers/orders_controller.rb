@@ -37,6 +37,9 @@ class OrdersController < Application
   end
 
   def saveitems
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     status = params[:order][:status]
     for checked in params[:checked].keys
       orderitem = Orderitem.find(checked)
@@ -60,6 +63,9 @@ class OrdersController < Application
   end
 
   def create
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     toive = Statusname.first(:conditions => "name='Toive'")
 
     @order = Order.new(params[:order])
@@ -107,6 +113,9 @@ class OrdersController < Application
   end
 
   def update
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     @order = Order.find(params[:id])
     @order.orderitems.clear
     @order.name = params[:name]
@@ -150,11 +159,17 @@ class OrdersController < Application
   end
 
   def destroy
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     Order.find(params[:id]).destroy
     redirect_to :action => 'list'
   end
 
   def rmattribute
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     att = OrdersAttribute.find(params[:id])
     order = att.order
     att.destroy
@@ -162,6 +177,9 @@ class OrdersController < Application
   end
 
   def confirmed(body)
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     status = Statusname.find(params[:admin][:status])
     for checked in params[:checked].keys
       item = Orderitem.find(checked)

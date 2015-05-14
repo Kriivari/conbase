@@ -19,6 +19,9 @@ class PersoneventattributesController < Application
   end
 
   def create
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     @personeventattribute = Personeventattribute.new(params[:personeventattribute])
     if @personeventattribute.save
       flash[:notice] = 'Personeventattribute was successfully created.'
@@ -33,6 +36,9 @@ class PersoneventattributesController < Application
   end
 
   def update
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     @personeventattribute = Personeventattribute.find(params[:id])
     if @personeventattribute.update_attributes(params[:personeventattribute])
       flash[:notice] = 'Personeventattribute was successfully updated.'
@@ -43,6 +49,9 @@ class PersoneventattributesController < Application
   end
 
   def destroy
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     Personeventattribute.find(params[:id]).destroy
     redirect_to :action => 'list'
   end

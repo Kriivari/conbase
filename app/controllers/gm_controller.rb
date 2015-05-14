@@ -193,6 +193,9 @@ class GmController < Application
   end
 
   def destroy
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     Program.find(params[:id]).destroy
     redirect_to :action => 'list'
   end

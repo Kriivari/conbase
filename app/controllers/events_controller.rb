@@ -28,6 +28,9 @@ class EventsController < Application
 
   # POST /events
   def create
+    if ! canedit
+      redirect_to :action => 'list'
+    end
 
     @event = Event.new(params[:event])
     @event.ispublic = false
@@ -124,6 +127,9 @@ class EventsController < Application
 
   # PUT /events/1
   def update
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     @event = Event.find(params[:id])
     if @event.update_attributes(params[:event])
       flash[:notice] = 'Event was successfully updated.'
@@ -135,6 +141,9 @@ class EventsController < Application
 
   # DELETE /events/1
   def destroy
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     Event.find(params[:id]).destroy
     redirect_to :action => 'list'
   end

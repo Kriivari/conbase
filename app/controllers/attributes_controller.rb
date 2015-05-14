@@ -23,6 +23,9 @@ class AttributesController < Application
   end
 
   def create
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     @attribute = Attribute.new(params[:attribute])
     if @attribute.save
       flash[:notice] = 'Attribute was successfully created.'
@@ -37,6 +40,9 @@ class AttributesController < Application
   end
 
   def update
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     @attribute = Attribute.find(params[:id])
     if @attribute.update_attributes(params[:attribute])
       flash[:notice] = 'Attribute was successfully updated.'
@@ -47,6 +53,9 @@ class AttributesController < Application
   end
 
   def destroy
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     Attribute.find(params[:id]).destroy
     redirect_to :action => 'list'
   end

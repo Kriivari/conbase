@@ -324,6 +324,9 @@ class ProgramsController < Application
   end
 
   def update
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     expire_fragment('programs_xml')
 
     @program = Program.find(params[:id])
@@ -409,6 +412,9 @@ class ProgramsController < Application
   end
 
   def rmgroup
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     group = Programgroup.find(params[:groupid])
     program = Program.find(params[:programid])
     program.programgroups.delete(group)
@@ -417,6 +423,9 @@ class ProgramsController < Application
   end
 
   def rmattribute
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     att = ProgramsEventsAttribute.find(params[:attributeid])
     att.destroy
     expire_fragment('programs_xml')
@@ -424,6 +433,9 @@ class ProgramsController < Application
   end
 
   def destroy
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     program = Program.find(params[:id])
     program.program_languages.each { |l| l.destroy }
     program.destroy
@@ -432,6 +444,9 @@ class ProgramsController < Application
   end
 
   def remove_organizer
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     organizer = ProgramsOrganizer.find(params[:id])
     @program = Program.find(params[:program])
     organizer.destroy

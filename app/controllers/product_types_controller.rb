@@ -43,6 +43,9 @@ class ProductTypesController < Application
   # POST /product_types
   # POST /product_types.json
   def create
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     @product_type = ProductType.new(params[:product_type])
     product = Product.find(params[:product_type][:product_id])
     @product_type.product = product
@@ -62,6 +65,9 @@ class ProductTypesController < Application
   # PUT /product_types/1
   # PUT /product_types/1.json
   def update
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     @product_type = ProductType.find(params[:id])
     product = Product.find(params[:product_type][:product_id])
     @product_type.product = product
@@ -81,6 +87,9 @@ class ProductTypesController < Application
   # DELETE /product_types/1
   # DELETE /product_types/1.json
   def destroy
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     @product_type = ProductType.find(params[:id])
     @product_type.destroy
 

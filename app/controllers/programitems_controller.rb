@@ -34,6 +34,9 @@ class ProgramitemsController < Application
   end
 
   def create
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     if params[:loc][:value] == "0"
       flash[:notice] = 'Paikka puuttuu!'
       redirect_to :action => 'new', :id => params[:program][:id]
@@ -74,6 +77,9 @@ class ProgramitemsController < Application
   end
 
   def update
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     @programitem = Programitem.find(params[:id])
     @locations = Location.where(:event_id => @programitem.program.event.id).order("name")
     if Programitem.update(params[:id], params[:programitem])
@@ -91,6 +97,9 @@ class ProgramitemsController < Application
   # DELETE /programitems/1
   # DELETE /programitems/1.json
   def destroy
+    if ! canedit
+      redirect_to :action => 'list'
+    end
     programitem = Programitem.find(params[:id])
     program = programitem.program
     programitem.destroy
