@@ -21,13 +21,13 @@ class PersongroupsController < Application
 
   def create
     if ! canedit
-      redirect_to :action => 'list'
+      redirect_to :action => 'index'
     end
     @persongroup = Persongroup.new(params[:persongroup])
     @persongroup.event = @event
     if @persongroup.save
       flash[:notice] = 'Persongroup was successfully created.'
-      redirect_to :action => 'list'
+      redirect_to :action => 'index'
     else
       render :action => 'new'
     end
