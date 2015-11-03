@@ -1,7 +1,9 @@
 <h1>Kirjaudu sisään</h1>
 <%= form_for(:user) do |f|%>
-<p>Sähköpostiosoite<%= f.text_field :primary_email %></p>
-<p>Salasana: <%= f.password_field :password %></p>
-<p><%= f.submit "Kirjaudu" %></p>
+    <table>
+        <tr><td>Sähköpostiosoite</td><td><%= f.text_field :primary_email %></td></tr>
+        <tr><td>Salasana</td><td><%= f.password_field :password %></td></tr>
+        <tr><td><%= f.submit "Kirjaudu" %></td></tr>
+    </table>
 <% end %>
 
