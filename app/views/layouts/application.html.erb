@@ -2,7 +2,13 @@
 <head>
   <title><%= @event.name %> tietokanta: <%= controller.action_name %></title>
   <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
   <%= stylesheet_link_tag 'scaffold' %>
+  <link rel="stylesheet" href="/assets/skeleton/normalize.css">
+  <link rel="stylesheet" href="/assets/skeleton/skeleton.css">
+  <link rel="stylesheet" href="/assets/menu.css">
+  <link rel="stylesheet" href="/assets/media.css">
   <%= javascript_include_tag :defaults %>
   <%= javascript_include_tag '/assets/jquery.js' %>
   <%= javascript_include_tag '/assets/jquery_ujs.js' %>
@@ -11,22 +17,31 @@
   <%= csrf_meta_tag %>
 </head>
 <body>
-<p class="menu">
-<%= link_to "Etusivu", :controller => 'login', :action => 'index' %>
-<%= link_to "Työvoima", :controller => 'staff', :action => 'index' %>
-<%= link_to "Uusi henkilö", :controller => 'people', :action => 'new' %>
-<%= link_to "Uusi työvoima", :controller => 'staff', :action => 'new' %>
-<%= link_to "Ohjelmanumerot", :controller => 'programs', :action => 'index' %>
-<%= link_to "Uusi ohjelmanumero", :controller => 'programs', :action => 'new' %>
-<%= link_to "Tilaukset", :controller => 'orders', :action => 'index' %>
-<%= link_to "Myyjät", :controller => 'exhibitors', :action => 'index' %>
-<%= link_to "Tuotemyynti", :controller => 'purchases', :action => 'index' %>
-<%= link_to "Henkilöhaku", :controller => 'people', :action => 'search' %>
-<%= link_to "Kirjaudu ulos", :controller => 'login', :action => 'logout' %>
-</p>
-<p style="color: green"><%= flash[:notice] %></p>
+<header>
+<nav>
+      <a href="#" id="menu-icon"></a>
+      <ul>
+        <li><%= link_to "Etusivu", :controller => 'login', :action => 'index' %></li>
+        <li><%= link_to "Työvoima", :controller => 'staff', :action => 'index' %></li>
+        <li><%= link_to "Ohjelmanumerot", :controller => 'programs', :action => 'index' %></li>
+        <li><%= link_to "Tilaukset", :controller => 'orders', :action => 'index' %></li>
+        <li><%= link_to "Myyjät", :controller => 'exhibitors', :action => 'index' %></li>
+        <li><%= link_to "Tuotemyynti", :controller => 'purchases', :action => 'index' %></li>
+        <li><%= link_to "Henkilöhaku", :controller => 'people', :action => 'search' %></li>
+        <li><%= link_to "Kirjaudu ulos", :controller => 'login', :action => 'logout' %></li>
+      </ul>
+</nav>
+</header>
+<section>
+<div class="container">
+  <div class="row">
+    <div class="twelve columns">
+      <p style="color: green"><%= flash[:notice] %></p>
 
 <%= yield %>
-
+    </div>
+  </div>
+</div>
+</section>
 </body>
 </html>

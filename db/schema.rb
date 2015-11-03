@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130730183000) do
+ActiveRecord::Schema.define(:version => 20141207211935) do
 
   create_table "attribute_values", :force => true do |t|
     t.integer "attribute_id",                :null => false
@@ -34,18 +34,20 @@ ActiveRecord::Schema.define(:version => 20130730183000) do
   end
 
   create_table "events", :force => true do |t|
-    t.string   "name",         :limit => 50
+    t.string   "name",          :limit => 50
     t.integer  "year"
     t.datetime "starttime"
     t.datetime "endtime"
     t.boolean  "ispublic"
     t.text     "footer"
     t.text     "registration"
+    t.boolean  "shirtorder"
     t.boolean  "ticketorder"
     t.string   "ticketfooter"
     t.string   "address"
     t.string   "bankaccount"
     t.string   "businesscode"
+    t.text     "tshirt_footer"
   end
 
   create_table "exhibitors", :force => true do |t|
@@ -55,16 +57,17 @@ ActiveRecord::Schema.define(:version => 20130730183000) do
     t.text    "notes"
     t.integer "event_id"
     t.text    "description"
-    t.integer "rebate"
+    t.integer "rebate",             :default => 0
     t.float   "paid"
     t.date    "invoicedate"
     t.date    "duedate"
-    t.string  "billing_address"
+    t.text    "billing_address"
+    t.text    "customer_reference"
   end
 
   create_table "exhibitors_product_types", :id => false, :force => true do |t|
-    t.integer "product_type_id"
     t.integer "exhibitor_id"
+    t.integer "product_type_id"
   end
 
   create_table "locations", :force => true do |t|
@@ -139,8 +142,8 @@ ActiveRecord::Schema.define(:version => 20130730183000) do
     t.text     "notes"
     t.string   "primary_email", :limit => 50
     t.integer  "birthyear"
-    t.string   "picture_url"
-    t.string   "photo_url"
+    t.text     "picture_url"
+    t.text     "photo_url"
     t.text     "cv"
     t.text     "old_id"
     t.string   "shirttext",     :limit => 30
@@ -185,6 +188,10 @@ ActiveRecord::Schema.define(:version => 20130730183000) do
     t.boolean "nonstaff",                     :default => false
     t.text    "description"
   end
+
+  add_index "persongroups", ["days"], :name => "persongroups_days_idx"
+  add_index "persongroups", ["event_id"], :name => "persongroups_event_idx"
+  add_index "persongroups", ["food"], :name => "persongroups_foods_idx"
 
   create_table "pga_diagrams", :id => false, :force => true do |t|
     t.string "diagramname",   :limit => 64, :null => false
@@ -238,14 +245,9 @@ ActiveRecord::Schema.define(:version => 20130730183000) do
     t.text   "scriptsource"
   end
 
-  create_table "product_items_purchases", :id => false, :force => true do |t|
-    t.integer "product_item_id"
-    t.integer "purchase_id"
-  end
-
   create_table "product_types", :force => true do |t|
     t.string   "name"
-    t.boolean  "valid"
+    t.boolean  "active"
     t.float    "price"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
@@ -253,9 +255,19 @@ ActiveRecord::Schema.define(:version => 20130730183000) do
     t.float    "secondprice"
   end
 
+  create_table "product_types_exhibitors", :id => false, :force => true do |t|
+    t.integer "product_type_id"
+    t.integer "exhibitor_id"
+  end
+
+  create_table "product_types_purchases", :id => false, :force => true do |t|
+    t.integer "product_type_id"
+    t.integer "purchase_id"
+  end
+
   create_table "products", :force => true do |t|
     t.string   "name"
-    t.boolean  "valid"
+    t.boolean  "active"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -305,11 +317,13 @@ ActiveRecord::Schema.define(:version => 20130730183000) do
     t.text     "description"
     t.text     "publicnotes"
     t.text     "privatenotes"
-    t.integer  "attendance"
+    t.text     "attendance"
     t.integer  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "url"
+    t.boolean  "videorights"
+    t.boolean  "sliderights"
   end
 
   create_table "programs_events_attributes", :force => true do |t|
@@ -337,6 +351,7 @@ ActiveRecord::Schema.define(:version => 20130730183000) do
     t.datetime "updated_at", :null => false
     t.integer  "event_id"
     t.integer  "person_id"
+    t.text     "details"
   end
 
   create_table "ropecon_applied_position", :id => false, :force => true do |t|
