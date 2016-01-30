@@ -339,13 +339,8 @@ class StaffController < Application
   end
 
   def showbygroup
-    @groups = []
     @group = Persongroup.find(params[:id])
-    @group.people_persongroups.each { |group|
-      if group != nil && group.status != nil && group.status.object_id > -2
-        @groups.push group
-      end
-    }
+    @groups = @group.members
     @groups.sort!{|g1,g2| g1.person.lastname <=> g2.person.lastname}
   end
 

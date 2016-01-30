@@ -5,14 +5,18 @@ class Persongroup < ActiveRecord::Base
   cattr_reader :per_page
   @@per_page = 10
 
-  def size
-    count = 0
-    self.people_persongroups.each { |group|
-      if group != nil && group.status != nil && group.status.object_id > -2
-	count = count + 1
+  def members
+    m = []
+    self.people_persongroups.each{ |group|
+      if ! m.include?( group.person )
+        m << group.person
       end
     }
-    return count
+    return m
+  end
+
+  def size
+    return members.length
   end
 
   def ingroup( person )
