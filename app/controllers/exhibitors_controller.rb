@@ -60,9 +60,7 @@ class ExhibitorsController < Application
     travelpass = ProductType.find_by_name("Myyjäpassi")
 
     tables = params[:tables].to_i
-    if tables > 0
-      tables = tables.to_i
-    else
+    if tables == 0
       tables = 1
     end
     for i in 1..tables
