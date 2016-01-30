@@ -128,6 +128,18 @@ class GmController < Application
         grp.save
         game.save
       end
+      if params[gamesym][:children]
+        grp = Programgroup.find_by_name( "Soveltuu lapsille" )
+        grp.programs << game
+        grp.save
+        game.save
+      end
+      if params[gamesym][:loud]
+        grp = Programgroup.find_by_name( "Äänekäs" )
+        grp.programs << game
+        grp.save
+        game.save
+      end
 
       organizer = ProgramsOrganizer.new
       organizer.person = @person

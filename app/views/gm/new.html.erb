@@ -44,40 +44,41 @@
 		<td align="left" valign="top">Pelin nimi / Game Title:</td>
 		<td class="element" valign="top" align="left">	<input size="30" style="width: 350px" name="game<%= i %>[name]" id="game<%=i %>_name" type="text" /></td>
 	</tr>
-	<tr>
-		<td align="left" valign="top">Pelin genre / Game Genre:</td>
-		<td class="element" valign="top" align="left"><%= collection_select(("game" + i.to_s).to_sym, :value, @genres, :value, :value) %></td>
-	</tr>
-	<tr>
-		<td align="left" valign="top">Pelaajien lukumäärä / Number of players:</td>
-		<td class="element" valign="top" align="left">	<input size="30" style="width: 350px" name="game<%= i %>[attendance]" id="game<%= i %>_attendance" type="text" /></td>
-	</tr>
-	<tr>
-		<td align="left" valign="top">Pelin kuvaus ja lisätiedot pelaajille / Game description and additional information to players:</td>
-		<td class="element" valign="top" align="left">	<input size="30" style="width: 350px" name="game<%= i %>[description]" id="game<%= i %>_description" type="text" /></td>
-	</tr>
 
+      <tr><td align="left" valign="top">Valitse kaikki, jotka sopivat pelille / Choose all that apply for the game</td></tr>
 	<tr>
-		<td align="left" valign="top">Peli pelataan englanniksi / The game will be played in english</td>
-		<td class="element" valign="top" align="left">	<input name="game<%= i %>[english]" id="game<%= i %>_english" type="checkbox" /></td>
+		<td align="left" valign="top">Englanninkielinen / Played in English
+		<input name="game<%= i %>[english]" id="game<%= i %>_english" type="checkbox" /></td>
+    <td align="left" valign="top">Lapsiystävällinen / Suitable for children
+      <input name="game<%= i %>[children]" id="game<%= i %>_children" type="checkbox" /></td>
+    <td align="left" valign="top">Vain täysi-ikäisille / Only for adults
+      <input name="game<%= i %>[adult]" id="game<%= i %>_adult" type="checkbox" /></td>
+    </tr>
+      <tr>
+    <td align="left" valign="top">Vaatii maailmatuntemusta / Setting knowledge required
+      <input name="game<%= i %>[worldknowledge]" id="game<%= i %>_worldknowledge" type="checkbox" /></td>
+    <td align="left" valign="top">Vaatii sääntötuntemusta / Rules knowledge required
+      <input name="game<%= i %>[rulesknowledge]" id="game<%= i %>_rulesknowledge" type="checkbox" /></td>
+    <td align="left" valign="top">Aloittelijaystävällinen / Suitable for beginners
+      <input name="game<%= i %>[beginner]" id="game<%= i %>_beginner" type="checkbox" /></td>
+        </tr>
+    <td align="left" valign="top">Äänekäs / Loud
+      <input name="game<%= i %>[loud]" id="game<%= i %>_loud" type="checkbox" /></td>
 	</tr>
       <tr>
-        <td align="left" valign="top">Peli sopii aloittelijoille / The game is suitable for beginners</td>
-        <td class="element" valign="top" align="left">	<input name="game<%= i %>[beginner]" id="game<%= i %>_beginner" type="checkbox" /></td>
-      </tr>
-	<tr>
-		<td align="left" valign="top">Etukäteistiedot pelimaailmasta suositeltavia / Familiarity with the setting recommended</td>
-		<td class="element" valign="top" align="left">	<input name="game<%= i %>[worldknowledge]" id="game<%= i %>_worldknowledge" type="checkbox" /></td>
-	</tr>
-	<tr>
-		<td align="left" valign="top">Pelisääntöjen tuntemus suositeltavaa / Knowledge of the rules recommended</td>
-		<td class="element" valign="top" align="left">	<input name="game<%= i %>[rulesknowledge]" id="game<%= i %>_rulesknowledge" type="checkbox" /></td>
-	</tr>
-	<tr>
-		<td align="left" valign="top">Peli ei sovellu lapsille! Pelaajien on oltava täysi-ikäisiä! / Unsuitable for minors! All players must be adult!</td>
-		<td class="element" valign="top" align="left">	<input name="game<%= i %>[adult]" id="game<%= i %>_adult" type="checkbox" /></td>
-	</tr>
 
+      <tr>
+        <td align="left" valign="top">Valitse kaikki, jotka kuvaavat peliä / Choose all that describe the game:</td>
+        <td class="element" valign="top" align="left"><%= collection_select(("game" + i.to_s).to_sym, :value, @genres, :value, :value) %></td>
+      </tr>
+      <tr>
+        <td align="left" valign="top">Pelaajien lukumäärä / Number of players:</td>
+        <td class="element" valign="top" align="left">	<input size="30" style="width: 350px" name="game<%= i %>[attendance]" id="game<%= i %>_attendance" type="text" /></td>
+      </tr>
+      <tr>
+        <td align="left" valign="top">Pelin kuvaus ja lisätiedot pelaajille / Game description and additional information to players:</td>
+        <td class="element" valign="top" align="left">	<input size="30" style="width: 350px" name="game<%= i %>[description]" id="game<%= i %>_description" type="text" /></td>
+      </tr>
 	<tr>
 		<td align="left" valign="top">Pelin oletettu kesto / Length of the Game:</td>
 		<td class="element" valign="top" align="left">	<input size="30" style="width: 350px" name="game<%= i %>[duration]" id="game<%= i %>_duration" type="text" /></td>
