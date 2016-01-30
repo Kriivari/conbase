@@ -1,4 +1,6 @@
-<p><label for="attribute_attribute">Attribute</label><br/>
+<%= form_for(@attribute_value) do |f| %>
+
+    <p><label for="attribute_attribute">Attribute</label><br/>
 <%= f.select(:attribute, :attribute, @attributes) %></p>
 
 <p><label for="attribute_value_value">Value</label><br/>
@@ -7,4 +9,8 @@
 <p><label for="attribute_value_defaultvalue">Defaultvalue</label><br/>
 <select id="attribute_value_defaultvalue" name="attribute_value[defaultvalue]"><option value="false">False</option><option value="true">True</option></select></p>
 <!--[eoform:attribute_value]-->
+
+    <%= f.submit "Talleta" %>
+
+<% end %>
 
