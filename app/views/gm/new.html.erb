@@ -68,7 +68,20 @@
 
       <tr>
         <td colspan="2" align="left" valign="top">Valitse kaikki, jotka kuvaavat peliä / Choose all that describe the game:</td>
-        <td class="element" valign="top" align="left"><%= collection_select(("game" + i.to_s).to_sym, :value, @genres, :value, :value) %></td>
+        </tr>
+        <% for j in (@genres.length / 3) %>
+          <tr>
+            <td valign="top" align="left">
+              <input name="game<%= i %>[<%= @genres[j*3]%>]" id="game<%= i %>_<%= @genres[j*3]%>" type="checkbox" />
+            </td>
+            <td valign="top" align="left">
+              <input name="game<%= i %>[<%= @genres[j*3+1]%>]" id="game<%= i %>_<%= @genres[j*3+1]%>" type="checkbox" />
+            </td>
+            <td valign="top" align="left">
+              <input name="game<%= i %>[<%= @genres[j*3+2]%>]" id="game<%= i %>_<%= @genres[j*3+2]%>" type="checkbox" />
+            </td>
+          </tr>
+        <% end %>
       </tr>
       <tr>
         <td colspan="2" align="left" valign="top">Pelaajien lukumäärä / Number of players:</td>
