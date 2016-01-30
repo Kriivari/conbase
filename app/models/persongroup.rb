@@ -7,12 +7,14 @@ class Persongroup < ActiveRecord::Base
 
   def members
     m = []
+    g = []
     self.people_persongroups.each{ |group|
-      if ! m.include?( group.person )
+      if ! m.include?( group.person ) && group.status == -1
         m << group.person
+        g << group
       end
     }
-    return m
+    return g
   end
 
   def size
