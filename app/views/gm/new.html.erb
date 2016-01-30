@@ -69,24 +69,18 @@
       <tr>
         <td colspan="2" align="left" valign="top">Valitse kaikki, jotka kuvaavat peliä / Choose all that describe the game:</td>
         </tr>
-        <% for j in 0..(@genres.length / 3) %>
-          <tr>
+        <% for j in 0..@genres.length %>
+          <% if j % 3 == 0 %>
+              <% if j > 0 %>
+                  </tr>
+              <% end %>
+              <tr>
+          <% end %>
             <td valign="top" align="left">
               <%= @genres[j*3].value %><input name="game<%= i %>[<%= @genres[j*3].value%>]" id="game<%= i %>_<%= @genres[j*3].value%>" type="checkbox" />
             </td>
-            <% if j*3+1 < @genres.length %>
-            <td valign="top" align="left">
-              <%= @genres[j*3+1].value %><input name="game<%= i %>[<%= @genres[j*3+1].value%>]" id="game<%= i %>_<%= @genres[j*3+1].value%>" type="checkbox" />
-            </td>
-                <% end %>
-                <% if j*3+2 < @genres.length %>
-            <td valign="top" align="left">
-              <%= @genres[j*3+2].value %><input name="game<%= i %>[<%= @genres[j*3+2].value%>]" id="game<%= i %>_<%= @genres[j*3+2].value%>" type="checkbox" />
-            </td>
-            <% end %>
-          </tr>
         <% end %>
-      </tr>
+          </tr>
       <tr>
         <td colspan="2" align="left" valign="top">Pelaajien lukumäärä / Number of players:</td>
         <td class="element" valign="top" align="left">	<input size="30" style="width: 350px" name="game<%= i %>[attendance]" id="game<%= i %>_attendance" type="text" /></td>
