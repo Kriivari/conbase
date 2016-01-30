@@ -1,0 +1,20 @@
+<div class="sisalto">
+	<h2>Program sign up</h2>
+	<% if @program.errors.empty? %>
+		<p>Thank you for your sign up. Information below has been saved. The program team will contact you soon. You can contact us at ohjelma@ropecon.fi</p>
+
+		<p>Program name: <%= @program.name%></p>
+		<p>Program description: <%= @program.description%></p>
+
+		<p>First name: <%= @person.firstname %></p>
+		<p>Last name: <%= @person.lastname %></p>
+		<p>Nickname: <%= @person.nickname %></p>
+		<p>Phone number: <%= @person.primary_phone %></p>
+		<p>E-mail address: <%= @person.primary_email %></p>
+		<hr/>
+		<p><%= link_to "Sign up additional programs", :controller => 'programs', :action => 'newen' %>
+<% else %>
+	<%= render "shared/error_messages", :target => @program %>
+	<p>Your sign up has not been saved! Please hit Back and fix erroneous fields.</p>
+<% end %>
+</div>

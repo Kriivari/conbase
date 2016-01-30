@@ -197,6 +197,10 @@ class ProgramsController < Application
     new
   end
 
+  def newen
+    new
+  end
+
   def create
     if params[:person][:firstname] == nil || params[:person][:firstname].length == 0
       @person = Person.find(params[:organizers][:id])
@@ -277,6 +281,10 @@ class ProgramsController < Application
     if !verify
       render(:layout => "Ropecon_program_registration")
     end
+  end
+
+  def createen
+    create
   end
 
   def save_larp( params, program )
