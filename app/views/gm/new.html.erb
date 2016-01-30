@@ -77,7 +77,9 @@
               <tr>
           <% end %>
             <td valign="top" align="left">
-              <%= @genres[j].value %><input name="game<%= i %>[<%= @genres[j].value%>]" id="game<%= i %>_<%= @genres[j].value%>" type="checkbox" />
+              <% if @genres[j] %>
+                <%= @genres[j].value %><input name="game<%= i %>[<%= @genres[j].value%>]" id="game<%= i %>_<%= @genres[j].value%>" type="checkbox" />
+              <% end %>
             </td>
         <% end %>
           </tr>
