@@ -59,8 +59,8 @@ class ExhibitorsController < Application
     ticket = ProductType.find_by_name("Viikonloppu")
     travelpass = ProductType.find_by_name("Myyjäpassi")
 
-    tables = params[:tables]
-    if tables
+    tables = params[:tables].to_i
+    if tables > 0
       tables = tables.to_i
     else
       tables = 1
