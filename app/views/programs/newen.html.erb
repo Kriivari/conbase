@@ -6,36 +6,6 @@
 
   <p>Make sure the contact information is correct! The team will contact you via e-mail for further details and/or to confirm your acceptance to the <%= @event %> program.</p>
 
-
-  Other considerations (things you want to point out to the organizers, f.e. preferences for schedules and contact info for co-organizers ):
-
-  Some of the program in Ropecon will be filmed and shared on Ropecon’s YouTube-channel after the event. In addition, slides for lectures can be shared on Ropecon’s website.
-
-  My program can be filmed, edited and published online:
-
-  My program slides / material can be shared:
-
-  Main organizer:
-
-  Main organizer information:
-
-  First name:
-
-  Last name:
-
-  Nickname (for the badge):
-
-  Mobile phone number:
-
-  E-mail (used to id people!):
-
-
-
-  SEND
-
-  * compulsory field
-
-
 <%= form_for( @program, :url => { :action => 'create' } ) do |f| %>
 <%= render "shared/error_messages", :target => @person %>
 <div>
