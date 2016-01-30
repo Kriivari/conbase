@@ -185,7 +185,7 @@ class ProgramsController < Application
     @program = Program.new
     @person = Person.new
     @type = nil
-    @types = Programgroup.where('visible is true').map { |p| [p.name, p.id] }
+    @types = Programgroup.where('visible is true').map { |p| [p.name, p.nameen, p.id] }
     if verify
       @people = Person.all(:order => "lastname, firstname")
     else
