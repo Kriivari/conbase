@@ -74,12 +74,16 @@
             <td valign="top" align="left">
               <%= @genres[j*3].value %><input name="game<%= i %>[<%= @genres[j*3].value%>]" id="game<%= i %>_<%= @genres[j*3].value%>" type="checkbox" />
             </td>
+            <% if j*3+1 < @genres.length %>
             <td valign="top" align="left">
               <%= @genres[j*3+1].value %><input name="game<%= i %>[<%= @genres[j*3+1].value%>]" id="game<%= i %>_<%= @genres[j*3+1].value%>" type="checkbox" />
             </td>
+                <% end %>
+                <% if j*3+2 < @genres.length %>
             <td valign="top" align="left">
               <%= @genres[j*3+2].value %><input name="game<%= i %>[<%= @genres[j*3+2].value%>]" id="game<%= i %>_<%= @genres[j*3+2].value%>" type="checkbox" />
             </td>
+            <% end %>
           </tr>
         <% end %>
       </tr>
