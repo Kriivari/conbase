@@ -26,7 +26,11 @@
 
 <p><label for="location_multiple">Päällekäiset varaukset sallittu</label><br/>
 <select id="location_multiple" name="location[multiple]"><option value="false">Ei</option><option value="true">Kyllä</option></select></p>
-<!--[eoform:location]-->
+
+    <p><label for="location_enabled">Tila käytettävissä</label><br/>
+      <select id="location_enabled" name="location[enabled]"><option value="false">Ei</option><option value="true">Kyllä</option></select></p>
+
+    <!--[eoform:location]-->
 
 <%= f.submit "Talleta" %>
 
