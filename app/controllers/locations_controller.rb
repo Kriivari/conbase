@@ -11,7 +11,7 @@ class LocationsController < Application
   #       :redirect_to => { :action => :list }
 
   def list
-    @locations = Location.paginate :page => params[:page], :conditions => ["event_id in (select id from events where name=?)", @event.name], :order => 'start_time DESC, name'
+    @locations = Location.paginate :page => params[:page], :conditions => ["event_id in (select id from events where name=?)", @event.name], :order => 'enabled, start_time DESC, name'
   end
 
   def show
