@@ -69,7 +69,7 @@
       <tr>
         <td colspan="2" align="left" valign="top">Valitse kaikki, jotka kuvaavat peliä / Choose all that describe the game:</td>
         </tr>
-        <% for j in (@genres.length / 3) %>
+        <% for j in 1..(@genres.length / 3) %>
           <tr>
             <td valign="top" align="left">
               <input name="game<%= i %>[<%= @genres[j*3]%>]" id="game<%= i %>_<%= @genres[j*3]%>" type="checkbox" />
