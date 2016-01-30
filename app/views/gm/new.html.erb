@@ -72,13 +72,13 @@
         <% for j in 1..(@genres.length / 3) %>
           <tr>
             <td valign="top" align="left">
-              <input name="game<%= i %>[<%= @genres[j*3]%>]" id="game<%= i %>_<%= @genres[j*3]%>" type="checkbox" />
+              <%= @genres[j*3].value %><input name="game<%= i %>[<%= @genres[j*3].value%>]" id="game<%= i %>_<%= @genres[j*3].value%>" type="checkbox" />
             </td>
             <td valign="top" align="left">
-              <input name="game<%= i %>[<%= @genres[j*3+1]%>]" id="game<%= i %>_<%= @genres[j*3+1]%>" type="checkbox" />
+              <%= @genres[j*3+1].value %><input name="game<%= i %>[<%= @genres[j*3+1].value%>]" id="game<%= i %>_<%= @genres[j*3+1].value%>" type="checkbox" />
             </td>
             <td valign="top" align="left">
-              <input name="game<%= i %>[<%= @genres[j*3+2]%>]" id="game<%= i %>_<%= @genres[j*3+2]%>" type="checkbox" />
+              <%= @genres[j*3+2].value %><input name="game<%= i %>[<%= @genres[j*3+2].value%>]" id="game<%= i %>_<%= @genres[j*3+2].value%>" type="checkbox" />
             </td>
           </tr>
         <% end %>
