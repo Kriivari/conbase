@@ -59,7 +59,13 @@ class ExhibitorsController < Application
     ticket = ProductType.find_by_name("Viikonloppu")
     travelpass = ProductType.find_by_name("Myyjäpassi")
 
-    for i in 1..params[:tables].to_i
+    tables = params[:tables]
+    if tables
+      tables = tables.to_i
+    else
+      tables = 1
+    end
+    for i in 1..tables
       @exhibitor.product_types << table
     end
     for i in 1..params[:tickets].to_i
