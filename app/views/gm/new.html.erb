@@ -16,36 +16,36 @@
 <table border="0" id="comment_form">
 
 	<tr>
-		<td rowspan="2" align="left" valign="top">Etunimi / First Name: <span class="form_required">*</span></td>
+		<td colspan="2" align="left" valign="top">Etunimi / First Name: <span class="form_required">*</span></td>
 		<td class="element" valign="top" align="left">	<input id="person_firstname" name="person[firstname]" size="30" style="width: 350px" type="text" /></td>
 	</tr>
 	<tr>
-		<td rowspan="2" align="left" valign="top">Sukunimi / Last Name:: <span class="form_required">*</span></td>
+		<td colspan="2" align="left" valign="top">Sukunimi / Last Name:: <span class="form_required">*</span></td>
 		<td class="element" valign="top" align="left">	<input size="30" style="width: 350px" name="person[lastname]" id="person_lastname" type="text" /></td>
 	</tr>
 	<tr>
-		<td rowspan="2" align="left" valign="top">Lempinimi (tulee badgeen) / Nickname (for your badge):</td>
+		<td colspan="2" align="left" valign="top">Lempinimi (tulee badgeen) / Nickname (for your badge):</td>
 		<td class="element" valign="top" align="left">	<input size="30" style="width: 350px" name="person[nickname]" id="person_nickname" type="text" /></td>
 	</tr>
 	<tr>
-		<td rowspan="2" align="left" valign="top">Matkapuhelin / Mobile phone: <span class="form_required">*</span></td>
+		<td colspan="2" align="left" valign="top">Matkapuhelin / Mobile phone: <span class="form_required">*</span></td>
 		<td class="element" valign="top" align="left">	<input size="30" style="width: 350px" name="person[primary_phone]" id="person_primary_phone" type="text" /></td>
 	</tr>
 	<tr>
-		<td rowspan="2" align="left" valign="top">Sähköpostiosoite (juuri sinun, tällä tunnistetaan ihmiset) / E-mail address (yours - this is how we identify people): <span class="form_required">*</span></td>
+		<td colspan="2" align="left" valign="top">Sähköpostiosoite (juuri sinun, tällä tunnistetaan ihmiset) / E-mail address (yours - this is how we identify people): <span class="form_required">*</span></td>
 		<td class="element" valign="top" align="left">	<input size="30" style="width: 350px" name="person[primary_email]" id="person_primary_email" type="text" /></td>
 	</tr>
         <br />
 <% for i in 1..7 %>
 	<tr>
-		<td rowspan="2" align="left" valign="top"><%= i %>. pelin tiedot / Game Session <%= i %></td>
+		<td colspan="2" align="left" valign="top"><%= i %>. pelin tiedot / Game Session <%= i %></td>
 	</tr>
 	<tr>
-		<td rowspan="2" align="left" valign="top">Pelin nimi / Game Title:</td>
+		<td colspan="2" align="left" valign="top">Pelin nimi / Game Title:</td>
 		<td class="element" valign="top" align="left">	<input size="30" style="width: 350px" name="game<%= i %>[name]" id="game<%=i %>_name" type="text" /></td>
 	</tr>
 
-      <tr><td rowspan="2" align="left" valign="top">Valitse kaikki, jotka sopivat pelille / Choose all that apply for the game</td></tr>
+      <tr><td colspan="2" align="left" valign="top">Valitse kaikki, jotka sopivat pelille / Choose all that apply for the game</td></tr>
 	<tr>
 		<td align="left" valign="top">Englanninkielinen / Played in English
 		<input name="game<%= i %>[english]" id="game<%= i %>_english" type="checkbox" /></td>
@@ -67,23 +67,23 @@
 	</tr>
 
       <tr>
-        <td rowspan="2" align="left" valign="top">Valitse kaikki, jotka kuvaavat peliä / Choose all that describe the game:</td>
+        <td colspan="2" align="left" valign="top">Valitse kaikki, jotka kuvaavat peliä / Choose all that describe the game:</td>
         <td class="element" valign="top" align="left"><%= collection_select(("game" + i.to_s).to_sym, :value, @genres, :value, :value) %></td>
       </tr>
       <tr>
-        <td rowspan="2" align="left" valign="top">Pelaajien lukumäärä / Number of players:</td>
+        <td colspan="2" align="left" valign="top">Pelaajien lukumäärä / Number of players:</td>
         <td class="element" valign="top" align="left">	<input size="30" style="width: 350px" name="game<%= i %>[attendance]" id="game<%= i %>_attendance" type="text" /></td>
       </tr>
       <tr>
-        <td rowspan="2" align="left" valign="top">Pelin kuvaus ja lisätiedot pelaajille / Game description and additional information to players:</td>
+        <td colspan="2" align="left" valign="top">Pelin kuvaus ja lisätiedot pelaajille / Game description and additional information to players:</td>
         <td class="element" valign="top" align="left">	<input size="30" style="width: 350px" name="game<%= i %>[description]" id="game<%= i %>_description" type="text" /></td>
       </tr>
 	<tr>
-		<td rowspan="2" align="left" valign="top">Pelin oletettu kesto / Length of the Game:</td>
+		<td colspan="2" align="left" valign="top">Pelin oletettu kesto / Length of the Game:</td>
 		<td class="element" valign="top" align="left">	<input size="30" style="width: 350px" name="game<%= i %>[duration]" id="game<%= i %>_duration" type="text" /></td>
 	</tr>
 	<tr>
-		<td rowspan="2" align="left" valign="top">Toivottu peluutusajankohta / Desired Time of the Game:</td>
+		<td colspan="2" align="left" valign="top">Toivottu peluutusajankohta / Desired Time of the Game:</td>
     <td class="element" valign="top" align="left">  <select name="game<%= i %>[preftime]" id="game<%= i %>_preftime">
       <option>Pe / Fri 16:00</option>
       <option>Pe / Fri 18:00</option>
@@ -102,7 +102,7 @@
     </select></td>
 	</tr>
 	<tr>
-		<td rowspan="2" align="left" valign="top">Muuta pelitietoa roolipelitiskille / Other Information for the Role Playing Help Desk:</td>
+		<td colspan="2" align="left" valign="top">Muuta pelitietoa roolipelitiskille / Other Information for the Role Playing Help Desk:</td>
 		<td class="element" valign="top" align="left">	<input size="30" style="width: 350px" name="game<%= i %>[privatenotes]" id="game<%= i %>_privatenotes" type="text" /></td>
 	</tr>
 	<tr><td>&nbsp;</td></tr>
