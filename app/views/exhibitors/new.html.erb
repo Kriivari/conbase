@@ -42,12 +42,13 @@
           </tr>
           <tr>
             <td align="left" valign="top">Pöytäpaikan tyyppi: <span class="form_required">*</span></td>
-            <td class="element" valign="top" align="left">
-              <% for size in @sizes %>
-                <input name="table" value="<%= size.name %>" type="radio" id="table_<%= size.id %>" /><label for="table_<%= size.id %>"><%= size.name %></label>&nbsp;
-              <% end %>
-            </td>
           </tr>
+          <% for size in @sizes %>
+              <tr>
+                <td></td></td><td class="element" valign="top" align="left">
+                <input name="table" value="<%= size.name %>" type="radio" id="table_<%= size.id %>" /><label for="table_<%= size.id %>"><%= size.name %></label></td>
+              </tr>
+          <% end %>
           <tr>
             <td align="left" valign="top">Mahdollisen osaston neliömäärä:</td>
             <td class="element" valign="top" align="left">	<input size="30" style="width: 350px" name="tables" id="tables" type="text" /></td>
