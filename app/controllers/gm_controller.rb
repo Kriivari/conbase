@@ -154,7 +154,6 @@ class GmController < Application
     realbody = realbody + @person.details( @event )
     realbody = realbody + "\n\nIlmoittamasi pelit / Signed up games:\n"
     for game in @games
-      realbody = realbody + "\nPelin nimi / Game title: " + game.name + "\n"
       realbody = realbody + "Genre: " + game.programs_events_attributes[0].value + "\n"
       realbody = realbody + "Pelin kuvaus ja lisätiedot pelaajille / Game description and additional information to players: " + game.description + "\n"
       realbody = realbody + "Pelaajien lukumäärä / Number of players: " + game.attendance + "\n"
