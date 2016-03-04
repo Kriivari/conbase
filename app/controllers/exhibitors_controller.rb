@@ -78,6 +78,10 @@ class ExhibitorsController < Application
     person.save
     @event.save
     @exhibitor.save
+    @exhibitorbooth = table.fullname
+    if @exhibitorbooth == "Myyntiosasto"
+      @exhibitorbooth = tables.to_s + " neliömetriä"
+    end
     ExhibitorMailer.confirmation_email(@event,@exhibitor).deliver
   end
 

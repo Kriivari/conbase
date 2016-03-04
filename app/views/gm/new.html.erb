@@ -9,72 +9,76 @@
         <h2><%= flash[:notice] %></h2>
 	<h2><%= @event %> GM-ilmoittautuminen / GM Sign-up</h2>
 
+<p>* Pakollinen kenttä / Mandatory field</p>
 <p>Ilmoittautumisen lähetettyäsi saat lähiaikoina sähköpostiisi vahvistusviestin.</p>
-<p>After signing up, you will receive a confirmation message to your e-mail within a few days.</p>
+<p>After signing up, you will receive a confirmation message to your e-mail.</p>
 <%= form_for( @person, :url => { :action => 'create' } ) do |f| %>
 <div>
-<table border="0" id="comment_form">
+<table border="0" id="comment_form" style="border-collapse:collapse;">
 
 	<tr>
-		<td colspan="2" align="left" valign="top">Etunimi / First Name: <span class="form_required">*</span></td>
+		<td colspan="2" align="left" valign="top">Etunimi / First name <span class="form_required">*</span></td>
 		<td class="element" valign="top" align="left">	<input id="person_firstname" name="person[firstname]" size="30" style="width: 350px" type="text" /></td>
 	</tr>
 	<tr>
-		<td colspan="2" align="left" valign="top">Sukunimi / Last Name:: <span class="form_required">*</span></td>
+		<td colspan="2" align="left" valign="top">Sukunimi / Last name <span class="form_required">*</span></td>
 		<td class="element" valign="top" align="left">	<input size="30" style="width: 350px" name="person[lastname]" id="person_lastname" type="text" /></td>
 	</tr>
 	<tr>
-		<td colspan="2" align="left" valign="top">Lempinimi (tulee badgeen) / Nickname (for your badge):</td>
+		<td colspan="2" align="left" valign="top">Lempinimi (tulee badgeen) / Nickname (for your badge) </td>
 		<td class="element" valign="top" align="left">	<input size="30" style="width: 350px" name="person[nickname]" id="person_nickname" type="text" /></td>
 	</tr>
 	<tr>
-		<td colspan="2" align="left" valign="top">Matkapuhelin / Mobile phone: <span class="form_required">*</span></td>
+		<td colspan="2" align="left" valign="top">Matkapuhelin / Mobile phone <span class="form_required">*</span></td>
 		<td class="element" valign="top" align="left">	<input size="30" style="width: 350px" name="person[primary_phone]" id="person_primary_phone" type="text" /></td>
 	</tr>
 	<tr>
-		<td colspan="2" align="left" valign="top">Sähköpostiosoite (juuri sinun, tällä tunnistetaan ihmiset) / E-mail address (yours - this is how we identify people): <span class="form_required">*</span></td>
+		<td colspan="2" align="left" valign="top">Sähköpostiosoite (käytetään tunnistautumiseen) / E-mail address (used for identification) <span class="form_required">*</span></td>
 		<td class="element" valign="top" align="left">	<input size="30" style="width: 350px" name="person[primary_email]" id="person_primary_email" type="text" /></td>
 	</tr>
-        <br />
+    <br />
+
 <% for i in 1..7 %>
+    <br />
 	<tr>
-		<td colspan="2" align="left" valign="top"><%= i %>. pelin tiedot / Game Session <%= i %></td>
+		<td colspan="2" align="left" valign="top"><h3><%= i %>. pelin tiedot / Game session <%= i %></h3></td>
 	</tr>
 	<tr>
-		<td colspan="2" align="left" valign="top">Pelin nimi / Game Title:</td>
+		<td colspan="2" align="left" valign="top">Pelin nimi / Game title:</td>
 		<td class="element" valign="top" align="left">	<input size="30" style="width: 350px" name="game<%= i %>[name]" id="game<%=i %>_name" type="text" /></td>
 	</tr>
 
-      <tr><td colspan="2" align="left" valign="top">Valitse kaikki, jotka sopivat pelille / Choose all that apply for the game</td></tr>
-	<tr>
+    <tr><td colspan="2" align="left" valign="top"><b>Valitse kaikki, jotka sopivat pelille / Choose all that apply for the game</b></td></tr>
+	<tr style="border-top: 1px solid black;" >
 		<td align="left" valign="top">Englanninkielinen / Played in English
 		<input name="game<%= i %>[english]" id="game<%= i %>_english" type="checkbox" /></td>
     <td align="left" valign="top">Lapsiystävällinen / Suitable for children
-      <input name="game<%= i %>[children]" id="game<%= i %>_children" type="checkbox" /></td>
+        <input name="game<%= i %>[children]" id="game<%= i %>_children" type="checkbox" /></td>
     <td align="left" valign="top">Vain täysi-ikäisille / Only for adults
-      <input name="game<%= i %>[adult]" id="game<%= i %>_adult" type="checkbox" /></td>
+        <input name="game<%= i %>[adult]" id="game<%= i %>_adult" type="checkbox" /></td>
     </tr>
-      <tr>
+    <tr>
     <td align="left" valign="top">Vaatii maailmatuntemusta / Setting knowledge required
-      <input name="game<%= i %>[worldknowledge]" id="game<%= i %>_worldknowledge" type="checkbox" /></td>
+        <input name="game<%= i %>[worldknowledge]" id="game<%= i %>_worldknowledge" type="checkbox" /></td>
     <td align="left" valign="top">Vaatii sääntötuntemusta / Rules knowledge required
-      <input name="game<%= i %>[rulesknowledge]" id="game<%= i %>_rulesknowledge" type="checkbox" /></td>
+        <input name="game<%= i %>[rulesknowledge]" id="game<%= i %>_rulesknowledge" type="checkbox" /></td>
     <td align="left" valign="top">Aloittelijaystävällinen / Suitable for beginners
-      <input name="game<%= i %>[beginner]" id="game<%= i %>_beginner" type="checkbox" /></td>
-        </tr>
-    <td align="left" valign="top">Äänekäs / Loud
-      <input name="game<%= i %>[loud]" id="game<%= i %>_loud" type="checkbox" /></td>
+        <input name="game<%= i %>[beginner]" id="game<%= i %>_beginner" type="checkbox" /></td>
+    </tr>
+    <tr>
+        <td align="left" valign="top">Äänekäs / Loud
+        <input name="game<%= i %>[loud]" id="game<%= i %>_loud" type="checkbox" /></td>
 	</tr>
-
-      <tr>
-        <td colspan="2" align="left" valign="top">Valitse kaikki, jotka kuvaavat peliä / Choose all that describe the game:</td>
-        </tr>
+    
+    <tr style="border-top: 1px solid black;"><td colspan="2" align="left" valign="top"><b>Valitse kaikki, jotka kuvaavat peliä / Choose all that describe the game</b></td></tr>
+    <tr>
+        <tr >
         <% for j in 0..@genres.length %>
           <% if j % 3 == 0 %>
               <% if j > 0 %>
-                  </tr>
+        </tr>
               <% end %>
-              <tr>
+        <tr>
           <% end %>
             <td valign="top" align="left">
               <% if @genres[j] %>
@@ -82,21 +86,22 @@
               <% end %>
             </td>
         <% end %>
-          </tr>
-      <tr>
-        <td colspan="2" align="left" valign="top">Pelaajien lukumäärä / Number of players:</td>
+        </tr>
+    </tr>
+      <tr style="border-top: 1px solid black;">
+        <td colspan="2" align="left" valign="top">Pelaajien lukumäärä / Number of players</td>
         <td class="element" valign="top" align="left">	<input size="30" style="width: 350px" name="game<%= i %>[attendance]" id="game<%= i %>_attendance" type="text" /></td>
       </tr>
       <tr>
-        <td colspan="2" align="left" valign="top">Pelin kuvaus ja lisätiedot pelaajille / Game description and additional information to players:</td>
+        <td colspan="2" align="left" valign="top">Pelin kuvaus ja lisätiedot pelaajille / Game description and additional information to players</td>
         <td class="element" valign="top" align="left">	<input size="30" style="width: 350px" name="game<%= i %>[description]" id="game<%= i %>_description" type="text" /></td>
       </tr>
 	<tr>
-		<td colspan="2" align="left" valign="top">Pelin oletettu kesto / Length of the Game:</td>
+		<td colspan="2" align="left" valign="top">Pelin kesto / Game length</td>
 		<td class="element" valign="top" align="left">	<input size="30" style="width: 350px" name="game<%= i %>[duration]" id="game<%= i %>_duration" type="text" /></td>
 	</tr>
 	<tr>
-		<td colspan="2" align="left" valign="top">Toivottu peluutusajankohta / Desired Time of the Game:</td>
+		<td colspan="2" align="left" valign="top">Toivottu peluutusajankohta / Desired time for the game</td>
     <td class="element" valign="top" align="left">  <select name="game<%= i %>[preftime]" id="game<%= i %>_preftime">
       <option>Pe / Fri 16:00</option>
       <option>Pe / Fri 18:00</option>
@@ -115,7 +120,7 @@
     </select></td>
 	</tr>
 	<tr>
-		<td colspan="2" align="left" valign="top">Muuta pelitietoa roolipelitiskille / Other Information for the Role Playing Help Desk:</td>
+		<td colspan="2" align="left" valign="top">Muuta pelitietoa roolipelitiskille / Other information for the Role-Playing Help Desk:</td>
 		<td class="element" valign="top" align="left">	<input size="30" style="width: 350px" name="game<%= i %>[privatenotes]" id="game<%= i %>_privatenotes" type="text" /></td>
 	</tr>
 	<tr><td>&nbsp;</td></tr>
@@ -124,10 +129,7 @@
 		<td align="left" valign="top"></td>
 		<td valign="top" align="left">	<%= f.submit "Ilmoittaudu / Sign up" %></td>
 	</tr>
-	<tr>
-		<td></td>
-	<td align="left" valign="top">* pakollinen kenttä / Mandatory Field</td>
-	</tr>
+
 </table>
 </div>
 <% end %>

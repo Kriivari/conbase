@@ -1,10 +1,10 @@
 <div class="sisalto">
   <h2><%= flash[:notice] %></h2>
-  <h2>Kaubamajavaraus</h2>
+  <h2>Myyntialuevaraus</h2>
   <% if @exhibitor.errors.empty? %>
       <p>Kiitos varauksestasi. Alla olevat tiedot on nyt talletettu. Lopullisen varmistuksen saatte
 	s&auml;hk&ouml;postitse.</p>
-      <p>Lisätietoja tarvittaessa osoitteesta kaubamaja@ropecon.fi</p>
+      <p>Lisätietoja tarvittaessa osoitteesta myyntialue@ropecon.fi</p>
 
       <p>Etunimi: <%= @exhibitor.person.firstname %></p>
       <p>Sukunimi: <%= @exhibitor.person.lastname %></p>
@@ -12,10 +12,11 @@
       <p>Puhelin: <%= @exhibitor.person.primary_phone %></p>
       <p>Yrityksen nimi: <%= @exhibitor.companyname %></p>
       <p>Laskutusosoite: <%= @exhibitor.billing_address %></p>
-      <p>Pöytiä: <%= @exhibitor.tables %> (<%= @exhibitor.tablesize %>)</p>
-      <p>Lisärannekkeita: <%= @exhibitor.tickets %></p>
-      <p>Kulkulupia: <%= @exhibitor.travelpasses %></p>
+      <p>Osasto: <%= @exhibitorbooth %></p>
+      <p>Rannekkeita: <%= @exhibitor.tickets %></p>
+      <p>Myyjäpasseja: <%= @exhibitor.travelpasses %></p>
       <p>Lisätietoja: <%= @exhibitor.notes %></p>
+      <br />
       <p><b>Alustava automaattisesti laskettu varauksen kokonaishinta: <%= @exhibitor.total %> euroa</b></p>
   <% else %>
       <%= render "shared/error_messages", :target => @exhibitor %>
