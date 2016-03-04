@@ -11,7 +11,7 @@ class GmController < Application
     @person = Person.new
     @genre = nil
     @genres = AttributeValue.all(:conditions => "attribute_id in (select id from attributes where name='Genre') and visible = true",
-                                :order => "value")
+                                :order => "sort")
     @genres.each { |genre|
       if genre.defaultvalue
         @genre = genre
