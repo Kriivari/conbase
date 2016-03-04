@@ -78,7 +78,7 @@ class ExhibitorsController < Application
     person.save
     @event.save
     @exhibitor.save
-    @exhibitorbooth = table.fullname
+    @exhibitorbooth = table.name
     if @exhibitorbooth == "Myyntiosasto"
       @exhibitorbooth = tables.to_s + " neliömetriä"
     end
