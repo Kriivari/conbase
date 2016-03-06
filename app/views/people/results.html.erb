@@ -27,7 +27,7 @@
     <td valign="top"><%= person.password != nil %>
     <td><%= link_to 'Näytä', :action => 'show', :id => person %></td>
     <td><%= link_to 'Muokkaa', :action => 'edit', :id => person %></td>
-    <td><%= link_to 'Poista', { :action => 'destroy', :id => person }, :confirm => 'Are you sure?', :method => :post %></td>
+    <td><%= button_to 'Poista', { :action => 'destroy', :id => person }, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

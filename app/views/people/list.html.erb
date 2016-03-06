@@ -34,7 +34,7 @@
     </td>
     <td valign="top"><%= link_to 'Näytä', :action => 'show', :id => person %>
     <%= link_to 'Muokkaa', :action => 'edit', :id => person %>
-    <%= link_to 'Poista', { :action => 'destroy', :id => person }, :confirm => 'Are you sure?', :method => :post %></td>
+    <%= button_to 'Poista', { :action => 'destroy', :id => person }, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
