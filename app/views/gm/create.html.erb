@@ -21,9 +21,13 @@
         <% grp = Programgroup.find_by_name( "Pelisääntöjen tuntemus suotavaa" ) %>
         <p>Pelisääntöjen tuntemus suositeltavaa / Knowledge of the rules recommended: <%= yesno( game, grp ) %></p>
         <% grp = Programgroup.find_by_name( "Ei sovellu lapsille" ) %>
-        <p>Peli ei sovellu lapsille! Pelaajien on oltava täysi-ikäisiä! / Unsuitable for minors! All players must be over 18!: <%= yesno( game, grp ) %></p>
+        <p>Vain täysi-ikäisille / Only for adults: <%= yesno( game, grp ) %></p>
+        <% grp = Programgroup.find_by_name( "Soveltuu lapsille" ) %>
+        <p>Soveltuu lapsille / Suitable for children: <%= yesno( game, grp ) %></p>
         <% grp = Programgroup.find_by_name( "Englanninkielinen" ) %>
         <p>Peli pelataan englanniksi / Will be played in English: <%= yesno( game, grp ) %></p>
+        <% grp = Programgroup.find_by_name( "Äänekäs" ) %>
+        <p>Äänekäs / Loud: <%= yesno( game, grp ) %></p>
         <p>Muuta tietoa / Other information: <%= game.privatenotes %></p>
     <% end %>
 <% else %>
