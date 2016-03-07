@@ -59,11 +59,17 @@ class ExhibitorsController < Application
     ticket = ProductType.find_by_name("Viikonloppu")
     travelpass = ProductType.find_by_name("Myyjäpassi")
 
-    tables = params[:tables].to_i
-    if tables == 0
-      tables = 1
+    @tables = params[:tables].to_i
+    @exhibitorbooth = table.name
+    if @tables > 0 && @exhibitorbooth != "Myyntiosasto"
+      @exhibitor.errors.add(:companyname, "Jos valitset muun kuin myyntiosaston, jätä osaston koko tyhjäksi!")
+      render
+      return
     end
-    for i in 1..tables
+    if @tables == 0 && @exhibitorbooth != "Myyntiosasto"
+      @tables = 1
+    end
+    for i in 1..@tables
       @exhibitor.product_types << table
     end
     for i in 1..params[:tickets].to_i
@@ -78,11 +84,7 @@ class ExhibitorsController < Application
     person.save
     @event.save
     @exhibitor.save
-    @exhibitorbooth = table.name
-    if @exhibitorbooth == "Myyntiosasto"
-      @exhibitorbooth = tables.to_s + " neliömetriä"
-    end
-    ExhibitorMailer.confirmation_email(@event,@exhibitor).deliver
+    ExhibitorMailer.confirmation_email(@event,@exhibitor,@exhibitorbooth,@tables).deliver
   end
 
   def destroy

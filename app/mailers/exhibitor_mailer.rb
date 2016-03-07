@@ -1,9 +1,11 @@
 class ExhibitorMailer < ActionMailer::Base
-  default :from => "kaubamaja@ropecon.fi"
+  default :from => "myyntialue@ropecon.fi"
 
-  def confirmation_email( event, exhibitor )
+  def confirmation_email( event, exhibitor, exhibitorbooth, tables )
     @exhibitor = exhibitor
     @event = event
-    mail( :to => @exhibitor.person.primary_email, :subject => @event.name + " - Kaubamajavaraus" )
+    @exhibitorbooth = exhibitorbooth
+    @tables = tables
+    mail( :to => @exhibitor.person.primary_email, :subject => @event.name + " - myyntialuevaraus" )
   end
 end

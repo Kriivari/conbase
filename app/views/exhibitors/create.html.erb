@@ -12,7 +12,11 @@
       <p>Puhelin: <%= @exhibitor.person.primary_phone %></p>
       <p>Yrityksen nimi: <%= @exhibitor.companyname %></p>
       <p>Laskutusosoite: <%= @exhibitor.billing_address %></p>
-      <p>Osasto: <%= @exhibitorbooth %></p>
+      <p>Osasto: <%= @exhibitorbooth %>
+<% if @exhibitorbooth == "Myyntiosasto" %>
+        (koko <%= @tables %> neliömetriä)
+<% end %>
+      </p>
       <p>Rannekkeita: <%= @exhibitor.tickets %></p>
       <p>Myyjäpasseja: <%= @exhibitor.travelpasses %></p>
       <p>Lisätietoja: <%= @exhibitor.notes %></p>
