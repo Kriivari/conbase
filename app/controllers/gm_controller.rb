@@ -88,7 +88,7 @@ class GmController < Application
       group.save
 
       for genre in genres
-        genresym = ("game" + i.to_s + "_" + genre.id.to_s).to_sym
+        genresym = genre.id.to_sym
         if(params[gamesym][genresym])
           att = ProgramsEventsAttribute.new
           att.program = game
