@@ -87,8 +87,8 @@ class GmController < Application
       game.programgroups << group
       group.save
 
-      for genre in genres
-        genresym = genre.id.to_sym
+      genres.each { |genre|
+        genresym = (genre.id.to_s).to_sym
         if params[gamesym][genresym]
           att = ProgramsEventsAttribute.new
           att.program = game
@@ -97,7 +97,7 @@ class GmController < Application
           att[:value] = genre.value
           att.save
         end
-      end
+      }
       @event.save
       g.save
       game.save
