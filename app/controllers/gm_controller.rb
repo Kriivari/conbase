@@ -67,6 +67,9 @@ class GmController < Application
     end
     @games = []
     g = Attribute.first(:conditions => "name='Genre'")
+    genres = AttributeValue.all(:conditions => "attribute_id in (select id from attributes where name='Genre') and visible = true",
+                                 :order => "sort")
+
     for i in 1..num
       gamesym = ("game" + i.to_s).to_sym
       game = Program.new
@@ -84,16 +87,17 @@ class GmController < Application
       game.programgroups << group
       group.save
 
-      genre = params[gamesym][:value]
-      att = ProgramsEventsAttribute.first(:conditions => ["program_id=? and event_id=? and attribute_id=?", game.id, @event.id, g.id])
-      if att == nil
-        att = ProgramsEventsAttribute.new
+      for genre in genres
+        genresym = ("game" + i.to_s + "_" + genre.id.to_s).to_sym
+        if(params[gamesym][genresym])
+          att = ProgramsEventsAttribute.new
+          att.program = game
+          att.event = @event
+          att.attribute = g
+          att[:value] = genre.value
+          att.save
+        end
       end
-      att.program = game
-      att.event = @event
-      att.attribute = g
-      att[:value] = genre
-      att.save
       @event.save
       g.save
       game.save
@@ -164,9 +168,13 @@ class GmController < Application
       grp = Programgroup.find_by_name( "Pelisääntöjen tuntemus suotavaa" )
       realbody = realbody + "Pelisääntöjen tuntemus suositeltavaa / Knowledge of the rules recommended: " + yesno( game, grp ) + "\n"
       grp = Programgroup.find_by_name( "Ei sovellu lapsille" )
-      realbody = realbody + "Peli ei sovellu lapsille! Pelaajien on oltava täysi-ikäisiä! / Unsuitable for minors! All players must be over 18!: " + yesno( game, grp ) + "\n"
+      realbody = realbody + "Vain täysi-ikäisille / Only for adults: " + yesno( game, grp ) + "\n"
+      grp = Programgroup.find_by_name( "Soveltuu lapsille" )
+      realbody = realbody + "Soveltuu lapsille / Suitable for children: " + yesno( game, grp ) + "\n"
       grp = Programgroup.find_by_name( "Englanninkielinen" )
       realbody = realbody + "Peli pelataan englanniksi / Will be played in English: " + yesno( game, grp ) + "\n"
+      grp = Programgroup.find_by_name( "Äänekäs" )
+      realbody = realbody + "Äänekäs / Loud: " + yesno( game, grp ) + "\n"
       realbody = realbody + "Muuta tietoa / Other information: " + game.privatenotes + "\n"
     end
     StaffMailer.confirm(realbody, "gm-info@ropecon.fi", @person.primary_email, nil, @event.name + " - GM-ilmoittautuminen / GM sign-up").deliver
