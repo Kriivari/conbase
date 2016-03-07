@@ -175,6 +175,9 @@ class GmController < Application
       realbody = realbody + "Peli pelataan englanniksi / Will be played in English: " + yesno( game, grp ) + "\n"
       grp = Programgroup.find_by_name( "Äänekäs" )
       realbody = realbody + "Äänekäs / Loud: " + yesno( game, grp ) + "\n"
+      for gen in game.programs_events_attributes
+        realbody = realbody + gen.value + "\n"
+      end
       realbody = realbody + "Muuta tietoa / Other information: " + game.privatenotes + "\n"
     end
     StaffMailer.confirm(realbody, "gm-info@ropecon.fi", @person.primary_email, nil, @event.name + " - GM-ilmoittautuminen / GM sign-up").deliver
