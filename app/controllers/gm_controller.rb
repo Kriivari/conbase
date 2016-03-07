@@ -89,7 +89,7 @@ class GmController < Application
 
       for genre in genres
         genresym = genre.id.to_sym
-        if(params[gamesym][genresym])
+        if params[gamesym][genresym]
           att = ProgramsEventsAttribute.new
           att.program = game
           att.event = @event
