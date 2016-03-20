@@ -1,5 +1,5 @@
 class ProgramsController < Application
-  before_filter :authorize, :except => [:new, :newen, :create, :createen, :public, :csv, :xml, :tabular]
+  before_filter :authorize, :except => [:new, :newen, :newlarp, :create, :createen, :public, :csv, :xml, :tabular]
 #  caches_page :csv, :public, :tabular
 #  cache_sweeper :program_sweeper, :only => [:edit, :create]
 
