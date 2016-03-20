@@ -153,7 +153,7 @@ class PeopleController < Application
       return
     end
     Person.find(params[:id]).destroy
-    redirect_to :action => 'list'
+    redirect_to :action => 'index'
   end
 
   def duplicates

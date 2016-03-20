@@ -9,9 +9,13 @@
 
 <p>Olet pyytänyt seuraavanlaista myyntipaikkaa:</p>
 <ul>
-<li><%= @exhibitor.tables.to_s %> pöytää (koko <%= @exhibitor.tablesize %>)</li>
+<li><%= @exhibitorbooth %>
+<% if @exhibitorbooth == "Myyntiosasto" %>
+(koko <%= @tables %> neliömetriä)
+<% end %>
+</li>
 <% if @exhibitor.tickets %>
-<li><%= @exhibitor.tickets.to_s %> lisäranneketta</li>
+<li><%= @exhibitor.tickets.to_s %> ranneketta</li>
 <% end %>
 <% if @exhibitor.travelpasses %>
 <li><%= @exhibitor.travelpasses.to_s %> myyjäpassia</li>
@@ -21,7 +25,7 @@
 
 <p>Tämä viesti ei ole vahvistus varauksesta.</p>
 <p>Otamme yhteyttä mahdollisimman pian.</p>
-<p><%= @event.name %> kaubamajatiimi<br />
-<a href="mailto:kaubamaja@ropecon.fi">kaubamaja@ropecon.fi</a></p>
+<p><%= @event.name %> myyntialuetiimi<br />
+<a href="mailto:myyntialue@ropecon.fi">myyntialue@ropecon.fi</a></p>
 </body>
 </html>
