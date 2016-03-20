@@ -7,3 +7,5 @@ gem 'jquery-rails', '>= 1.0.12'
 gem 'calendar_date_select'
 gem 'prawn'
 gem 'therubyracer'
+
+gem 'thin'
