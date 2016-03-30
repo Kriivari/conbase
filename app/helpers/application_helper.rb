@@ -29,7 +29,7 @@ module ApplicationHelper
   end
 
   def self.reference(prefix,object)
-    return refnumber(prefix.to_s + object.id.to_s)
+    return refnumber(prefix.to_s + object.id.to_s) unless object.is_a?(String)
   end
 
   def self.refnumber(orig)
