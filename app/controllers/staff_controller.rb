@@ -1,6 +1,6 @@
 class StaffController < Application
-#  before_filter :authorize, :except => [:new, :create, :tshirt, :ordershirt]
-  before_filter :authorize, :except => [:login]
+  before_filter :authorize, :except => [:new, :create, :tshirt, :ordershirt]
+#  before_filter :authorize, :except => [:login]
 
   def index
     @groups = Persongroup.all(:conditions => ["event_id=?", @event.id], :order => "name")
