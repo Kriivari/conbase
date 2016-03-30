@@ -17,7 +17,5 @@ test:
 
 production:
   adapter: postgresql
-  database: ropecon
-  username: www-data
-  password: www-data
-  host: localhost
+  database: conbase_production
+  host: /var/run/postgresql/

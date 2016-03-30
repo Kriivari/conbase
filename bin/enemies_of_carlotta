@@ -6,7 +6,7 @@
 set -e
 
 if [ "$1" == "subscribe" -o "$1" == "unsubscribe" ]; then
-  enemies-of-carlotta --"$1" --name="$2" "$3"
+  ssh alias@dipoli.ropecon.fi enemies-of-carlotta --"$1" --name="$2" "$3"
 else
   exit 2
 fi

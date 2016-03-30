@@ -23,6 +23,7 @@ Conbase::Application.configure do
 
   config.action_mailer.delivery_method = :sendmail
 
-  config.mailing_list_client = "sudo -H -u alias /usr/local/conbase/bin/enemies_of_carlotta"
+  #config.mailing_list_client = "sudo -H -u alias /usr/local/conbase/bin/enemies_of_carlotta"
+  config.mailing_list_client = "/srv/conbase/conbase/bin/enemies_of_carlotta"
   #config.mailing_list_client = "/usr/local/conbase/bin/enemies_of_carlotta"
 end
