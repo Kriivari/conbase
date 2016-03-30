@@ -29,6 +29,9 @@ module ApplicationHelper
   end
 
   def self.reference(prefix,object)
+    if object.is_a?(String)
+      return ""
+    end
     return refnumber(prefix.to_s + object.id.to_s) unless object.is_a?(String)
   end
 
