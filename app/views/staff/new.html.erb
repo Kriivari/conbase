@@ -6,7 +6,7 @@
      sen perillemenosta.</p>
 <%= form_for( @person, :url => { :action => 'create' } ) do |f| %>
 <div>
-<table border="0" id="comment_form" width="400px">
+<table border="0" id="comment_form" width="500px">
 
 	<tr>
 		<td align="left" valign="top">Etunimi: <span class="form_required">*</span></td>
@@ -56,23 +56,15 @@
   <% end %>
 	<tr>
 		<td align="left" valign="top">Kahdeksan tunnin työpanos Conin aikana oikeuttaa viikonloppurannekkeeseen. Haluan sen lisäksi päivystää varatyövoimana neljä tuntia ja saada kaksi ruokarahaa. Tässä ilmoitetaan vain halukkuus, vahvistus asiaan tulee myöhemmin.</td>
-		<td class="element" valign="top" align="left">	</td>
-	</tr>
-	<tr>
-		<td align="left" valign="top"></td>
-		<td class="element" valign="top" align="left">	<input name="extra" value="yes" type="radio" id="extra_yes" /><label for="extra_yes">Kyllä</label>&nbsp;<input name="extra" value="ei" type="radio" id="extra_no" /><label for="extra_no">Ei</label></td>
+		<td class="element" valign="bottom" align="left">	<input name="extra" value="yes" type="radio" id="extra_yes" /><label for="extra_yes">Kyllä</label>&nbsp;<input name="extra" value="ei" type="radio" id="extra_no" /><label for="extra_no">Ei</label></td>
 	</tr>
 	<tr>
 		<td align="left" valign="top">Minulla on JV-kortti ja suostun, jopa vaadin saada tehdä yli 12 tuntia töitä.</td>
-		<td class="element" valign="top" align="left">	</td>
+		<td class="element" valign="bottom" align="left">	<input name="toomuch" value="yes" type="radio" id="toomuch_yes" /><label for="toomuch_yes">Kyllä</label>&nbsp;<input name="toomuch" value="ei" type="radio" id="toomuch_no" /><label for="toomuch_no">Ei</label></td>
 	</tr>
 	<tr>
-		<td align="left" valign="top"></td>
-		<td class="element" valign="top" align="left">	<input name="toomuch" value="yes" type="radio" id="toomuch_yes" /><label for="toomuch_yes">Kyllä</label>&nbsp;<input name="toomuch" value="ei" type="radio" id="toomuch_no" /><label for="toomuch_no">Ei</label></td>
-	</tr>
-	<tr>
-		<td align="left" valign="top">Minulla on voimassaoleva järjestyksenvalvojakortti. Järjestyksenvalvojakortin numero</td>
-		<td class="element" valign="top" align="left">	<input size="30" style="width: 350px" name="jvnumber" id="jvnumber" type="text" /></td>
+		<td align="left" valign="top">Voimassaolevan järjestyksenvalvojakortin numero</td>
+		<td class="element" valign="bottom" align="left">	<input size="30" style="width: 350px" name="jvnumber" id="jvnumber" type="text" /></td>
 	</tr>
 	<tr>
 		<td align="left" valign="top">Muuta kokemusta vastaavista tapahtumista:</td>
@@ -87,7 +79,7 @@
 		<td class="element" valign="top" align="left">	<textarea size="30" style="width: 350px" rows="2" wrap="virtual" name="kuulut" id="kuulut"></textarea></td>
 	</tr>
 	<tr>
-		<td align="left" valign="top">Täyttämällä tämän lomakkeen annat luvan Ropecon ry:lle käyttää tietojasi <a href="http://www.ropecon.fi/permanent/rekisteriseloste.html">rekisteriselosteen</a> mukaisiin tarkoituksiin.</td>
+		<td colspan="2" align="left" valign="top">Täyttämällä tämän lomakkeen annat luvan Ropecon ry:lle käyttää tietojasi <a href="http://www.ropecon.fi/permanent/rekisteriseloste.html">rekisteriselosteen</a> mukaisiin tarkoituksiin.</td>
 	</tr>
     <tr>
       <td align="left" valign="top">Jätä tämä kenttä tyhjäksi!:</td>
