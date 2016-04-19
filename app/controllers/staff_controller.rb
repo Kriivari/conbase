@@ -96,6 +96,11 @@ class StaffController < Application
       @person.primary_phone = params[:person][:primary_phone]
       @person.birthyear = params[:person][:birthyear]
       @person.notes = params[:person][:notes] + "; " + params[:kuulit] + "; " + params[:kuulut]
+      if @person.firstname != params[:person][:firstname] || @person.lastname != params[:person][:lastname]
+        @person.notes = @person.notes + "\nVanha nimi: " + @person.firstname + " " + @person.lastname
+        @person.firstname = params[:person][:firstname]
+        @person.lastname = params[:person][:lastname]
+      end
       @person.nickname = params[:person][:nickname]
       @person.photo_url = params[:person][:photo_url]
     else
