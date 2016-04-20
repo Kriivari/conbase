@@ -1,3 +1,4 @@
+<% count = 0 %>
 <h1><%= @attribute.name %></h1>
 
 <table>
@@ -23,6 +24,7 @@ if att.person
     }
 #  end
   if show.length > 0
+    count++
 %>
   <tr>
     <td><%= att.person.lastname %></td>
@@ -38,3 +40,5 @@ if att.person
 end
 end %>
 </table>
+
+<p><b>Yhteensä <%= count %> henkilöä.</b></p>
