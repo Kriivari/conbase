@@ -14,6 +14,7 @@
   <table>
     <tr><td>Myyntituote:</td><td><%= collection_select(:product_type, :product_id, Product.all, :id, :name) %></td></tr>
     <tr><td>Nimi:</td><td><%= f.text_field :name %></td></tr>
+    <tr><td>Englanninkielinen nimi:</td><td><%= f.text_field :nameen %></td></tr>
     <tr><td>Hinta:</td><td><%= f.text_field :price %></td></tr>
     <tr><td>Toisen ja useamman kappaleen hinta:</td><td><%= f.text_field :secondprice %></td></tr>
     <tr><td>Myytävissä:</td><td><%= f.check_box :active %></td></tr>

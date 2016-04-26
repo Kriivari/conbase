@@ -93,6 +93,7 @@ class ExhibitorsController < Application
 
   def createen
     create
+    render
   end
 
   def destroy
