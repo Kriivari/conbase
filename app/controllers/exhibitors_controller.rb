@@ -1,5 +1,5 @@
 class ExhibitorsController < Application
-  before_filter :authorize, :except => [:new, :create]
+  before_filter :authorize, :except => [:new, :create, :newen, :createen]
 
   def index
     list
