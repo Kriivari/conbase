@@ -29,6 +29,8 @@ Conbase::Application.routes.draw do
 
   resources :exhibitors do
     get 'rmproduct', :on => :collection
+    get 'newen'
+    get "createen"
   end
 
   resources :programgroups
