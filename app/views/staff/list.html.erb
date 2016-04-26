@@ -29,7 +29,7 @@ end %>
     </table>
 
     <table border="1">
-<tr><th colspan="2"></th><th>Etunimi</th><th>Sukunimi</th><th>Lempinimi</th><th>Sähköposti</th><th>Puhelin</th><th>Kuva</th><th>Syntymävuosi</th><th>Halutut pisteet</th><th>Vanhat pisteet</th><th>Oma ilmoitus</th><th>CV</th><th>JV</th><th>Muuta</th></tr>
+<tr><th colspan="2"></th><th>Etunimi</th><th>Sukunimi</th><th>Lempinimi</th><th>Sähköposti</th><th>Puhelin</th><th>Syntymävuosi</th><th>Halutut pisteet</th><th>Vanhat pisteet</th><th>Oma ilmoitus</th><th>CV</th><th>JV</th><th>Muuta</th></tr>
       <% count = 0 %>
       <% @staffs.each{ |staff| %>
 <tr>
@@ -40,7 +40,6 @@ end %>
 <td valign="top"><%=staff.nickname%></td>
 <td valign="top"><%=staff.primary_email%></td>
 <td valign="top"><%=staff.primary_phone%></td>
-<td valign="top"><a href="<%=staff.photo_url%>"><%=staff.photo_url%></a></td>
 <td valign="top"><%=staff.birthyear%></td>
 <td valign="top">
 <% staff.people_persongroups.each { |group|
