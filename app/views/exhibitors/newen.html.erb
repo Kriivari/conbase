@@ -1,0 +1,92 @@
+<div class="sisalto">
+  <h2><%= flash[:notice] %></h2>
+  <h2><%= @event %> Vendor Registration Form</h2>
+
+  <p>Your registration will be confirmed via email after sending your reservation.</p>
+  <%= form_for( @exhibitor, :url => { :action => "create" } ) do |f| %>
+      <div>
+        <table border="0" id="comment_form">
+
+          <tr>
+            <td align="left" valign="top">Company / Organization (published online and in the layout of the Vendor Hall): <span class="form_required">*</span></td>
+            <td class="element" valign="top" align="left">	<input id="exhibitor_companyname" name="exhibitor[companyname]" size="30" style="width: 350px" type="text" /></td>
+          </tr>
+          <tr>
+            <td align="left" valign="top">Description (published online and in the layout):</td>
+            <td class="element" valign="top" align="left">	<input size="30" style="width: 350px" name="exhibitor[description]" id="exhibitor_description" type="text" /></td>
+          </tr>
+          <tr>
+            <td align="left" valign="top">First name of the contact person: <span class="form_required">*</span></td>
+            <td class="element" valign="top" align="left">	<input size="30" style="width: 350px" name="person[firstname]" id="person_firstname" type="text" /></td>
+          </tr>
+          <tr>
+            <td align="left" valign="top">Family name of the contact person: <span class="form_required">*</span></td>
+            <td class="element" valign="top" align="left">	<input size="30" style="width: 350px" name="person[lastname]" id="person_lastname" type="text" /></td>
+          </tr>
+          <tr>
+            <td align="left" valign="top">Mobile phone number: <span class="form_required">*</span></td>
+            <td class="element" valign="top" align="left">	<input size="30" style="width: 350px" name="person[primary_phone]" id="person_primary_phone" type="text" length="20" /></td>
+          </tr>
+          <tr>
+            <td align="left" valign="top">Email address: <span class="form_required">*</span></td>
+            <td class="element" valign="top" align="left">	<input size="30" style="width: 350px" name="person[primary_email]" id="person_primary_email" type="text" /></td>
+          </tr>
+          <tr>
+            <td align="left" valign="top">Billing address: <span class="form_required">*</span></td>
+            <td class="element" valign="top" align="left">	<input size="30" style="width: 350px" name="exhibitor[billing_address]" id="exhibitor_billing_address" type="text" /></td>
+          </tr>
+          <tr>
+            <td align="left" valign="top">Billing reference:</td>
+            <td class="element" valign="top" align="left">	<input size="30" style="width: 350px" name="exhibitor[customer_reference]" id="exhibitor_customer_reference" type="text" /></td>
+          </tr>
+          <tr>
+            <td align="left" valign="top">Stand type: <span class="form_required">*</span></td>
+            <td class="element" valign="top" align="left">
+              <% for size in @sizes %>
+                <input name="table" value="<%= size.name %>" type="radio" id="table_<%= size.id %>" /> <%= size.name %><br/>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <td align="left" valign="top">The area (in square meters) for the stand area, if applicable:</td>
+            <td class="element" valign="top" align="left">	<input size="30" style="width: 350px" name="tables" id="tables" type="text" /></td>
+          </tr>
+          <tr>
+            <td align="left" valign="top">Number of Vendor Badges reserved:</td>
+            <td class="element" valign="top" align="left">	<input size="30" style="width: 350px" name="travelpasses" id="travelpasses" type="text" /></td>
+          </tr>
+          <tr>
+            <td align="left" valign="top">Number of weekend tickets reserved:</td>
+            <td class="element" valign="top" align="left">	<input size="30" style="width: 350px" name="tickets" id="tickets" type="text" /></td>
+          </tr>
+          <tr>
+            <td align="left" valign="top">Information about advertisements in the programme leaflet reserved:</td>
+            <td class="element" valign="top" align="left">	<textarea size="30" style="width: 350px" rows="5" wrap="virtual" name="advertisements" id="advertisements"></textarea></td>
+          </tr>
+          <tr>
+            <td align="left" valign="top">Additional information and requests:</td>
+            <td class="element" valign="top" align="left">	<textarea size="30" style="width: 350px" rows="5" wrap="virtual" name="exhibitor[notes]" id="exhibitor_notes"></textarea></td>
+          </tr>
+          <tr>
+            <td align="left" valign="top">I agree to the <a href="http://www.ropecon.fi/pmwiki/index.php/Intra/Myyj%C3%A4ehdot2016">Terms and Conditions of the Ropecon 2016 Vendor Hal</a>. <span class="form_required">*</span></td>
+            <td class="element" valign="top" align="left">	<input name="agree" id="agree" type="checkbox" /></td>
+          </tr>
+          <tr>
+            <td align="left" valign="top">For promotional stands, please refer to the <a href="http://www.ropecon.fi/pmwiki/index.php/Intra/Yhdistysehdot2016">Terms and Conditions of Promotional Stand</a>.</td>
+            <td class="element" valign="top" align="left"></td>
+          </tr>
+          <tr>
+            <td align="left" valign="top">By filling out this form you give the Ropecon Association permission to use your personal information for the purposes described in our <a href="http://www.ropecon.fi/permanent/rekisteriseloste.html">Privacy Policy</a>.</td>
+          </tr>
+          <tr>
+            <td align="left" valign="top"></td>
+            <td valign="top" align="left">	<%= f.submit( "SEND YOUR RESERVATION" ) %></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td align="left" valign="top">* A compulsory field</td>
+          </tr>
+        </table>
+      </div>
+  <% end %>
+</div>

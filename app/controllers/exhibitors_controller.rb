@@ -42,6 +42,10 @@ class ExhibitorsController < Application
 #    @sizes = Product.find_by_name( "Myyntipöytä" ).product_types.active( true )
   end
 
+  def newen
+    new
+  end
+
   def create
     @exhibitor = Exhibitor.create(params[:exhibitor])
     unless params[:agree]
@@ -85,6 +89,10 @@ class ExhibitorsController < Application
     @event.save
     @exhibitor.save
     ExhibitorMailer.confirmation_email(@event,@exhibitor,@exhibitorbooth,@tables).deliver
+  end
+
+  def createen
+    create
   end
 
   def destroy

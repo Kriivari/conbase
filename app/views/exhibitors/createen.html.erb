@@ -1,0 +1,28 @@
+<div class="sisalto">
+  <h2><%= flash[:notice] %></h2>
+  <h2>Vendor Area Reservation</h2>
+  <% if @exhibitor.errors.empty? %>
+      <p>Thank you for your reservation. The information below has been stored. You will receive a final confirmation via email.
+      <p>Lisätietoja tarvittaessa osoitteesta myyntialue@ropecon.fi</p>
+
+      <p>First name: <%= @exhibitor.person.firstname %></p>
+      <p>Family name: <%= @exhibitor.person.lastname %></p>
+      <p>Email address: <%= @exhibitor.person.primary_email %></p>
+      <p>Mobile phone number: <%= @exhibitor.person.primary_phone %></p>
+      <p>Company / Organization: <%= @exhibitor.companyname %></p>
+      <p>Billing address: <%= @exhibitor.billing_address %></p>
+      <p>Stand type: <%= @exhibitorbooth %>
+<% if @exhibitorbooth == "Myyntiosasto" %>
+        (Size <%= @tables %> square meters)
+<% end %>
+      </p>
+      <p>Weekend tickets: <%= @exhibitor.tickets %></p>
+      <p>Vendor badges: <%= @exhibitor.travelpasses %></p>
+      <p>Additional information: <%= @exhibitor.notes %></p>
+      <br />
+      <p><b>Preliminary automatically calculated total price: <%= @exhibitor.total %> euros</b></p>
+  <% else %>
+      <%= render "shared/error_messages", :target => @exhibitor %>
+      <p>Your reservation has not been stored! Please go back and correct incorrect information.</p>
+  <% end %>
+</div>

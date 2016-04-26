@@ -6,26 +6,27 @@
 <p>Hei <%= @exhibitor.person.name %> / <%= @exhibitor.companyname %>,</p>
 
 <p>Kiitos yhteydenotostasi. Tämä on järjestelmän automaattinen vastausviesti. Olet lähettänyt pyynnön myyntipaikasta <%= @event.name %> <%= @event.year.to_s %> -tapahtumaan.</p>
+<p>Thank you for your reservation. This is an automatically generated email. You have entered a request for a vendor area for <%= @event.name %> <%= @event.year.to_s %>.</p>
 
-<p>Olet pyytänyt seuraavanlaista myyntipaikkaa:</p>
+<p>Olet pyytänyt seuraavanlaista myyntipaikkaa / You have asked the following vendor area:</p>
 <ul>
 <li><%= @exhibitorbooth %>
 <% if @exhibitorbooth == "Myyntiosasto" %>
-(koko <%= @tables %> neliömetriä)
+(koko <%= @tables %> neliömetriä / size <%= @tables %> square meters)
 <% end %>
 </li>
 <% if @exhibitor.tickets %>
-<li><%= @exhibitor.tickets.to_s %> ranneketta</li>
+<li><%= @exhibitor.tickets.to_s %> ranneketta / weekend tickets</li>
 <% end %>
 <% if @exhibitor.travelpasses %>
-<li><%= @exhibitor.travelpasses.to_s %> myyjäpassia</li>
+<li><%= @exhibitor.travelpasses.to_s %> myyjäpassia / vendor badges</li>
 <% end %>
 </ul>
-<p>Varauksen alustava kokonaishinta: <%= @exhibitor.total.to_s %> euroa.</p>
+<p>Varauksen alustava kokonaishinta / Preliminary total price: <%= @exhibitor.total.to_s %> euroa.</p>
 
-<p>Tämä viesti ei ole vahvistus varauksesta.</p>
-<p>Otamme yhteyttä mahdollisimman pian.</p>
-<p><%= @event.name %> myyntialuetiimi<br />
+<p>Tämä viesti ei ole vahvistus varauksesta. / This message is not a confirmation of the reservation.</p>
+<p>Otamme yhteyttä mahdollisimman pian. / We will contact you as soon as possible.</p>
+<p><%= @event.name %> myyntialuetiimi / Vendor Area Team<br />
 <a href="mailto:myyntialue@ropecon.fi">myyntialue@ropecon.fi</a></p>
 </body>
 </html>
