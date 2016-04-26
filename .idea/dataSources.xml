@@ -30,7 +30,7 @@
     <data-source source="LOCAL" name="Rails conbase: production" uuid="d72d58d5-ed47-4c77-a062-e11a1f63764d">
       <driver-ref>postgresql</driver-ref>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://127.0.0.1/ropecon</jdbc-url>
+      <jdbc-url>jdbc:postgresql:///var/run/postgresql//conbase_production</jdbc-url>
       <libraries>
         <library>
           <url>file://$USER_HOME$/Library/Preferences/RubyMine40/jdbc-drivers/postgresql-driver-license.txt</url>
