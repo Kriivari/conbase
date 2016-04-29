@@ -86,7 +86,7 @@ class Person < ActiveRecord::Base
     end
 
     self.people_persongroups.each { |group|
-      if group.persongroup.event.id == event.id && group.persongroup.days && group.persongroup.days > maxdays && group.status == -1
+      if event && group.persongroup.event && group.persongroup.event.id == event.id && group.persongroup.days && group.persongroup.days > maxdays && group.status == -1
         maxdays = maxdays + group.persongroup.days
       end
     }
