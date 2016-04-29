@@ -5,6 +5,9 @@ class PeopleEventsAttribute < ActiveRecord::Base
 
   def self.by_name(event,name,person)
     attribute = ::Attribute.find_by_name(name)
+    if event == nil || person == nil || attribute == nil
+      return
+    end
     PeopleEventsAttribute.where("event_id=? and person_id=? and attribute_id=?", event.id, person.id, attribute.id)
   end
 end
