@@ -8,7 +8,7 @@ class StaffController < Application
 
   def tshirt
     @person = Person.new
-    @shirttypes = ProductType.all(:conditions => ["product_id=?", Product.first(:conditions => ["name='Staff-paita'"]).id]).sort{ |a,b| a.name <=> b.name }
+    @shirttypes = ProductType.all(:conditions => ["product_id=? and active=true", Product.first(:conditions => ["name='Staff-paita'"]).id]).sort{ |a,b| a.name <=> b.name }
     begin
       render(:layout => "layouts/" + @event.name.to_s + "_staff" )
     rescue Exception
