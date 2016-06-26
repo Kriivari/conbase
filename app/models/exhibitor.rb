@@ -57,7 +57,7 @@ class Exhibitor < ActiveRecord::Base
     unless product_types && product_types.select{|t| t.product.name == "Myyntipöytä"}
       return 0
     end
-    return product_types.select{|t| t.product.name == "Myyntipöytä"}.size
+    return product_types.select{|t| t.product.name == "Myyntipöytä" && t.name != "A-myyntipöytä" && t.name != "B-myyntipöytä"}.size
   end
 
   def tickets
@@ -98,6 +98,13 @@ class Exhibitor < ActiveRecord::Base
   end
 
   def self.special_type( product_type )
-    return product_type.product_id == 3 || (product_type.product_id == 2 && product_type.id == 3)
+    if product_type.product_id == 3 #Myyntipöytä
+      return false if product_type.name == "A-myyntipöytä" || product_type.name == "B-myyntipöytä"
+      return true
+    end
+    return true if product_type.id == 5 # Myyjäpassi
+    return true if product_type.id == 3 #Viikonloppuranneke
+
+    false
   end
 end

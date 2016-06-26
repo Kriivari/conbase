@@ -47,7 +47,7 @@ class InvoicePdf < Prawn::Document
       for product_type in invoice.product_types
         next if Exhibitor.special_type( product_type )
 	if prevname != product_type.fullname || prevprice != product_type.price 
-	  if prevname != ""
+	  if prevname != "" # && (prevname != "Ranneke Myyjäpassi" && prevqty != invoice.travelpasses)
             rows << [prevname, prevqty, {:content => "%.2f €" % prevprice, :align => :right}, invoice.rebate.to_s + "%", {:content => "%.2f €" % (prevqty * prevprice * (100-invoice.rebate) / 100), :align => :right}]
 	  end
 	  prevname = product_type.fullname
