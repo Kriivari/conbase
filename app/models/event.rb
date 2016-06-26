@@ -58,8 +58,24 @@ class Event < ActiveRecord::Base
   end
 
   def food_count
-    foods = Person.find_by_sql(["select distinct people.* from people where id in (select person_id from people_persongroups where persongroup_id in (select id from persongroups where event_id=? and food>0))", self.id])
-    return foods.size
+    #foods = Person.find_by_sql(["select distinct people.* from people where id in (select person_id from people_persongroups where persongroup_id in (select id from persongroups where event_id=? and food>0))", self.id])
+    #return foods.size
+    totalfood = 0
+    ppl = {}
+
+    foods = Person.find_by_sql(["select distinct string_agg(pg.name, ', ') as groups , max(pg.food) as food, p.id, p.firstname, p.lastname from people p inner join people_persongroups ppg on p.id = ppg.person_id inner join persongroups pg on ppg.persongroup_id = pg.id where pg.event_id=? and pg.food>0 and ppg.status = -1 group by p.id order by 1", self.id])
+    foods.each {|f|
+        ppl[f.id] = {:food => f.food, :groups => f.groups}
+    }
+
+    attr = PeopleEventsAttribute.find(:all, :conditions => ["event_id = :event and attribute_id = 5", {:event => self.id}])
+    attr.each {|f|
+        ppl[f.person_id] = {:food => f.value}
+    }
+    ppl.each {|pid,gg|
+	totalfood += gg[:food].to_i
+    }
+    return totalfood
   end
 
   def times
