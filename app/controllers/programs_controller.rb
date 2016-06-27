@@ -32,6 +32,21 @@ class ProgramsController < Application
     render :action => "list"
   end
 
+  def export
+    publicdata
+    respond_to do |format|
+      format.json do
+        headers["Content-Type"] = "application/json; charset=utf-8"
+        render "export.json", :layout => false
+      end
+      format.xml do
+        headers["Content-Type"] = "application/xml; charset=utf-8"
+        render "export.xml", :layout => false
+      end
+      format.csv
+    end
+  end
+
   def xml
     publicdata
     respond_to do |format|

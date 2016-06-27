@@ -1,0 +1,41 @@
+<% cache('programs_xml') do %>
+<contvlist>
+    <event name='<%= @event.name %>' year='<%= @event.year.to_s %>'>
+<% @programs.each do |program| %>
+        <item id='<%= program.id %>'
+              name='<%= h(program.program.name) %>'
+              itemname='<%= h(program.name) %>'
+              description='<%= h(program.program.description) %>'
+              itemdescription='<%= h(program.description) %>'
+              location='<%= program.location.name %>'
+              day='<%= program.start_time.strftime("%a") %>'
+              startday='<%= program.start_time.strftime("%Y-%m-%d") %>'
+              endday='<%= program.end_time.strftime("%Y-%m-%d") %>'
+              starttime='<%= program.start_time.strftime("%H:%M") %>'
+              endtime='<%= program.end_time.strftime("%H:%M") %>'
+              attendance='<%= h(program.program.attendance) %>'
+              genre='<%= h(program.program.genre) %>'
+<% if program.created_at %>
+              created='<%= program.created_at.strftime("%Y-%m-%d %H:%M") %>'
+<% end %>
+<% if program.change %>
+              changed='<%= program.change.strftime("%Y-%m-%d %H:%M") %>'
+<% end %>
+        >
+<% program.program.programgroups.each do |group| %>
+            <type primary='<% group.primarygroup %>'>
+                <%=  group.name  %>
+            </type>
+<% end %>
+<% program.program.programs_organizers.each do |o| %>
+<% if o.person != nil && o.statusname.id != -5 %>
+            <organizer type='<%= o.statusname.name %>'>
+                <%=  o.person.name  %>
+            </organizer>
+<% end %>
+<% end %>
+        </item>
+<% end %>
+    </event>
+</contvlist>
+<% end %>

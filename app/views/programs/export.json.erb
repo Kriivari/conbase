@@ -1,0 +1,26 @@
+<% cache('programs_json') do %>
+[
+<% @programs.each do |program| %>
+  {
+    "id": "<%= program.id %>",
+    "title": "<%= program.program.name %>: <%= program.name %>",
+    "desc": "<%= program.program.description %> <%= program.description %>",
+    "loc": ["<%= program.location.name %>"],
+    "date": "<%= program.start_time.strftime("%Y-%m-%d") %>",
+    "time": "<%= program.start_time.strftime("%H:%M") %>",
+    "tags": [
+    <% program.program.programgroups.each do |group| %>
+      "<%= group.name %>",
+    <% end %>
+      ],
+    "people": [
+    <% program.program.programs_organizers.each do |o| %>
+      <% if o.person != nil && o.statusname.id != -5 %>
+        "<%= o.person.name %>",
+      <% end %>
+    <% end %>
+      ]
+  },
+<% end %>
+]
+<% end %>
