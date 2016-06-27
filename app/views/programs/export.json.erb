@@ -2,12 +2,12 @@
 <% @programs.each do |program| %>
   {
     "id": "<%= program.id %>",
-    "title": "<%= program.program.name %>: <%= program.name %>",
-    "desc": "<%= program.program.description %> <%= program.description %>",
+    "title": "<%= program.fullname %>",
+    "desc": "<%= program.fulldescription %>",
     "loc": ["<%= program.location.name %>"],
     "date": "<%= program.start_time.strftime("%Y-%m-%d") %>",
     "time": "<%= program.start_time.strftime("%H:%M") %>",
-    "mins": "<%= (program.end_time - program.start_time) * 24 * 60 %>",
+    "mins": "<%= (program.end_time - program.start_time).to_i %>",
     "tags": [
     <% program.program.programgroups.each do |group| %>
       "<%= group.name %>",

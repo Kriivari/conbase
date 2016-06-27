@@ -5,6 +5,20 @@ class Programitem < ActiveRecord::Base
   cattr_reader :per_page
   @@per_page = 10
 
+  def fullname
+    if name && name.length > 0
+      return program.name + ": " + name
+    end
+    return program.name
+  end
+
+  def fulldescription
+    if description && description.length > 0
+      return program.description + " " + description
+    end
+    return program.description
+  end
+
   def validate
     unless start_time && end_time && start_time < end_time
       errors.add(:start_time, "Alku- tai loppuaika puuttuu tai loppuaika ei ole alkuajan jälkeen.")
