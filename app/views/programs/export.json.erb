@@ -8,7 +8,7 @@
     "date": "<%= program.start_time.strftime("%Y-%m-%d") %>",
     "time": "<%= program.start_time.strftime("%H:%M") %>",
     "mins": "<%= ((program.end_time - program.start_time)/60).to_i %>",
-    "tags": <%= program.program.programgroups.map{ |group| group.name }.html_safe %>,
+    "tags": <%= program.program.programgroups.map{ |group| group.name }.to_s.html_safe %>,
     "people": [
     <% program.program.programs_organizers.each do |o| %>
       <% if o.person != nil && o.statusname.id != -5 %>
