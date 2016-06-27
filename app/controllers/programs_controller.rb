@@ -37,7 +37,22 @@ class ProgramsController < Application
     respond_to do |format|
       format.json do
         headers["Content-Type"] = "application/json; charset=utf-8"
-        render "export.json", :layout => false
+        output = []
+        for program in programs do
+          people = []
+          for organizer in program.program.programs_organizers do
+            if organizer.person && organizer.statusname.id != -5
+              o = { :id => o.person.id, :name => o.person.fullname }
+              people << o
+            end
+          end
+          pr = { :id => program.id, :title => program.fullname, :desc => program.fulldescription,
+                 :loc => [program.location.name], :date=> program.start_time.strftime("%Y-%m-%d"),
+                 :time => program.start_time.strftime("%H:%M"), :mins => ((program.end_time - program.start_time)/60).to_i,
+                 :tags => program.program.programgroups.map{ |group| group.name }, :people => people }
+          output << pr
+        end
+        render :json => output
       end
       format.xml do
         headers["Content-Type"] = "application/xml; charset=utf-8"
