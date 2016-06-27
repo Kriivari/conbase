@@ -36,7 +36,7 @@ class ProgramsController < Application
     publicdata
     respond_to do |format|
       format.json do
-        headers["Content-Type"] = "application/json; charset=utf-8"
+        #headers["Content-Type"] = "application/json; charset=utf-8"
         output = []
         for program in @programs do
           people = []
