@@ -42,7 +42,7 @@ class ProgramsController < Application
           people = []
           for organizer in program.program.programs_organizers do
             if organizer.person && organizer.statusname.id != -5
-              o = { :id => o.person.id, :name => o.person.fullname }
+              o = { :id => organizer.person.id, :name => organizer.person.fullname }
               people << o
             end
           end
