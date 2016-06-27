@@ -52,7 +52,7 @@ class ProgramsController < Application
                  :tags => program.program.programgroups.map{ |group| group.name }, :people => people }
           output << pr
         end
-        render :json => output
+        render :json => output, :layout => false
       end
       format.xml do
         headers["Content-Type"] = "application/xml; charset=utf-8"
