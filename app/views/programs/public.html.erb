@@ -44,7 +44,7 @@
                      <%= @wdays[program.end_time.wday] %>
                      <%= program.end_time.strftime("%H.%M") %>
     </td>
-<% if program.program.programgroups %>
+<% if program.program.programgroups  && program.program.programgroups.length > 0 %>
     <td class="cat<%= program.program.programgroups.first.id %>" title="<%= h program.program.description %>">
 <% else %>
     <td class="name" title="<%= h program.program.description %>">
