@@ -10,11 +10,14 @@
     "mins": "<%= ((program.end_time - program.start_time)/60).to_i %>",
     "tags": <%= program.program.programgroups.map{ |group| group.name }.to_s.html_safe %>,
     "people": [
-    <% program.program.programs_organizers.each do |o| %>
-      <% if o.person != nil && o.statusname.id != -5 %>
-        "<%= o.person.name %>",
+      <% program.program.programs_organizers.each do |o|
+        if o.person && o.statusname.id != -5 %>
+      {
+        "id": "<%= o.person.id %>",
+        "name": "<%= o.person.fullname %>"
+      },
+        <% end %>
       <% end %>
-    <% end %>
       ]
   },
 <% end %>
