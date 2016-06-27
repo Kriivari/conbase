@@ -38,7 +38,7 @@ class ProgramsController < Application
       format.json do
         headers["Content-Type"] = "application/json; charset=utf-8"
         output = []
-        for program in programs do
+        for program in @programs do
           people = []
           for organizer in program.program.programs_organizers do
             if organizer.person && organizer.statusname.id != -5
