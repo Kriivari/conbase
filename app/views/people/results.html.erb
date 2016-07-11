@@ -8,6 +8,7 @@
     <th>Sähköposti</th>
     <th>Puhelin</th>
     <th>Syntynyt</th>
+    <th>Ryhmät</th>
     <th>Muistiinpanot</th>
     <th>CV</th>
     <th>Salasana</th>
@@ -18,13 +19,14 @@
   <tr>
     <td valign="top"><%= link_to person.firstname, :action => 'show', :id => person %></td>
     <td valign="top"><%= link_to person.lastname, :action => 'show', :id => person %></td>
-    <td valign="top"><%= person.nickname %>
-    <td valign="top"><%= person.primary_email %>
-    <td valign="top"><%= person.primary_phone %>
-    <td valign="top"><%= person.birthyear %>
-    <td valign="top"><%= person.notes %>
-    <td valign="top"><%= person.cv %>
-    <td valign="top"><%= person.password != nil %>
+    <td valign="top"><%= person.nickname %></td>
+    <td valign="top"><%= person.primary_email %></td>
+    <td valign="top"><%= person.primary_phone %></td>
+    <td valign="top"><%= person.birthyear %></td>
+    <td valign="top"><%= person.realgroups( @event ) %></td>
+    <td valign="top"><%= person.notes %></td>
+    <td valign="top"><%= person.cv %></td>
+    <td valign="top"><%= person.password != nil %></td>
     <td><%= link_to 'Näytä', :action => 'show', :id => person %></td>
     <td><%= link_to 'Muokkaa', :action => 'edit', :id => person %></td>
     <td><%= button_to 'Poista', { :action => 'destroy', :id => person }, :confirm => 'Are you sure?', :method => :delete %></td>
