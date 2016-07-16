@@ -50,6 +50,9 @@ class ProgramsController < Application
                  :loc => [program.location.name], :date=> program.start_time.strftime("%Y-%m-%d"),
                  :time => program.start_time.strftime("%H:%M"), :mins => ((program.end_time - program.start_time)/60).to_i,
                  :tags => program.program.programgroups.map{ |group| group.name }, :people => people }
+          pr[:attendance] = program.program.attendance unless program.program.attendance.empty?
+          attr = program.program.programs_events_attributes.map {|a| next unless a.attribute_id == 1; a.value}
+          pr[:attributes] = attr unless attr.empty?
           output << pr
         end
         render :json => output, :layout => false
