@@ -14,6 +14,7 @@ Conbase::Application.configure do
 
   # Compress assets
   config.assets.compress = true
+  config.assets.logger = false
 
   config.assets.js_compressor = :uglifier
 
