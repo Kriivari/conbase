@@ -53,10 +53,9 @@ class Person < ActiveRecord::Base
         nonstaff = group if group.nonstaff
       end
     }
-    if staff
-      return staff.name
-    end
-    nonstaff.name
+    return staff.name if staff
+    return nonstaff.name if nonstaff
+    ''
   end
 
   def accepted?( event )
