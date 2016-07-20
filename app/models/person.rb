@@ -48,15 +48,15 @@ class Person < ActiveRecord::Base
     self.people_persongroups.each { |g|
       group = g.persongroup
       if group.event.id == event.id && g.status == -1
-        return group if group.name == 'Conitea'
+        return group.name if group.name == 'Conitea'
         staff = group unless group.nonstaff
         nonstaff = group if group.nonstaff
       end
     }
     if staff
-      return staff
+      return staff.name
     end
-    nonstaff
+    nonstaff.name
   end
 
   def accepted?( event )
