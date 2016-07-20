@@ -1,17 +1,21 @@
 <% cache('staff_tickets') do %>
 <h3><%= @event %></h3>
 <table border="1">
-<tr><th>Sukunimi</th><th>Etunimi</th><th>Päiviä</th></tr>
+<tr><th>Sukunimi</th><th>Etunimi</th><th>Lempinimi</th><th>Työpiste</th><th>Päiviä</th></tr>
 <% @staffs.each{ |staff| %>
 <tr>
 <% maxday = staff.max_days(@event)
 if maxday == 1 %>
 <td valign="top"><b><%=staff.lastname%></b></td>
 <td valign="top"><b><%=staff.firstname%></b></td>
+<td valign="top"><b><%=staff.nickname%></b></td>
+<td valign="top"><b><%=staff.primary_group(@event)%></b></td>
 <td valign="top"><b><%= maxday %></b></td>
 <% else %>
 <td valign="top"><%=staff.lastname%></td>
 <td valign="top"><%=staff.firstname%></td>
+<td valign="top"><%=staff.nickname%></td>
+<td valign="top"><%=staff.primary_group(@event)%></td>
 <td valign="top"><%= maxday %></td>
 <% end %>
 </tr>

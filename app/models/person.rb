@@ -26,61 +26,72 @@ class Person < ActiveRecord::Base
 
   def in_reserve_group?
     self.people_persongroups.each { |group|
-      if group.persongroup.event.id == @event.id && group.persongroup.name == "Varatyövoima"
-        return true
-      end
+      return true if group.persongroup.event.id == @event.id && group.persongroup.name == 'Varatyövoima'
     }
-    return false
+    false
   end
 
   def realgroups( event )
-    ret = ""
+    ret = ''
     self.people_persongroups.each { |group|
       if group.persongroup.event.id == event.id && group.status == -1
-	if ret.length > 0
-	  ret += ", "
-	end
-	ret += group.persongroup.name
+	      ret += ', ' if ret.length > 0
+      	ret += group.persongroup.name
       end
     }
-    return ret
+    ret
+  end
+
+  def primary_group( event )
+    staff = nil
+    nonstaff = nil
+    self.people_persongroups.each { |g|
+      group = g.persongroup
+      if group.event.id == event.id && g.status == -1
+        return group if group.name == 'Conitea'
+        staff = group unless group.nonstaff
+        nonstaff = group if group.nonstaff
+      end
+    }
+    if staff
+      return staff
+    end
+    nonstaff
   end
 
   def accepted?( event )
     self.people_persongroups.each { |group|
-      if group.persongroup.event.id == event.id && group.status == -1
-        return true
-      end
+      return true if group.persongroup.event.id == event.id && group.status == -1
     }
-    return false
+    false
   end
 
   def fullname
-    return lastname + " " + firstname
+    lastname + ' ' + firstname
   end
 
   def name
-    return firstname + " " + lastname
+    firstname + ' ' + lastname
   end
 
   def created
-    for group in self.people_persongroups
+    self.people_persongroups.each{ |group|
       if group.persongroup.event.object_id == @event.object_id
 	      return group.created_at
       end
-    end
-    return Time.now
+    }
+    Time.now
   end
 
   def max_days(event)
     maxdays = 0
-    for att in PeopleEventsAttribute.by_name(event,"Ranneke",self)
-      if att.value == "Paiva" && maxdays == 0
+    PeopleEventsAttribute.by_name(event,'Ranneke',self).each{ |att|
+      if att.value == 'Paiva' && maxdays == 0
         maxdays = 1
-      elsif att.value == "Viikonloppu" && maxdays < 3
+      elsif att.value == 'Viikonloppu' && maxdays < 3
         maxdays = 3
       end
-    end
+    }
     if maxdays > 0
       return maxdays
     end
@@ -90,51 +101,40 @@ class Person < ActiveRecord::Base
         maxdays = maxdays + group.persongroup.days
       end
     }
-    return maxdays
+    maxdays
   end
 
   def max_food(event)
     maxfood = 0
-    for food in PeopleEventsAttribute.by_name(event, "Ruokaraha", self)
+    PeopleEventsAttribute.by_name(event, 'Ruokaraha', self).each{ |food|
       if food.value && food.value.to_i > maxfood
         maxfood = food.value.to_i
       end
-    end
+    }
     self.people_persongroups.each { |group|
       if group.persongroup.event.id == event.id && group.persongroup.food != nil && group.persongroup.food > maxfood && group.status == -1
         maxfood = group.persongroup.food
       end
     }
-    return maxfood
+    maxfood
   end
 
   def before_create
-    if self.password != nil && self.password.length == 0
-      self.password = nil
-    end
-    if self.password != nil
-      #self.password = "$SALT$" || Person.hash_password(self.id.to_s || self.password)
-      self.password = Person.hash_password(self.password)
-    end
+    self.password = nil if self.password != nil && self.password.length == 0
+    self.password = Person.hash_password(self.password) unless self.password == nil
   end
 
   def self.login(name, password)
-    if password == nil || password.length == 0
-      return nil
-    end
-    person = Person.where("primary_email = ?", name).first
-    unless person
-      return nil
-    end
-    if person.password.start_with?( "$SALT$" )
-      hashed_password = "$SALT$" || hash_password(person.id.to_s || password || "")
+    return nil if password == nil || password.length == 0
+    person = Person.where('primary_email = ?', name).first
+    return nil unless person
+    if person.password.start_with?( '$SALT$' )
+      hashed_password = '$SALT$' || hash_password(person.id.to_s || password || '')
     else
-      hashed_password = hash_password(password || "")
+      hashed_password = hash_password(password || '')
     end
-    if person.password == hashed_password
-      return person
-    end
-    return nil
+    return person if person.password == hashed_password
+    nil
   end
 
   def try_to_login
@@ -142,40 +142,21 @@ class Person < ActiveRecord::Base
   end
 
   def self.hash_password(password)
-    if password == nil || password.length == 0
-      return nil
-    end
-    logger.info("Hashing to " + Digest::SHA1.hexdigest(password))
+    return nil if password == nil || password.length == 0
     Digest::SHA1.hexdigest(password)
-  end
-
-  def available(time)
-    return true
-  end
-
-  def scheduled(time)
-    return ""
-  end
-
-  def availability_color(time)
-    return "Lime"
   end
 
   def details( event )
     ret = self.fullname
-    ret = ret + " " + self.primary_email + "\n"
-    ret = ret + self.primary_phone + "\n"
-    ret = ret + self.birthyear.to_s + "\n"
-    ret = ret + self.nickname + "\n"
-    if self.notes
-      ret = ret + self.notes + "\n"
-    end
-    ret = ret + "\n"
+    ret = ret + ' ' + self.primary_email + '\n'
+    ret = ret + self.primary_phone + '\n'
+    ret = ret + self.birthyear.to_s + '\n'
+    ret = ret + self.nickname + '\n'
+    ret = ret + self.notes + '\n' if self.notes
+    ret = ret + '\n'
     self.people_persongroups.each { |group|
-      if group.persongroup.event == event
-        ret = ret + group.persongroup.name + ": " + group.statusname.name + "\n"
-      end
+      ret = ret + group.persongroup.name + ': ' + group.statusname.name + '\n' if group.persongroup.event == event
     }
-    return ret
+    ret
   end
 end
