@@ -7,6 +7,9 @@ class Programitem < ActiveRecord::Base
 
   def fullname
     if name && name.length > 0
+      #Filter out duplicates like 'Pukukilpailu: Pukukilpailu - ilmoittautuminen'
+      return name if name.include? program.name
+
       return program.name + ": " + name
     end
     return program.name
@@ -14,7 +17,8 @@ class Programitem < ActiveRecord::Base
 
   def fulldescription
     if description && description.length > 0
-      return program.description + " " + description
+      return description if description.include? program.description
+      return program.description + "\n\n" + description
     end
     return program.description
   end
