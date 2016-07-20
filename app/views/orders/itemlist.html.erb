@@ -24,6 +24,7 @@
     <td><%= item.cost %></td>
     <td><%= item.maxcost %></td>
     <td><%= item.statusname %></td>
+    <td><%= item.order.destination %></td>
     <td><%= item.notes %></td>
     <td><%= link_to 'Näytä', :action => 'show', :id => item.order %></td>
     <td><%= link_to 'Muokkaa', :action => 'edit', :id => item.order %></td>
