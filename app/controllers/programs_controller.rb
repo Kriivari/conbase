@@ -55,6 +55,7 @@ class ProgramsController < Application
           pr[:attributes] = attr unless attr.empty?
           output << pr
         end
+        headers['Access-Control-Allow-Origin'] = '*'
         render :json => output, :layout => false
       end
       format.xml do
