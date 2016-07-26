@@ -5,7 +5,7 @@
 <% @staffs.each{ |staff| %>
 <tr><td valign="top"><%=staff.lastname%></td>
 <td valign="top"><%=staff.firstname%></td>
-<td valign="top"><b><%=staff.primary_group(@event)%></b></td>
+<td valign="top"><%=staff.primary_group(@event)%></td>
 <td valign="top"><%=staff.max_food(@event)%></td>
 <td>&nbsp;</td></tr>
 <% } %>
