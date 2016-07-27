@@ -6,6 +6,8 @@
     <th>Kuvaus</th>
     <th>Ajat ja paikat</th>
     <th>Tekijät</th>
+    <th>Video</th>
+    <th>Slide</th>
     <th>Tila</th>
     <th>Julkaisu</th>
     <th>Muutettu</th>
@@ -25,6 +27,8 @@
 <%= organizer.person %>
 <% } %>
     </td>
+    <td valign="top"><%= 'Kyllä' if program.videorights %></td>
+    <td valign="top"><%= 'Kyllä' if program.sliderights %></td>
     <td valign="top"><%= program.statusname  %></td>
     <td valign="top"><%= content_tag(:span, program.videorights ? "OK" : "ei", :title => "Video") %> / <%= content_tag(:span, program.sliderights ? "OK" : "ei", :title => "Kalvot") %></td>
     <td valign="top"><%= program.updated_at %></td>
