@@ -9,7 +9,6 @@
     <th>Video</th>
     <th>Slide</th>
     <th>Tila</th>
-    <th>Julkaisu</th>
     <th>Muutettu</th>
   </tr>
   
@@ -30,7 +29,6 @@
     <td valign="top"><%= 'Kyllä' if program.videorights %></td>
     <td valign="top"><%= 'Kyllä' if program.sliderights %></td>
     <td valign="top"><%= program.statusname  %></td>
-    <td valign="top"><%= content_tag(:span, program.videorights ? "OK" : "ei", :title => "Video") %> / <%= content_tag(:span, program.sliderights ? "OK" : "ei", :title => "Kalvot") %></td>
     <td valign="top"><%= program.updated_at %></td>
     <td valign="top"><%= link_to 'Näytä', :action => 'show', :id => program %>
     <%= link_to 'Muokkaa', :action => 'edit', :id => program %>
