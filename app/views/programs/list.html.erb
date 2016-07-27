@@ -26,8 +26,8 @@
 <%= organizer.person %>
 <% } %>
     </td>
-    <td valign="top"><%= 'Kyllä if program.videorights %></td>
-    <td valign="top"><%= 'Kyllä if program.sliderights %></td>
+    <td valign="top"><%= 'Kyllä' if program.videorights %></td>
+    <td valign="top"><%= 'Kyllä' if program.sliderights %></td>
     <td valign="top"><%= program.statusname  %></td>
     <td valign="top"><%= program.updated_at %></td>
     <td valign="top"><%= link_to 'Näytä', :action => 'show', :id => program %>
