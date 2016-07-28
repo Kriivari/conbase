@@ -103,9 +103,9 @@ class ProgramsController < Application
 
   def sort( programitems, type )
     if type == "loc"
-      programitems.sort! { |x,y| [x.location, x.start_type] <=> [y.location, y.start_time] }
+      programitems.sort! { |x,y| [x.location, x.start_time] <=> [y.location, y.start_time] }
     elsif type == "type"
-      programitems.sort! { |x,y| [x.location, x.start_type] <=> [y.location, y.start_time] }
+      programitems.sort! { |x,y| [x.location, x.start_time] <=> [y.location, y.start_time] }
     elsif type == "org"
       programitems.sort! { |x,y| [x.program.main_organizer.fullname, x.start_time, x.location] <=> [y.program.main_organizer.fullname, y.start_time, y.location] }
     else
