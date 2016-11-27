@@ -13,4 +13,4 @@ gem 'uglifier'
 
 gem 'thin'
 
-gem 'rest-client'
+gem 'rest-client', '~>1.0'
