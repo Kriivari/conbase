@@ -12,3 +12,5 @@ gem 'execjs', '2.4.0'
 gem 'uglifier'
 
 gem 'thin'
+
+gem 'rest-client'

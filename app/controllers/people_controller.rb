@@ -119,6 +119,12 @@ class PeopleController < Application
     if params[:grp][:value] != '0'
       group = Persongroup.find(params[:grp][:value])
       group.add( @person, Statusname.find_by_name("Vahvistettu") )
+      if @event.slack_token && group.admin
+        response = RestClient.get( "https://slack.com/api/users.admin.invite", {:params => {:token => @event.slack_token, :email => @person.primary_email}})
+        if response.code != 200
+          flash[:slack] = "Slack-kutsun lähetys epäonnistui. Code: " + response.code + ", viesti: " + response.body
+        end
+      end
     end
 
     for attribute in @attributes

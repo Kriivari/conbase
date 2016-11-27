@@ -39,19 +39,6 @@
     <p><label for="event_tshirt_footer">Paitatilauslomakkeen loppuosa (HTML sallittu)</label><br/>
       <%= f.text_area :tshirt_footer %></p>
 
-    <p><label for="event_ticketorder">Ranneketilaukset</label><br/>
-      <select id="event_ticketorder" name="event[ticketorder]">
-        <option value="false">Kiinni</option>
-        <% if @event && @event.ticketorder %>
-            <option value="true" selected="selected">Auki</option>
-        <% else %>
-            <option value="true">Auki</option>
-        <% end %>
-      </select></p>
-
-    <p><label for="event_ticketfooter">Ranneketilausteksti (%PRICE%, %REFERENCE%, %SHIRTDETAILS%)</label><br/>
-      <%= f.text_area :ticketfooter %></p>
-
     <p><label for="event_registration">Ilmoittautumisen vahvistusviesti</label><br/>
     <%= f.text_area :registration %></p>
 
@@ -64,7 +51,10 @@
     <p><label for="event_businesscode">Y-tunnus</label><br/>
       <%= f.text_field :businesscode %></p>
 
-    <%= f.submit 'Edit' %>
+    <p><label for="event_slack_token">Slack-token</label><br/>
+      <%= f.text_field :slack_token %></p>
+
+    <%= f.submit 'Talleta' %>
 <% end %>
 
 <!--[eoform:event]-->
