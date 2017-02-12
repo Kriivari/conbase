@@ -10,11 +10,11 @@
 	<h2><%= @event %> GM-ilmoittautuminen / GM Sign-up</h2>
 
 <p>* Pakollinen kenttä / Mandatory field</p>
-<p>Ilmoittautumisen lähetettyäsi saat lähiaikoina sähköpostiisi vahvistusviestin.</p>
-<p>After signing up, you will receive a confirmation message to your e-mail.</p>
+<p>Ilmoittautumisen lähetettyäsi saat lähiaikoina sähköpostiisi vahvistusviestin.
+<br/>After signing up, you will receive a confirmation message to your e-mail.</p>
   <br/>
-  <p>Lisätietoja: <a href="https://www.ropecon.fi/pmwiki/index.php/2017/GMHaku2017">GM-ohje</a></p>
-  <p>Additional information: <a href="https://www.ropecon.fi/pmwiki/index.php/2017/GMHaku2017Eng">GM-information</a></p>
+  <p>Lisätietoja: <a href="https://www.ropecon.fi/pmwiki/index.php/2017/GMHaku2017">GM-ohje</a>
+  <br/>Additional information: <a href="https://www.ropecon.fi/pmwiki/index.php/2017/GMHaku2017Eng">GM-information</a></p>
 <%= form_for( @person, :url => { :action => 'create' } ) do |f| %>
 <div>
 <table border="0" id="comment_form" style="border-collapse:collapse;">
@@ -105,7 +105,7 @@
           </tr>
       <tr>
         <td colspan="2" align="left" valign="top">Pelin kuvaus ja lisätiedot pelaajille / Game description and additional information to players</td>
-        <td class="element" valign="top" align="left">	<textarea rows="4" cols="80" style="width: 350px" name="game<%= i %>[description]" id="game<%= i %>_description"/></td>
+        <td class="element" valign="top" align="left">	<textarea rows="4" cols="80" style="width: 350px" name="game<%= i %>[description]" id="game<%= i %>_description"> </textarea></td>
       </tr>
 	<tr>
 		<td colspan="2" align="left" valign="top">Pelin kesto / Game length</td>
