@@ -48,7 +48,7 @@ class GmController < Application
     end
     if params[:backroom]
       backroom = Attribute.first(:conditions => "name='Takahuone'")
-      backroom.add( @event, @person, "Kyllä" )
+      backroom.add( @event, @person, "Kyllä", "" )
     end
     num = 7
     if params[:game1][:name].length == 0
