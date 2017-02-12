@@ -80,7 +80,7 @@ class GmController < Application
       game.attendance = params[gamesym][:attendance]
       game.description = params[gamesym][:description]
       system = params[gamesym][:system]
-      if system && system.length > 0
+      if system != nil && system.length > 0
         game.publicnotes = "Pelisysteemi: " + system + "\n" + params[gamesym][:publicnotes]
       else
         game.publicnotes = params[gamesym][:publicnotes]
