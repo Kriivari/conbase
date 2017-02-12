@@ -79,12 +79,7 @@ class GmController < Application
       game.name = params[gamesym][:name]
       game.attendance = params[gamesym][:attendance]
       game.description = params[gamesym][:description]
-      system = params[gamesym][:system]
-      if system != nil && system.length > 0
-        game.publicnotes = "Pelisysteemi: " + system + "\n" + params[gamesym][:publicnotes]
-      else
-        game.publicnotes = params[gamesym][:publicnotes]
-      end
+      game.publicnotes = params[gamesym][:system]
       game.event = @event
       game.privatenotes = "Ajankohta: " + params[gamesym][:preftime] + ", Kesto: " + params[gamesym][:duration] + ", " + params[gamesym][:privatenotes]
       game.status = -2
