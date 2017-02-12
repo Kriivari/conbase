@@ -305,7 +305,9 @@ class ProgramsController < Application
 
       realbody = @event.registration
       realbody = realbody + "\n\n"
-      realbody = realbody + @person.details( @event )
+      realbody = realbody + @person.fullname + "\n"
+      realbody = realbody + @person.primary_email + "\n"
+      realbody = realbody + @person.primary_phone + "\n"
       realbody = realbody + "\n\nIlmoittamasi ohjelma:\n"
       realbody = realbody + "Ohjelman nimi: " + @program.name + "\n"
       realbody = realbody + "Ohjelman kuvaus: " + @program.description + "\n"
