@@ -46,7 +46,10 @@ class GmController < Application
       ts = Attribute.first(:conditions => "name='Staff-paita'")
       ts.add( @event, @person, tshirt, params[:shirttext] )
     end
-
+    if params[:backroom]
+      backroom = Attribute.first(:conditions => "name='Takahuone'")
+      backroom.add( @event, @person, "Kyllä" )
+    end
     num = 7
     if params[:game1][:name].length == 0
       flash[:notice] = 'Lomakkeella pitää ilmoittaa ainakin yksi peli!'
@@ -76,7 +79,12 @@ class GmController < Application
       game.name = params[gamesym][:name]
       game.attendance = params[gamesym][:attendance]
       game.description = params[gamesym][:description]
-      game.publicnotes = params[gamesym][:publicnotes]
+      system = params[gamesym][:system]
+      if system && system.length > 0
+        game.publicnotes = "Pelisysteemi: " + system + "\n" + params[gamesym][:publicnotes]
+      else
+        game.publicnotes = params[gamesym][:publicnotes]
+      end
       game.event = @event
       game.privatenotes = "Ajankohta: " + params[gamesym][:preftime] + ", Kesto: " + params[gamesym][:duration] + ", " + params[gamesym][:privatenotes]
       game.status = -2

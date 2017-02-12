@@ -12,6 +12,9 @@
 <p>* Pakollinen kenttä / Mandatory field</p>
 <p>Ilmoittautumisen lähetettyäsi saat lähiaikoina sähköpostiisi vahvistusviestin.</p>
 <p>After signing up, you will receive a confirmation message to your e-mail.</p>
+  <br/>
+  <p>Lisätietoja: <a href="https://www.ropecon.fi/pmwiki/index.php/2017/GMHaku2017">GM-ohje</a></p>
+  <p>Additional information: <a href="https://www.ropecon.fi/pmwiki/index.php/2017/GMHaku2017Eng">GM-information</a></p>
 <%= form_for( @person, :url => { :action => 'create' } ) do |f| %>
 <div>
 <table border="0" id="comment_form" style="border-collapse:collapse;">
@@ -36,6 +39,10 @@
 		<td colspan="2" align="left" valign="top">Sähköpostiosoite (käytetään tunnistautumiseen) / E-mail address (used for identification) <span class="form_required">*</span></td>
 		<td class="element" valign="top" align="left">	<input size="30" style="width: 350px" name="person[primary_email]" id="person_primary_email" type="text" /></td>
 	</tr>
+  <tr>
+    <td colspan="2" align="left" valign="top">Olen kiinnostunut takahuoneoikeudesta ja kaatoon osallistumisesta lootin sijaan (ei sitova) / I am interested in backroom rights and attending the wrap-up party instead of participating in the loot (non-binding)</td>
+    <td class="element" valign="top" align="left">	<input name="backroom" id="backroom" type="checkbox" /></td>
+  </tr>
     <br />
 
 <% for i in 1..7 %>
@@ -92,9 +99,13 @@
         <td colspan="2" align="left" valign="top">Pelaajien lukumäärä / Number of players</td>
         <td class="element" valign="top" align="left">	<input size="30" style="width: 350px" name="game<%= i %>[attendance]" id="game<%= i %>_attendance" type="text" /></td>
       </tr>
+          <tr style="border-top: 1px solid black;">
+            <td colspan="2" align="left" valign="top">Pelisysteemi / Game system</td>
+            <td class="element" valign="top" align="left">	<input size="30" style="width: 350px" name="game<%= i %>[system]" id="game<%= i %>_system" type="text" /></td>
+          </tr>
       <tr>
         <td colspan="2" align="left" valign="top">Pelin kuvaus ja lisätiedot pelaajille / Game description and additional information to players</td>
-        <td class="element" valign="top" align="left">	<input size="30" style="width: 350px" name="game<%= i %>[description]" id="game<%= i %>_description" type="text" /></td>
+        <td class="element" valign="top" align="left">	<textarea rows="4" cols="80" style="width: 350px" name="game<%= i %>[description]" id="game<%= i %>_description"/></td>
       </tr>
 	<tr>
 		<td colspan="2" align="left" valign="top">Pelin kesto / Game length</td>
