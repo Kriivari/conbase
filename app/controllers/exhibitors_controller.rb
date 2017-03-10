@@ -65,12 +65,17 @@ class ExhibitorsController < Application
 
     @tables = params[:tables].to_i
     @exhibitorbooth = table.name
-    if @tables > 0 && @exhibitorbooth != "Myyntiosasto"
-      @exhibitor.errors.add(:companyname, "Jos valitset muun kuin myyntiosaston, jätä osaston koko tyhjäksi!")
+    if @tables > 0 && @exhibitorbooth != "Kalustamaton osasto"
+      @exhibitor.errors.add(:companyname, "Jos valitset muun kuin kalustamattoman osaston, jätä osaston koko tyhjäksi!")
       render
       return
     end
-    if @tables == 0 && @exhibitorbooth != "Myyntiosasto"
+    if @tables == 0 && @exhibitorbooth == "Kalustamaton osasto"
+      @exhibitor.errors.add(:companyname, "Jos valitset kalustamattoman osaston, täytä myös osaston koko!")
+      render
+      return
+    end
+    if @tables == 0 && @exhibitorbooth != "Kalustamaton osasto"
       @tables = 1
     end
     for i in 1..@tables
@@ -83,7 +88,6 @@ class ExhibitorsController < Application
       @exhibitor.product_types << travelpass
     end
 
-    @exhibitor.notes = @exhibitor.notes + "\n\nMainostiedot:\n" + params[:advertisements]
     @exhibitor.event = @event
     person.save
     @event.save
