@@ -167,9 +167,11 @@ class Person < ActiveRecord::Base
     ret = ret + "<li>Lempinimi: " + self.nickname + "</li>"
     ret = ret + "<li>Lisätiedot: " + self.notes + "</li>" if self.notes
     ret = ret + "</ul><p>Halutut ryhmät</p><ul>"
+    groups = []
     self.people_persongroups.each { |group|
-      if group.persongroup.event == event && group.statusname.name != 'Aivan sama'
+      if group.persongroup.event == event && group.statusname.name != 'Aivan sama' && ! groups.include?( group )
         ret = ret + "<li>" + group.persongroup.name + ': ' + group.statusname.name + "</li>"
+        groups << group
       end
     }
     ret = ret + "</ul>"
@@ -184,9 +186,11 @@ class Person < ActiveRecord::Base
     ret = ret + "Lempinimi: " + self.nickname + '\n'
     ret = ret + "Lisätiedot: " + self.notes + '\n' if self.notes
     ret = ret + '\nHalutut ryhmät\n'
+    groups = []
     self.people_persongroups.each { |group|
-      if group.persongroup.event == event && group.statusname.name != 'Aivan sama'
+      if group.persongroup.event == event && group.statusname.name != 'Aivan sama' && !groups.include?( group )
         ret = ret + group.persongroup.name + ': ' + group.statusname.name + '\n'
+        groups << group
       end
     }
     ret
