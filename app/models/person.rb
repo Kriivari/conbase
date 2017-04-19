@@ -158,4 +158,34 @@ class Person < ActiveRecord::Base
     }
     ret
   end
+
+  def html_details( event )
+    ret = "<p>Henkilötiedot</p><ul><li>Nimi: " + self.fullname + "</li>"
+    ret = ret + "<li>Sähköpostiosoite: " + self.primary_email + "</li>"
+    ret = ret + "<li>Puhelinnumero: " + self.primary_phone + "</li>"
+    ret = ret + "<li>Syntymävuosi: " + self.birthyear.to_s + "</li>"
+    ret = ret + "<li>Lempinimi: " + self.nickname + "</li>"
+    ret = ret + "<li>Lisätiedot: " + self.notes + "</li>" if self.notes
+    ret = ret + "</ul><p>Halutut ryhmät</p><ul>"
+    self.people_persongroups.each { |group|
+      ret = ret + "<li>" + group.persongroup.name + ': ' + group.statusname.name + "</li>" if group.persongroup.event == event
+    }
+    ret = ret + "</ul>"
+    ret
+  end
+
+  def text_details( event )
+    ret = 'Henkilötiedot\nNimi: ' + self.fullname + '\n'
+    ret = ret + "Sähköpostiosoite: " + self.primary_email + '\n'
+    ret = ret + "Puhelinnumero: " + self.primary_phone + '\n'
+    ret = ret + "Syntymävuosi: " + self.birthyear.to_s + 'n'
+    ret = ret + "Lempinimi: " + self.nickname + '\n'
+    ret = ret + "Lisätiedot: " + self.notes + '\n' if self.notes
+    ret = ret + '\nHalutut ryhmät\n'
+    self.people_persongroups.each { |group|
+      ret = ret + group.persongroup.name + ': ' + group.statusname.name + '\n' if group.persongroup.event == event
+    }
+    ret
+  end
+
 end

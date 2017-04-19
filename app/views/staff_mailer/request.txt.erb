@@ -1,0 +1,11 @@
+Hei <%= @person.name %>,
+
+Kiitos ilmoittautumisestasi työvoimaan. Tämä on järjestelmän automaattinen vastausviesti.
+Olet jättänyt ilmoittautumisen työvoimaan <%= @event.name %> <%= @event.year.to_s %> -tapahtumaan.
+
+Seuraavat tiedot on nyt rekisteröity järjestelmäämme:
+<%= @person.text_details %>
+
+Tämä viesti ei ole vahvistus pääsemisestä työvoimaan. Otamme yhteyttä mahdollisimman pian.
+<%= @event.name %> työvoimatiimi
+ tyovoima@ropecon.fi

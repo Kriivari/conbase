@@ -1,0 +1,17 @@
+<html>
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+</head>
+<body>
+<p>Hei <%= @person.name %>,</p>
+
+<p>Kiitos ilmoittautumisestasi työvoimaan. Tämä on järjestelmän automaattinen vastausviesti. Olet jättänyt ilmoittautumisen työvoimaan <%= @event.name %> <%= @event.year.to_s %> -tapahtumaan.</p>
+
+<p>Seuraavat tiedot on nyt rekisteröity järjestelmäämme:</p>
+<%= @person.html_details( @event ) %>
+
+<p>Tämä viesti ei ole vahvistus pääsemisestä työvoimaan. Otamme yhteyttä mahdollisimman pian.</p>
+<p><%= @event.name %> työvoimatiimi<br />
+  <a href="mailto:tyovoima@ropecon.fi">tyovoima@ropecon.fi</a></p>
+</body>
+</html>

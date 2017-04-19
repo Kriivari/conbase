@@ -177,7 +177,7 @@ class StaffController < Application
     realbody = @event.registration
     realbody = realbody + "\n\n"
     realbody = realbody + @person.details( @event )
-    StaffMailer.confirm(realbody, "tyovoima@ropecon.fi", @person.primary_email, nil, @event.name + " - ilmoittautuminen").deliver
+    StaffMailer.request(realbody, "tyovoima@ropecon.fi", @person.primary_email, nil, @event.name + " - ilmoittautuminen").deliver
     begin
       render(:layout => "layouts/" + @event.name.to_s + "_staff" )
     rescue Exception
