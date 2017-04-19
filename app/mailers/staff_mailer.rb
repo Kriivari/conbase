@@ -1,6 +1,8 @@
 class StaffMailer < ActionMailer::Base
 
-  def staffrequest(body, from, to, group, subject)
+  def staffrequest(body, from, to, group, subject, event, person)
+    @event = event
+    @person = person
     if subject == nil || subject.length == 0
       @subject    = 'Vahvistus työvoimaan ilmoittautumisesta'
     else
