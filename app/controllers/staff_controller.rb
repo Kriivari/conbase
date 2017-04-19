@@ -177,7 +177,7 @@ class StaffController < Application
     realbody = @event.registration
     realbody = realbody + "\n\n"
     realbody = realbody + @person.details( @event )
-    StaffMailer.create_request(realbody, "tyovoima@ropecon.fi", @person.primary_email, nil, @event.name + " - ilmoittautuminen").deliver
+    StaffMailer.staffrequest(realbody, "tyovoima@ropecon.fi", @person.primary_email, nil, @event.name + " - ilmoittautuminen").deliver
     begin
       render(:layout => "layouts/" + @event.name.to_s + "_staff" )
     rescue Exception
@@ -261,7 +261,7 @@ class StaffController < Application
       end
       person.save
       pgroup.save
-      StaffMailer.confirm(body, "tyovoima@ropecon.fi", person.primary_email, nil, @event.name + " - tervetuloa tapahtumaan").deliver
+      StaffMailer.staffconfirm(body, "tyovoima@ropecon.fi", person.primary_email, nil, @event.name + " - tervetuloa tapahtumaan").deliver
 
       flash["add" + person.id.to_s] = person.firstname + " " + person.lastname + " lisätty ryhmään " + pgroup.name
       namelist = namelist + person.fullname + ", "
