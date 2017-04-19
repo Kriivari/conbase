@@ -169,7 +169,7 @@ class Person < ActiveRecord::Base
     ret = ret + "</ul><p>Halutut ryhmät</p><ul>"
     self.people_persongroups.each { |group|
       if group.persongroup.event == event
-        ret = ret + "<li>" + event.name + ' ' + event.year + ' ' + group.persongroup.name + ': ' + group.statusname.name + "</li>"
+        ret = ret + "<li>" + event.name + ' ' + event.year.to_s + ' ' + group.persongroup.name + ': ' + group.statusname.name + "</li>"
       end
     }
     ret = ret + "</ul>"
