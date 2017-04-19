@@ -8,7 +8,7 @@
 <p>Vahvistamme ilmoittautumisesi työvoimaan <%= @event.name %> <%= @event.year.to_s %> -tapahtumaan. Sinut on hyväksytty <%= @group %>-ryhmään.</p>
 
 <p>Seuraavat tiedot on nyt rekisteröity järjestelmäämme:</p>
-<%= @person.html_details( @event ) %>
+<%= sanitize( @person.html_details( @event ) )%>
 
 <p>Lisätietoja hyväksymisestä saat piakkoin. Tervetuloa mukaan!</p>
 <p><%= @event.name %> työvoimatiimi<br />
