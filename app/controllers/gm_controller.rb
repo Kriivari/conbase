@@ -185,7 +185,7 @@ class GmController < Application
       end
       realbody = realbody + "Muuta tietoa / Other information: " + game.privatenotes + "\n"
     end
-    StaffMailer.confirm(realbody, "gm-info@ropecon.fi", @person.primary_email, nil, @event.name + " - GM-ilmoittautuminen / GM sign-up").deliver
+    StaffMailer.gmrequest(realbody, "gm-info@ropecon.fi", @person.primary_email, nil, @event.name + " - GM-ilmoittautuminen / GM sign-up").deliver
   end
 
   def list
