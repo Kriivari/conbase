@@ -198,11 +198,6 @@ class GmController < Application
     redirect_to :action => 'list'
   end
 
-  def yesno( game, grp )
-    if game.programgroups.include?( grp )
-      return "Kyllä / Yes"
-    end
-    return "Ei / No"
-  end
+
 
 end
