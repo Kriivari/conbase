@@ -52,10 +52,4 @@ class Application < ActionController::Base
     return false
   end
 
-  def yesno( game, grp )
-    if game.programgroups.include?( grp )
-      return "Kyllä / Yes"
-    end
-    return "Ei / No"
-  end
 end
