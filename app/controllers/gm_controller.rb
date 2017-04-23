@@ -156,7 +156,7 @@ class GmController < Application
       game.save
     end
     @person.save
-    GmMailer.gmrequest("gm-info@ropecon.fi", @person.primary_email, nil, @event.name + " - GM-ilmoittautuminen / GM sign-up", @event, @person, @games).deliver
+    GmMailer.gmrequest("gm-info@ropecon.fi", @person.primary_email, @event.name + " - GM-ilmoittautuminen / GM sign-up", @event, @person, @games).deliver
   end
 
   def list
