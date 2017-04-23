@@ -1,1 +1,33 @@
-<%= @body %>
+<%= @event.registration %>
+
+
+<%= @person.fullname %>
+<%= @person.primary_email %>
+<%= @person.primary_phone %>
+
+
+Ilmoittamasi pelit / Signed up games:
+
+<% for game in @games %>
+Pelin nimi / Game title: <%= game.name %>
+Pelin kuvaus ja lisätiedot pelaajille / Game description and additional information to players: <%= game.description %>
+Pelaajien lukumäärä / Number of players: <%= game.attendance %>
+<% grp = Programgroup.find_by_name( "Aloittelijaystävällinen" ) %>
+Peli sopii aloittelijoille / The game is suitable for beginners: <%= yesno( game, grp ) %>
+<% grp = Programgroup.find_by_name( "Pelimaailman tuntemus suotavaa" ) %>
+Etukäteistiedot pelimaailmasta suositeltavia / Familiarity with the setting recommended: <%= yesno( game, grp ) %>
+<% grp = Programgroup.find_by_name( "Pelisääntöjen tuntemus suotavaa" ) %>
+Pelisääntöjen tuntemus suositeltavaa / Knowledge of the rules recommended: <%= yesno( game, grp ) %>
+<% grp = Programgroup.find_by_name( "Ei sovellu lapsille" ) %>
+Vain täysi-ikäisille / Only for adults: <%= yesno( game, grp ) %>
+<% grp = Programgroup.find_by_name( "Soveltuu lapsille" ) %>
+Soveltuu lapsille / Suitable for children: <%= yesno( game, grp ) %>
+<% grp = Programgroup.find_by_name( "Englanninkielinen" ) %>
+Peli pelataan englanniksi / Will be played in English: <%= yesno( game, grp ) %>
+<% grp = Programgroup.find_by_name( "Äänekäs" ) %>
+Äänekäs / Loud: <%= yesno( game, grp ) %>
+<% for gen in game.programs_events_attributes %>
+<%= gen.value %>
+<% end %>
+Muuta tietoa / Other information: <%= game.privatenotes %>
+<% end %>

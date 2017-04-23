@@ -156,36 +156,7 @@ class GmController < Application
       game.save
     end
     @person.save
-    realbody = @event.registration
-    realbody = realbody + "\n\n"
-    realbody = realbody + @person.fullname + "\n"
-    realbody = realbody + @person.primary_email + "\n"
-    realbody = realbody + @person.primary_phone + "\n"
-    realbody = realbody + "\n\nIlmoittamasi pelit / Signed up games:\n"
-    for game in @games
-      realbody = realbody + "\nPelin nimi / Game title: " + game.name + "\n"
-      realbody = realbody + "Pelin kuvaus ja lisätiedot pelaajille / Game description and additional information to players: " + game.description + "\n"
-      realbody = realbody + "Pelaajien lukumäärä / Number of players: " + game.attendance + "\n"
-      grp = Programgroup.find_by_name( "Aloittelijaystävällinen" )
-      realbody = realbody + "Peli sopii aloittelijoille / The game is suitable for beginners: " + yesno( game, grp ) + "\n"
-      grp = Programgroup.find_by_name( "Pelimaailman tuntemus suotavaa" )
-      realbody = realbody + "Etukäteistiedot pelimaailmasta suositeltavia / Familiarity with the setting recommended: " + yesno( game, grp ) + "\n"
-      grp = Programgroup.find_by_name( "Pelisääntöjen tuntemus suotavaa" )
-      realbody = realbody + "Pelisääntöjen tuntemus suositeltavaa / Knowledge of the rules recommended: " + yesno( game, grp ) + "\n"
-      grp = Programgroup.find_by_name( "Ei sovellu lapsille" )
-      realbody = realbody + "Vain täysi-ikäisille / Only for adults: " + yesno( game, grp ) + "\n"
-      grp = Programgroup.find_by_name( "Soveltuu lapsille" )
-      realbody = realbody + "Soveltuu lapsille / Suitable for children: " + yesno( game, grp ) + "\n"
-      grp = Programgroup.find_by_name( "Englanninkielinen" )
-      realbody = realbody + "Peli pelataan englanniksi / Will be played in English: " + yesno( game, grp ) + "\n"
-      grp = Programgroup.find_by_name( "Äänekäs" )
-      realbody = realbody + "Äänekäs / Loud: " + yesno( game, grp ) + "\n"
-      for gen in game.programs_events_attributes
-        realbody = realbody + gen.value + "\n"
-      end
-      realbody = realbody + "Muuta tietoa / Other information: " + game.privatenotes + "\n"
-    end
-    GmMailer.gmrequest(realbody, "gm-info@ropecon.fi", @person.primary_email, nil, @event.name + " - GM-ilmoittautuminen / GM sign-up").deliver
+    GmMailer.gmrequest("gm-info@ropecon.fi", @person.primary_email, nil, @event.name + " - GM-ilmoittautuminen / GM sign-up", @event, @person, @games).deliver
   end
 
   def list
