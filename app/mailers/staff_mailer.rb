@@ -15,7 +15,7 @@ class StaffMailer < ActionMailer::Base
     mail( :from => from, :to => to, :subject => @subject )
   end
 
-  def staffconfirm(body, from, to, group, subject, person)
+  def staffconfirm(body, from, to, group, subject, event, person)
     if subject == nil || subject.length == 0
       @subject    = 'Vahvistus työvoimaan hyväksymisestä'
     else
@@ -27,6 +27,7 @@ class StaffMailer < ActionMailer::Base
     @body = body
     @person = person
     @group = group
+    @event = event
     mail( :from => from, :to => to, :subject => @subject )
   end
 
