@@ -3,6 +3,8 @@ Hei <%= @person.name %>,
 Vahvistamme ilmoittautumisestasi työvoimaan <%= @event.name %> <%= @event.year.to_s %> -tapahtumaan.
 Sinut on hyväksytty <%= @group %>-ryhmään.
 
+<%= @body %>
+
 Seuraavat tiedot on nyt rekisteröity järjestelmäämme:
 <%= @person.text_details( @event ) %>
 
