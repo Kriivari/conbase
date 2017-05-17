@@ -5,8 +5,6 @@ class StaffMailer < ActionMailer::Base
     @person = person
     if subject == nil || subject.length == 0
       @subject    = 'Vahvistus työvoimaan ilmoittautumisesta'
-    else
-      @subject    = subject
     end
     if body == nil || body.length == 0
       body = 'Olet ilmoittautunut työvoimaksi ryhmään ' + group + '.'
@@ -15,26 +13,20 @@ class StaffMailer < ActionMailer::Base
     mail( :from => from, :to => to, :subject => @subject )
   end
 
-  def staffconfirm(body, from, to, group, subject, event, person)
-    if subject == nil || subject.length == 0
-      @subject    = 'Vahvistus työvoimaan hyväksymisestä'
-    else
-      @subject    = subject
-    end
-    if body == nil || body.length == 0
-      body = 'Sinut on hyväksytty työvoimaksi ryhmään ' + group + '.'
+  def staffconfirm(event, group, person, body)
+    if body == nil
+      body = ''
     end
     @body = body
     @person = person
     @group = group
     @event = event
-    mail( :from => from, :to => to, :subject => @subject )
+    mail( :from => 'tyovoima@ropecon.fi', :to => person.primary_email, :subject => @event.name + " - tervetuloa tapahtumaan" )
   end
 
-  def staffnotify(from, to, group, people)
-    subject    = 'Henkilöitä lisätty Conbasen ryhmään'
+  def staffnotify(group, people)
     @people = people
     @group = group
-    mail( :from => from, :to => to, :subject => subject )
+    mail( :from => 'tyovoima@ropecon.fi', :to => group.adminemail, :subject => 'Henkilöitä lisätty Conbasen ryhmään' )
   end
 end

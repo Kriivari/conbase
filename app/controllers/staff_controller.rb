@@ -261,15 +261,14 @@ class StaffController < Application
       end
       person.save
       pgroup.save
-      StaffMailer.staffconfirm(body, "tyovoima@ropecon.fi", person.primary_email, pgroup, @event.name + " - tervetuloa tapahtumaan", @event, person).deliver
+      StaffMailer.staffconfirm(@event, pgroup, person, body).deliver
 
       flash["add" + person.id.to_s] = person.firstname + " " + person.lastname + " lisätty ryhmään " + pgroup.name
       namelist << person
     end
 
     if pgroup.adminemail != nil
-      StaffMailer.staffnotify("tyovoima@ropecon.fi", pgroup.adminemail, pgroup, namelist)
-      StaffMailer.staffnotify("Lisätty ryhmään " + pgroup.name + ": " + namelist, "tyovoima@ropecon.fi", pgroup.adminemail, pgroup.adminemail, "Ryhmään lisätty henkilöitä").deliver
+      StaffMailer.staffnotify(pgroup, namelist)
     end
 
     redirect_to :action => 'list'
