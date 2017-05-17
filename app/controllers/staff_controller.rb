@@ -227,7 +227,7 @@ class StaffController < Application
     end
     expire_fragment('staff_tickets')
     expire_fragment('staff_foods')
-    namelist = ""
+    namelist = []
     pgroup = Persongroup.find(params[:admin][:primarygroup])
     for checked in params[:checked].keys
       groupfound = false
@@ -264,11 +264,12 @@ class StaffController < Application
       StaffMailer.staffconfirm(body, "tyovoima@ropecon.fi", person.primary_email, pgroup, @event.name + " - tervetuloa tapahtumaan", @event, person).deliver
 
       flash["add" + person.id.to_s] = person.firstname + " " + person.lastname + " lisätty ryhmään " + pgroup.name
-      namelist = namelist + person.fullname + ", "
+      namelist << person
     end
 
     if pgroup.adminemail != nil
-      StaffMailer.confirm("Lisätty ryhmään " + pgroup.name + ": " + namelist, "tyovoima@ropecon.fi", pgroup.adminemail, pgroup.adminemail, "Ryhmään lisätty henkilöitä").deliver
+      StaffMailer.staffnotify("tyovoima@ropecon.fi", pgroup.adminemail, pgroup, namelist)
+      StaffMailer.staffnotify("Lisätty ryhmään " + pgroup.name + ": " + namelist, "tyovoima@ropecon.fi", pgroup.adminemail, pgroup.adminemail, "Ryhmään lisätty henkilöitä").deliver
     end
 
     redirect_to :action => 'list'

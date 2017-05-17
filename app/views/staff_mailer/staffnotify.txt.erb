@@ -1,0 +1,7 @@
+Lisättiin <%= @people.size %> henkilöä Conbasen ryhmään <%= @group.name %>.
+
+Henkilöt ovat:
+
+<% for person in @people %>
+<%= person.name %>
+<% end %>

@@ -31,4 +31,10 @@ class StaffMailer < ActionMailer::Base
     mail( :from => from, :to => to, :subject => @subject )
   end
 
+  def staffnotify(from, to, group, people)
+    subject    = 'Henkilöitä lisätty Conbasen ryhmään'
+    @people = people
+    @group = group
+    mail( :from => from, :to => to, :subject => subject )
+  end
 end
