@@ -264,9 +264,7 @@ class StaffController < Application
       namelist << person
     end
 
-    if pgroup.adminemail != nil
-      StaffMailer.staffnotify(pgroup, namelist)
-    end
+    StaffMailer.staffnotify(pgroup, namelist)
 
     redirect_to :action => 'list'
   end

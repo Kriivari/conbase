@@ -27,7 +27,12 @@ class StaffMailer < ActionMailer::Base
   def staffnotify(group, people)
     @people = people
     @group = group
-    mail( :from => 'tyovoima@ropecon.fi', :to => group.adminemail, :subject => 'Henkilöitä lisätty Conbasen ryhmään' )
+    if group.adminemail
+      to = group.adminemail
+    else
+      to = 'tyovoima@ropecon.fi'
+    end
+    mail( :from => 'tyovoima@ropecon.fi', :to => to, :subject => 'Henkilöitä lisätty Conbasen ryhmään' )
   end
 
   def staffshirt(event, person, details, price, reference)
