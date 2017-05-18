@@ -29,4 +29,13 @@ class StaffMailer < ActionMailer::Base
     @group = group
     mail( :from => 'tyovoima@ropecon.fi', :to => group.adminemail, :subject => 'Henkilöitä lisätty Conbasen ryhmään' )
   end
+
+  def staffshirt(event, person, details, price, reference)
+    @event = event
+    @person = person
+    @details = details
+    @price = price
+    @reference = reference
+    mail( :from => 'myyntituotteet@ropecon.fi', :to => person.primary_email, :subject => @event.name + ' - Paitatilauksesi' )
+  end
 end

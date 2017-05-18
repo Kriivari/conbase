@@ -51,19 +51,16 @@ class StaffController < Application
       baseprice = tshirt.price
       purchase.save
       if params[:shirttext] == nil || params[:shirttext].length == 0
-	      baseprice = baseprice - 4
+	      baseprice = baseprice - 3.5
       end
       if @event.footer && baseprice > 0
 	      basename = tshirt.fullname
-	      realbody = @event.footer
-	      realbody = realbody.gsub("%PRICE%",baseprice.to_s.sub(".",","))
-	      realbody = realbody.gsub("%REFERENCE%",purchase.reference)
         if params[:shirttext] && params[:shirttext].length > 0
-	        realbody = realbody.gsub("%SHIRTDETAILS%", basename + "; Nimikointi: " + params[:shirttext])
+	        basename = tshirt.fullname + "; Nimikointi: " + params[:shirttext]
 	      else
-	        realbody = realbody.gsub("%SHIRTDETAILS%", basename + "; Ei nimikointia")
+          basename = tshirt.fullname + "; Ei nimikointia"
 	      end
-	      GenericMailer.email(@event, "tyovoima@ropecon.fi", @person.primary_email, "paitatilauksen maksuohjeet", realbody).deliver
+	      StaffMailer.staffshirt(@event, @person, details, baseprice, purchase.reference).deliver
       end
     end
 
