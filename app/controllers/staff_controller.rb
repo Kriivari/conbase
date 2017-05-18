@@ -60,7 +60,7 @@ class StaffController < Application
 	      else
           basename = tshirt.fullname + "; Ei nimikointia"
 	      end
-	      StaffMailer.staffshirt(@event, @person, details, baseprice, purchase.reference).deliver
+	      StaffMailer.staffshirt(@event, @person, basename, baseprice, purchase.reference).deliver
       end
     end
 
