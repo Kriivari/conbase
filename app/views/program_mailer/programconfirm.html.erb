@@ -1,0 +1,17 @@
+<html>
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+</head>
+<body>
+<p>Hei <%= @person.name %>,</p>
+
+<p>Olemme vastaanottaneet ilmoittautumisesi ohjelmanumeroksi <%= @event.name %> <%= @event.year.to_s %> -tapahtumaan.</p>
+
+<p>Seuraavat tiedot on nyt rekisteröity järjestelmäämme:</p>
+<%= sanitize( @person.html_details( @event ) )%>
+<%= sanitize( @program.html_details )%>
+<p>Lisätietoja hyväksymisestä saat piakkoin. Tervetuloa mukaan!</p>
+<p><%= @event.name %> ohjelmatiimi<br />
+  <a href="mailto:ohjelma@ropecon.fi">ohjelma@ropecon.fi</a></p>
+</body>
+</html>

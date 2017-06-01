@@ -93,4 +93,19 @@ class Program < ActiveRecord::Base
     }
     return self.publicnotes
   end
+
+  def html_details
+    ret = "Ohjelman nimi: " + self.name + "\n"
+    ret = ret + "Ohjelman kuvaus: " + self.description + "\n"
+    ret = ret + "Ohjelman lisätietoja: " + self.privatenotes + "\n"
+    ret
+  end
+
+  def text_details
+    ret = "<ul><li>Ohjelman nimi: " + self.name + "</li>"
+    ret = ret + "<li>Ohjelman kuvaus: " + self.description + "</li>"
+    ret = ret + "<li>Ohjelman lisätietoja: " + self.privatenotes + "</li>"
+    ret
+  end
+
 end

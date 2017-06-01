@@ -303,17 +303,7 @@ class ProgramsController < Application
     expire_fragment('programs_xml')
     if @program.save && english.save
 
-      realbody = @event.registration
-      realbody = realbody + "\n\n"
-      realbody = realbody + @person.fullname + "\n"
-      realbody = realbody + @person.primary_email + "\n"
-      realbody = realbody + @person.primary_phone + "\n"
-      realbody = realbody + "\n\nIlmoittamasi ohjelma:\n"
-      realbody = realbody + "Ohjelman nimi: " + @program.name + "\n"
-      realbody = realbody + "Ohjelman kuvaus: " + @program.description + "\n"
-      realbody = realbody + "Ohjelman lisätietoja: " + @program.privatenotes + "\n"
-      realbody = realbody + "Ohjelman nimi: " + @program.name + "\n"
-      StaffMailer.confirm(realbody, "ohjelma@ropecon.fi", @person.primary_email, nil, @event.name + " - ohjelmailmoittautuminen").deliver
+      ProgramMailer.programconfirm(@event, @person, @program).deliver
 
       flash[:notice] = 'Program was successfully created.'
       if params[:organizers] != nil

@@ -1,0 +1,13 @@
+Hei <%= @person.name %>,
+
+Olemme vastaanottaneet ilmoittautumisesi ohjelmanumeroksi <%= @event.name %> <%= @event.year.to_s %> -tapahtumaan.
+
+Seuraavat tiedot on nyt rekisteröity järjestelmäämme:
+
+<%= sanitize( @person.text_details( @event ) )%>
+<%= sanitize( @program.text_details )%>
+
+Lisätietoja hyväksymisestä saat piakkoin. Tervetuloa mukaan!
+
+<%= @event.name %> ohjelmatiimi
+  ohjelma@ropecon.fi
