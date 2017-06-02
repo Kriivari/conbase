@@ -230,6 +230,10 @@ class PeopleController < Application
       org.person = remain
       org.save
     end
+    for order in old.orders
+      order.person = remain
+      order.save
+    end
 
     remain.save
     old.destroy

@@ -35,7 +35,7 @@ for duplicate in @duplicates[person.id]
     <td><i><%=duplicate.primary_phone%></i></td>
     <td><i><a href="<%=duplicate.photo_url%>"><%=duplicate.photo_url%></a></i></td>
     <td><i><%=duplicate.birthyear%></i></td>
-    <td></td><td></td><td></td><td><%= link_to 'Yhdisä', :action => 'merge', :id => person, :duplicate => duplicate %></td>
+    <td></td><td></td><td></td><td><%= link_to 'Yhdistä', :action => 'merge', :id => person, :duplicate => duplicate %></td>
   </tr>
 <%
 end
