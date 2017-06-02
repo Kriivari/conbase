@@ -121,7 +121,7 @@ class PurchasesController < Application
   # POST /purchases/order.json
   def order
     @event = Event.find_by_id(params[:event])
-    @person = Person.find_by_primary_email(params[:person][:primary_email])
+    @person = Person.find_by_primary_email(params[:person][:primary_email].downcase.strip)
     if @person == nil
       @person = Person.new(params[:person])
       @person.save

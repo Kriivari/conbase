@@ -53,7 +53,7 @@ class ExhibitorsController < Application
       render
       return
     end
-    person = Person.find_by_primary_email(params[:person][:primary_email])
+    person = Person.find_by_primary_email(params[:person][:primary_email].downcase.strip)
     unless person
       person = Person.create(params[:person])
     end

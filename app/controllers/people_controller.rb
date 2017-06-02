@@ -111,7 +111,7 @@ class PeopleController < Application
     @groups = [['Ei uutta ryhmää', 0]] + @groups
     @person = Person.find(params[:id])
 
-    p = Person.find_by_primary_email(params[:primary_email])
+    p = Person.find_by_primary_email(params[:primary_email].downcase.strip)
     if p.id == @person.id
       flash[:notice] = 'Tällä sähköpostiosoitteella on jo henkilö kannassa: ' + p.fullname
     end

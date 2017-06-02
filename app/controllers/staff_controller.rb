@@ -18,7 +18,7 @@ class StaffController < Application
 
   def ordershirt
     @event = Event.find_by_id(params[:event])
-    @person = Person.find_by_primary_email(params[:person][:primary_email])
+    @person = Person.find_by_primary_email(params[:person][:primary_email].downcase.strip)
     if @person == nil
       @person = Person.new
       @person.errors.add(:primary_email, "Sähköpostiosoitetta ei tunnistettu")
@@ -88,7 +88,7 @@ class StaffController < Application
     end
     @oldgroups = ""
     @newgroups = ""
-    @person = Person.find_by_primary_email(params[:person][:primary_email])
+    @person = Person.find_by_primary_email(params[:person][:primary_email].downcase.strip)
     if @person != nil
       @person.primary_phone = params[:person][:primary_phone]
       @person.birthyear = params[:person][:birthyear]

@@ -27,7 +27,7 @@ class GmController < Application
 
   def create
     gmgroup = Persongroup.first(:conditions => ["name='GM' and event_id=?", @event.id])
-    @person = Person.find_by_primary_email(params[:person][:primary_email])
+    @person = Person.find_by_primary_email(params[:person][:primary_email].downcase.strip)
     if @person != nil
       if @person.firstname != params[:person][:firstname] && @person.lastname != params[:person][:lastname]
         flash[:notice] = 'Tällä sähköpostiosoitteella on jo henkilö kannassa!'

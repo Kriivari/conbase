@@ -240,7 +240,7 @@ class ProgramsController < Application
       @person = Person.find(params[:organizers][:id])
     end
     if @person == nil
-      @person = Person.find_by_primary_email(params[:person][:primary_email])
+      @person = Person.find_by_primary_email(params[:person][:primary_email].downcase.strip)
       if @person != nil
         @person.primary_phone = params[:person][:primary_phone]
         @person.birthyear = params[:person][:birthyear]
@@ -383,7 +383,7 @@ class ProgramsController < Application
       end
       organizer = ProgramsOrganizer.new
       if params[:person] && params[:person][:firstname] && params[:person][:firstname].length > 0
-        if Person.find_by_primary_email(params[:person][:primary_email])
+        if Person.find_by_primary_email(params[:person][:primary_email].downcase.strip)
           flash[:duplicate] = "Tällä sähköpostiosoitteella on jo henkilö tietokannassa."
           redirect_to :action => 'edit', :id => @program
           return
