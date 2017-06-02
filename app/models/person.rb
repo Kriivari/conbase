@@ -1,5 +1,6 @@
 class Person < ActiveRecord::Base
   before_create :downcase_email
+  before_update :downcase_email
   has_many :contacts
   has_many :people_persongroups
   has_many :people_events_attributes
