@@ -236,6 +236,10 @@ class PeopleController < Application
       order.person = remain
       order.save
     end
+    for exhibitor in old.exhibitors
+      exhibitor.person = remain
+      exhibitor.save
+    end
 
     remain.save
     old.destroy
