@@ -5,7 +5,7 @@ class LoginController < Application
     if request.get?
       session[:user_id] = nil
     else
-      @user = Person.new(params[:user].downcase.strip )
+      @user = Person.new(params[:user] )
       logged_in_user = @user.try_to_login
       if logged_in_user
         session[:user_id] = logged_in_user.id

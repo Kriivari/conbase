@@ -127,7 +127,7 @@ class Person < ActiveRecord::Base
 
   def self.login(name, password)
     return nil if password == nil || password.length == 0
-    person = Person.where('primary_email = ?', name).first
+    person = Person.where('primary_email = ?', name.downcase.strip).first
     return nil unless person
     if person.password.start_with?( '$SALT$' )
       hashed_password = '$SALT$' || hash_password(person.id.to_s || password || '')
